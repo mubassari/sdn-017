@@ -1,7 +1,7 @@
 <script setup>
 import { Pagination } from '~Components/core'
 import { AdminLayout } from '~Layouts';
-import { Head, router } from "@inertiajs/vue3";
+import { router } from "@inertiajs/vue3";
 import { ref } from 'vue';
 
 let title = ref('Daftar Artikel');
@@ -16,8 +16,7 @@ const deleteData = (route) => {
 </script>
 
 <template>
-  <Head :title="title" />
-  <AdminLayout>
+  <AdminLayout :title="title">
     <div class="w-full p-4">
       <h1 class="mb-3 text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">{{ title }}</h1>
       <div class="items-center justify-between block sm:flex md:divide-x md:divide-gray-100 dark:divide-gray-700">

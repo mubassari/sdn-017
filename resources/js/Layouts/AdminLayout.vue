@@ -1,6 +1,7 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from "vue";
 import { AdminNavbar, AdminSidebar, Toast } from "~Components/layouts"
+import { Head } from "@inertiajs/vue3";
 
 let sidebarIsOpen = ref(false);
 
@@ -15,9 +16,11 @@ const handleWindowSizeChange = () => {
     sidebarIsOpen.value = document.documentElement.clientWidth < 640
 };
 
+defineProps({ title: { type: String, default: '' } })
 </script>
 
 <template>
+    <Head :title="title" />
     <Toast />
     <AdminNavbar @toggleSidebar="sidebarIsOpen = !sidebarIsOpen" />
     <AdminSidebar :sidebarIsOpen="sidebarIsOpen" />

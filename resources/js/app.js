@@ -91,7 +91,7 @@ library.add(
 
 createInertiaApp({
     resolve: async (name) => (await import(`./Pages/${name}`)).default,
-    title: (title) => (title === "''" ? "SI PHBS" : `${title} | SI PHBS`),
+    title: (title) => (title === "" ? "SI PHBS" : `${title} | SI PHBS`),
     setup({ el, App, props, plugin }) {
         createApp({ render: () => h(App, props) })
             .use(plugin)
