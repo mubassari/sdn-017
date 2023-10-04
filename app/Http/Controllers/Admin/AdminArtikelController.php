@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ArtikelRequest;
 use App\Models\Artikel;
+use App\Models\Kategori;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -24,7 +25,7 @@ class AdminArtikelController extends Controller
                 'id'       => $data->id,
                 'judul'    => $data->judul,
                 'sampul'   => $data->path_sampul,
-                'kategori' => $data->Kategori,
+                'kategori' => $data->kategori->nama,
                 'slug'     => $data->slug,
                 'waktu'    => $data->waktu,
             ];
@@ -34,7 +35,8 @@ class AdminArtikelController extends Controller
     }
     
     public function tambah(){
-        return Inertia::render('Admin/Artikel/Tambah');
+        $kategori = Kategori::select('id','nama')->get();
+        return Inertia::render('Admin/Artikel/Tambah', compact('kategori'));
     }
 
     public function simpan(ArtikelRequest $request)
@@ -74,6 +76,7 @@ class AdminArtikelController extends Controller
 
     public function ubah(Artikel $artikel)
     {
+        $kategori = Kategori::select('id','nama')->get();
         $artikel = collect([$artikel])->transform(function($artikel) {
             return [
                 'id'          => $artikel->id,
@@ -83,7 +86,7 @@ class AdminArtikelController extends Controller
                 'kategori_id' => $artikel->kategori_id,
             ];
         })->first();
-        return Inertia::render('Admin/Artikel/Ubah', compact('artikel'));
+        return Inertia::render('Admin/Artikel/Ubah', compact('artikel', 'kategori'));
     }
 
     public function perbarui(ArtikelRequest $request, Artikel $artikel)

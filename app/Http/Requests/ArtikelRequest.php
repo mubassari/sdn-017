@@ -24,9 +24,10 @@ class ArtikelRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'judul'   => 'required|string',
-            'isi'     => 'required|string|max:65535',
-            'sampul'  => 'sometimes|nullable',
+            'judul'       => 'required|string',
+            'isi'         => 'required|string|max:65535',
+            'sampul'      => 'sometimes|nullable',
+            'kategori_id' => 'required|exists:kategori,id'
         ];
 
         return $rules;

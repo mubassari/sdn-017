@@ -41,6 +41,9 @@ const deleteData = (route) => {
               Sampul
             </th>
             <th scope="col" class="px-6 py-3">
+              Kategori
+            </th>
+            <th scope="col" class="px-6 py-3">
               <span class="sr-only">Opsi</span>
             </th>
           </tr>
@@ -53,8 +56,14 @@ const deleteData = (route) => {
                 <div class="text-base font-semibold">{{ artikel.judul }}</div>
                 <div class="font-normal text-gray-500 italic">{{ artikel.waktu }}</div>
               </th>
-              <td class="w-32 p-4">
+              <td class="w-32 px-6 py-4">
                 <img v-if="artikel.sampul" :src="artikel.sampul" :alt="artikel.judul" class="rounded">
+              </td>
+              <td class="px-6 py-4">
+                <span
+                  class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">
+                  {{ artikel.kategori }}
+                </span>
               </td>
               <td class="px-6 py-4 text-right whitespace-nowrap">
                 <a href="#" title="Lihat"
@@ -76,8 +85,8 @@ const deleteData = (route) => {
             </tr>
           </template>
           <template v-else>
-            <tr colspan="3"
-              class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700">
+              <td colspan="3" class="px-6 py-4 text-center whitespace-nowrap text-base">Tidak Ada Data</td>
             </tr>
           </template>
         </tbody>

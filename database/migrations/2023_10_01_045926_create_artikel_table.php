@@ -19,6 +19,8 @@ class CreateArtikelTable extends Migration
             $table->text('isi')->nullable();
             $table->string('slug');
             $table->string('sampul')->nullable();
+            $table->unsignedBigInteger('kategori_id')->nullable();
+
             $table->foreign('kategori_id')->references('id')->on('kategori')->onDelete('set null');
             $table->timestamps();
         });

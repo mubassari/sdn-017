@@ -14,36 +14,39 @@ class Kategori extends Model
     protected $table = 'kategori';
 
     protected $fillable = [
-        'judul',
+        'nama',
         'slug',
     ];
 
     protected $guarded = [
         'id',
+    ];
+
+    protected $hidden = [
         'created_at',
         'updated_at'
     ];
 
-    public $timestamps = true;
+    public $timestamps = false;
 
     protected static function boot()
     {
         parent::boot();
         
         static::created(function ($post) {
-            $post->slug = $post->generateSlug($post->judul);
+            $post->slug = $post->generateSlug($post->nama);
             $post->save();
         });
 
         static::saving(function ($post) {
-            $post->slug = $post->generateSlug($post->judul);
+            $post->slug = $post->generateSlug($post->nama);
         });
     }
 
-    private function generateSlug($judul)
+    private function generateSlug($nama)
     {
-        if (static::whereSlug($slug = Str::slug($judul))->exists()) {
-            $max = static::whereJudul($judul)->latest('id')->skip(1)->value('slug');
+        if (static::whereSlug($slug = Str::slug($nama))->exists()) {
+            $max = static::whereNama($nama)->latest('id')->skip(1)->value('slug');
             if (isset($max[-1]) && is_numeric($max[-1])) {
                 return preg_replace_callback('/(\d+)$/', function($mathces) {
                     return $mathces[1] + 1;

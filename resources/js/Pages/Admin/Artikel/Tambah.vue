@@ -11,6 +11,7 @@ const artikel = useForm({
   judul: '',
   sampul: null,
   isi: '',
+  kategori_id: 0,
 })
 
 </script>

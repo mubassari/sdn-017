@@ -9,8 +9,12 @@ defineProps({
 <template>
   <nav class="flex flex-col items-center justify-center p-4 " aria-label="Table navigation">
     <span class="text-sm text-gray-700 dark:text-gray-400">
-      Menampilkan data <span class="font-semibold text-gray-900 dark:text-white">{{ dari }}</span> - <span
-        class="font-semibold text-gray-900 dark:text-white">{{ ke }}</span>, dari total <span
+      Menampilkan
+      <template v-if="dari || ke">
+        data <span class="font-semibold text-gray-900 dark:text-white">{{ dari }}</span> - <span
+        class="font-semibold text-gray-900 dark:text-white">{{ ke }}</span>, dari
+      </template>
+       total <span
         class="font-semibold text-gray-900 dark:text-white">{{ total }}</span> data
     </span>
     <ul class="inline-flex -space-x-px text-sm h-8 mt-2 xs:mt-0" v-if="links.length > 3">

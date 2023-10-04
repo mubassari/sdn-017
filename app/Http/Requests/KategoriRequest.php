@@ -13,7 +13,7 @@ class KategoriRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,8 +23,10 @@ class KategoriRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            //
+        $rules = [
+            'nama' => 'required|unique:kategori,nama|string',
         ];
+
+        return $rules;
     }
 }

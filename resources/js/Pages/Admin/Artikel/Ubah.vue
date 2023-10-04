@@ -5,7 +5,7 @@ import { FormArtikel } from "~Components/forms"
 import { Head, useForm } from "@inertiajs/vue3";
 import { ref } from 'vue';
 
-let title = ref('Tambah Artikel');
+let title = ref('Ubah Artikel');
 
 const props = defineProps({ artikel: { type: Object, required: true } })
 
@@ -14,6 +14,7 @@ const artikel = useForm({
   judul: props.artikel.judul,
   sampul: props.artikel.sampul,
   isi: props.artikel.isi,
+  kategori_id: props.artikel.kategori_id,
 })
 
 </script>
