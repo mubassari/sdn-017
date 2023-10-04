@@ -270,79 +270,47 @@ const setLink = (isLink) => {
 </template>
 
 <style lang="scss">
-html.dark .ProseMirror table tbody tr th {
-  border-color: #6B7280;
-  color: #9CA3AF;
-  background-color: #1F2937;
-}
-
-html.dark .ProseMirror table tbody tr td {
-  border-color: #6B7280;
-  color: #ffffff;
-}
-
+/*
+  Based on TailwindCSS recommendations,
+  consider using classes instead of the `@apply` directive
+  @see https://tailwindcss.com/docs/reusing-styles#avoiding-premature-abstraction
+*/
 
 .ProseMirror {
-  max-width: 100%;
+  @apply max-w-full;
+}
 
-  > {
+.ProseMirror>table {
+  @apply border-spacing-0;
+}
 
-    table {
-      border-spacing: 0;
+.ProseMirror>table>tbody>tr>th {
+  @apply uppercase text-gray-900 dark:text-white bg-gray-200 dark:bg-gray-800 px-6 py-3;
+}
 
-      >tbody>tr> {
+.ProseMirror>table>tbody>tr>td {
+  @apply font-medium px-6 py-4;
+}
 
-        th {
-          padding: 0.75rem 1.5rem;
-          text-transform: uppercase;
-          color: #374151;
-          background-color: #F9FAFB;
-        }
+.ProseMirror>table>tbody>tr>th,
+.ProseMirror>table>tbody>tr>td {
+  @apply w-auto relative align-top box-border border border-gray-500;
+}
 
-        td {
-          padding: 1rem 1.5rem;
-          font-weight: 500;
-        }
+.ProseMirror>table>tbody>tr>td>p,
+.ProseMirror>table>tbody>tr>th>p {
+  @apply indent-0 m-0;
+}
 
-        th,
-        td {
-          width: auto;
-          position: relative;
-          vertical-align: top;
-          box-sizing: border-box;
-          border-width: 1px;
-        }
+.ProseMirror>table .selectedCell>p {
+  @apply text-gray-900 dark:text-white;
+}
 
-        td>p,
-        th>p {
-          margin: 0;
-          text-indent: 0;
-        }
-      }
+.ProseMirror>table .selectedCell:after {
+  @apply z-10 content-[""] absolute pointer-events-none inset-0 bg-blue-400/[0.4] dark:bg-gray-400/[0.4];
+}
 
-
-      .selectedCell:after {
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        z-index: 2;
-        content: "";
-        position: absolute;
-        pointer-events: none;
-        background: rgba(200, 200, 255, 0.4);
-      }
-
-      .column-resize-handle {
-        top: 0;
-        width: 4px;
-        right: -2px;
-        bottom: -2px;
-        position: absolute;
-        pointer-events: none;
-        background-color: #adf;
-      }
-    }
-  }
+.ProseMirror>table .column-resize-handle {
+  @apply w-1 absolute pointer-events-none bg-blue-300 -right-0.5 top-0 -bottom-0.5;
 }
 </style>
