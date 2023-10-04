@@ -1,1 +1,1 @@
-export { default as FormBerita } from './FormBerita';
+export { default as FormArtikel } from './FormArtikel';

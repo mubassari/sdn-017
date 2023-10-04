@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 // Admin Controller
 use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\Admin\AdminBeritaController;
+use App\Http\Controllers\Admin\AdminArtikelController;
 
 // General Controller
 
@@ -25,12 +25,12 @@ Route::get('',function () {
 
 Route::prefix('admin')->name('admin.')->namespace('App\Http\Controllers\Admin')->group(function() {
   Route::get('','AdminController@beranda')->name('beranda');
-  Route::prefix('berita')->name('berita.')->group(function(){
-    Route::get('','AdminBeritaController@index')->name('index');
-    Route::get('tambah','AdminBeritaController@tambah')->name('tambah');
-    Route::post('','AdminBeritaController@simpan')->name('simpan');
-    Route::get('ubah/{berita}','AdminBeritaController@ubah')->name('ubah');
-    Route::post('{berita}','AdminBeritaController@perbarui')->name('perbarui');
-    Route::delete('{berita}','AdminBeritaController@hapus')->name('hapus');
+  Route::prefix('artikel')->name('artikel.')->group(function(){
+    Route::get('','AdminArtikelController@index')->name('index');
+    Route::get('tambah','AdminArtikelController@tambah')->name('tambah');
+    Route::post('','AdminArtikelController@simpan')->name('simpan');
+    Route::get('ubah/{artikel}','AdminArtikelController@ubah')->name('ubah');
+    Route::post('{artikel}','AdminArtikelController@perbarui')->name('perbarui');
+    Route::delete('{artikel}','AdminArtikelController@hapus')->name('hapus');
   });
 });

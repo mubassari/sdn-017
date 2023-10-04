@@ -3,64 +3,65 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\BeritaRequest;
-use App\Models\Berita;
+use App\Http\Requests\ArtikelRequest;
+use App\Models\Artikel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
-class AdminBeritaController extends Controller
+class AdminArtikelController extends Controller
 {
     public function index(Request $request){
-        $list_berita = Berita::select('id','judul', 'sampul', 'slug', 'created_at')
+        $list_artikel = Artikel::select('id','judul', 'sampul', 'slug', 'kategori_id')
         ->orderBy('id', 'desc')
         ->when($request->input('cari'), function ($query, $role) {
-            $query->where('berita.judul', 'like', "%$role%");
+            $query->where('artikel.judul', 'like', "%$role%");
         })
         ->paginate(10)
         ->through(function($data) {
             return [
-                'id'     => $data->id,
-                'judul'  => $data->judul,
-                'sampul' => $data->path_sampul,
-                'slug'   => $data->slug,
-                'waktu'  => $data->waktu,
+                'id'       => $data->id,
+                'judul'    => $data->judul,
+                'sampul'   => $data->path_sampul,
+                'kategori' => $data->Kategori,
+                'slug'     => $data->slug,
+                'waktu'    => $data->waktu,
             ];
         })
         ->withQueryString();
-        return Inertia::render('Admin/Berita/Index', compact('list_berita'));
+        return Inertia::render('Admin/Artikel/Index', compact('list_artikel'));
     }
     
     public function tambah(){
-        return Inertia::render('Admin/Berita/Tambah');
+        return Inertia::render('Admin/Artikel/Tambah');
     }
 
-    public function simpan(BeritaRequest $request)
+    public function simpan(ArtikelRequest $request)
     {
         DB::beginTransaction();
         try {
             $validated = $request->validated();
-            $berita = Berita::create($validated);
+            $artikel = Artikel::create($validated);
 
             if ($request->hasFile('sampul')){
                 $name_file = $request->sampul->hashName();
-                if (!$request->sampul->move('img/berita', $name_file)) {
+                if (!$request->sampul->move('img/artikel', $name_file)) {
                     return back()->withInput()->with('alert', [
                         'status' => 'danger',
                         'pesan'  => 'Terjadi kesalahan saat mengunggah gambar. Silakan coba lagi!'
                     ]);
                 }
 
-                $berita->sampul = $name_file;
+                $artikel->sampul = $name_file;
             }
-            $berita->save();
+            $artikel->save();
 
             DB::commit();
 
-            return redirect()->route('admin.berita.index')->with('alert', [
+            return redirect()->route('admin.artikel.index')->with('alert', [
                 'status' => 'success',
-                'pesan'  => 'Anda berhasil menyimpan data Berita!'
+                'pesan'  => 'Anda berhasil menyimpan data Artikel!'
             ]);
         } catch (\Exception $e) {
             DB::rollBack();
@@ -71,54 +72,56 @@ class AdminBeritaController extends Controller
         }
     }
 
-    public function ubah(Berita $berita)
+    public function ubah(Artikel $artikel)
     {
-        $berita = collect([$berita])->transform(function($berita) {
+        $artikel = collect([$artikel])->transform(function($artikel) {
             return [
-                'id'     => $berita->id,
-                'judul'  => $berita->judul,
-                'isi'    => $berita->isi,
-                'sampul' => $berita->path_sampul,
+                'id'          => $artikel->id,
+                'judul'       => $artikel->judul,
+                'isi'         => $artikel->isi,
+                'sampul'      => $artikel->path_sampul,
+                'kategori_id' => $artikel->kategori_id,
             ];
         })->first();
-        return Inertia::render('Admin/Berita/Ubah', compact('berita'));
+        return Inertia::render('Admin/Artikel/Ubah', compact('artikel'));
     }
 
-    public function perbarui(BeritaRequest $request, Berita $berita)
+    public function perbarui(ArtikelRequest $request, Artikel $artikel)
     {
         DB::beginTransaction();
         try {
-            $validated     = $request->validated();
+            $validated             = $request->validated();
             
-            $berita->judul = $validated['judul'];
-            $berita->isi   = $validated['isi'];
+            $artikel->judul         = $validated['judul'];
+            $artikel->isi           = $validated['isi'];
+            $artikel->kategori_id   = $validated['kategori_id'];
 
             if ($request->hasFile('sampul') && $request->file('sampul')->isValid()){
                 $name_file = $request->sampul->hashName();
-                if(!$request->sampul->move('img/berita', $name_file)) {
+                if(!$request->sampul->move('img/artikel', $name_file)) {
                     return back()->withInput()->with('alert', [
                         'status' => 'danger',
                         'pesan'  => 'Terjadi kesalahan saat mengunggah gambar. Silakan coba lagi!'
                     ]);
                 }
 
-                if (Storage::exists("img/berita/$berita->sampul") && $berita->sampul !== 'default.jpg' && !Storage::delete("img/berita/$berita->sampul")){
+                if (Storage::exists("img/artikel/$artikel->sampul") && $artikel->sampul !== 'default.jpg' && !Storage::delete("img/artikel/$artikel->sampul")){
                     return back()->withInput()->with('alert', [
                         'status' => 'danger',
                         'pesan'  => 'Terjadi kesalahan saat menghapus gambar lama. Silakan coba lagi!'
                     ]);
                 }
 
-                $berita->sampul = $name_file;
+                $artikel->sampul = $name_file;
             }
 
-            $berita->save();
+            $artikel->save();
 
             DB::commit();
 
-            return redirect()->route('admin.berita.index')->with('alert', [
+            return redirect()->route('admin.artikel.index')->with('alert', [
                 'status' => 'success',
-                'pesan'  => 'Anda berhasil memperbarui data Berita!'
+                'pesan'  => 'Anda berhasil memperbarui data Artikel!'
             ]);
         } catch (\Exception $e) {
             DB::rollBack();
@@ -129,13 +132,13 @@ class AdminBeritaController extends Controller
         }
     }
 
-    public function hapus(Berita $berita)
+    public function hapus(Artikel $artikel)
     {
         DB::beginTransaction();
         try {
-            $berita->delete();
+            $artikel->delete();
 
-            if (Storage::exists("img/berita/$berita->sampul") && $berita->sampul !== 'default.jpg' && !Storage::delete('img/berita/' . $berita->sampul)) {
+            if (Storage::exists("img/artikel/$artikel->sampul") && $artikel->sampul !== 'default.jpg' && !Storage::delete('img/artikel/' . $artikel->sampul)) {
                 return back()->withInput()->with('alert', [
                     'status' => 'danger',
                     'pesan'  => 'Terjadi kesalahan saat menghapus gambar. Silakan coba lagi!'
@@ -144,9 +147,9 @@ class AdminBeritaController extends Controller
 
             DB::commit();
 
-            return redirect()->route('admin.berita.index')->with('alert', [
+            return redirect()->route('admin.artikel.index')->with('alert', [
                 'status' => 'success',
-                'pesan'  => 'Anda berhasil menghapus data Berita!'
+                'pesan'  => 'Anda berhasil menghapus data Artikel!'
             ]);
         } catch (\Exception $e) {
             DB::rollBack();

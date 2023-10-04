@@ -1,19 +1,16 @@
 <script setup>
 import { AdminLayout } from '~Layouts';
 import { Card } from "~Components/core"
-import { FormBerita } from "~Components/forms"
+import { FormArtikel } from "~Components/forms"
 import { Head, useForm } from "@inertiajs/vue3";
 import { ref } from 'vue';
 
-let title = ref('Tambah Berita');
+let title = ref('Tambah Artikel');
 
-const props = defineProps({ berita: { type: Object, required: true } })
-
-const berita = useForm({
-  id: props.berita.id,
-  judul: props.berita.judul,
-  sampul: props.berita.sampul,
-  isi: props.berita.isi,
+const artikel = useForm({
+  judul: '',
+  sampul: null,
+  isi: '',
 })
 
 </script>
@@ -25,7 +22,7 @@ const berita = useForm({
       <h1 class="mb-3 text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">{{ title }}</h1>
     </div>
     <Card>
-      <FormBerita :berita="berita" @submit="berita.post(route('admin.berita.perbarui', berita.id))" />
+      <FormArtikel :artikel="artikel" @submit="artikel.post(route('admin.artikel.simpan'))" />
     </Card>
   </AdminLayout>
 </template>

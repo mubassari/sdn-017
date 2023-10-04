@@ -2,20 +2,23 @@
 
 namespace App\Models;
 
+use App\Models\Kategori;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
-class Berita extends Model
+class Artikel extends Model
 {
     use HasFactory;
-    protected $table = 'berita';
+    protected $table = 'artikel';
 
     protected $fillable = [
         'judul',
         'isi',
         'slug',
         'sampul',
+        'kategori_id'
     ];
 
     protected $guarded = [
@@ -29,7 +32,7 @@ class Berita extends Model
     public function getPathSampulAttribute()
     {
         if ($this->sampul) {
-            return asset('img/berita/' . $this->sampul);
+            return asset('img/artikel/' . $this->sampul);
         }
     }
 
@@ -64,5 +67,15 @@ class Berita extends Model
             return "{$slug}-2";
         }
         return $slug;
+    }
+
+    /**
+     * Get the Kategori that owns the Artikel
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function Kategori(): BelongsTo
+    {
+        return $this->belongsTo(Kategori::class);
     }
 }

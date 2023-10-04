@@ -1,20 +1,19 @@
 <?php
 
 return [
+
     /*
-    |---------------------------------------------------------------------------------------
-    | Baris Bahasa untuk Pengingat Kata Sandi
-    |---------------------------------------------------------------------------------------
+    |--------------------------------------------------------------------------
+    | Pagination Language Lines
+    |--------------------------------------------------------------------------
     |
-    | Baris bahasa berikut adalah baris standar yang cocok dengan alasan yang diberikan
-    | oleh pembongkar kata sandi yang telah gagal dalam upaya pembaruan kata
-    | sandi, misalnya token tidak valid atau kata sandi baru tidak valid.
+    | The following language lines are used by the paginator library to build
+    | the simple pagination links. You are free to change them to anything
+    | you want to customize your views to better match your application.
     |
     */
 
-    'reset'     => 'Kata sandi Anda sudah direset!',
-    'sent'      => 'Kami sudah mengirim surel yang berisi tautan untuk mereset kata sandi Anda!',
-    'throttled' => 'Harap tunggu sebelum mencoba lagi.',
-    'token'     => 'Token pengaturan ulang kata sandi tidak sah.',
-    'user'      => 'Kami tidak dapat menemukan pengguna dengan alamat surel tersebut.',
+    'previous' => '&laquo; Sebelumnya',
+    'next' => 'Selanjutnya &raquo;',
+
 ];
