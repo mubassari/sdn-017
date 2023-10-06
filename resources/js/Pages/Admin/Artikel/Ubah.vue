@@ -5,7 +5,7 @@ import { FormArtikel } from "~Components/forms"
 import { useForm } from "@inertiajs/vue3";
 import { ref } from 'vue';
 
-let title = ref('Ubah Artikel');
+const title = ref('Ubah Artikel');
 
 const props = defineProps({ artikel: { type: Object, required: true } })
 

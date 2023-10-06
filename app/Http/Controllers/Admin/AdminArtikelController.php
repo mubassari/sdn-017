@@ -108,7 +108,7 @@ class AdminArtikelController extends Controller
                     ]);
                 }
 
-                if (Storage::exists("img/artikel/$artikel->sampul") && $artikel->sampul !== 'default.jpg' && !Storage::delete("img/artikel/$artikel->sampul")){
+                if (Storage::exists("img/artikel/$artikel->sampul") && $artikel->sampul !== 'default.png' && !Storage::delete("img/artikel/$artikel->sampul")){
                     return back()->withInput()->with('alert', [
                         'status' => 'danger',
                         'pesan'  => 'Terjadi kesalahan saat menghapus gambar lama. Silakan coba lagi!'
@@ -141,7 +141,7 @@ class AdminArtikelController extends Controller
         try {
             $artikel->delete();
 
-            if (Storage::exists("img/artikel/$artikel->sampul") && $artikel->sampul !== 'default.jpg' && !Storage::delete('img/artikel/' . $artikel->sampul)) {
+            if (Storage::exists("img/artikel/$artikel->sampul") && $artikel->sampul !== 'default.png' && !Storage::delete('img/artikel/' . $artikel->sampul)) {
                 return back()->withInput()->with('alert', [
                     'status' => 'danger',
                     'pesan'  => 'Terjadi kesalahan saat menghapus gambar. Silakan coba lagi!'

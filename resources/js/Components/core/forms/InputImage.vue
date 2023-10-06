@@ -10,7 +10,7 @@ const props = defineProps({
 });
 const emits = defineEmits(['update:modelValue', 'clearError']);
 
-let imagePreview = ref(props.modelValue);
+const imagePreview = ref(props.modelValue);
 
 const previewImage = (event) => {
   const file = event.target.files[0];

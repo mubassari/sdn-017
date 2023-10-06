@@ -4,7 +4,7 @@ import { AdminLayout } from '~Layouts';
 import { router } from "@inertiajs/vue3";
 import { ref } from 'vue';
 
-let title = ref('Daftar Artikel');
+const title = ref('Daftar Artikel');
 defineProps({ list_artikel: { type: Object, required: true } })
 
 const deleteData = (route) => {

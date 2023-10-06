@@ -6,7 +6,7 @@ import toast from '~Stores/toast'
 
 const page = usePage()
 
-let removeFinishEventListener = router.on('finish', () => {
+const removeFinishEventListener = router.on('finish', () => {
   if (page.props.alert) {
     toast.add(page.props.alert)
   }

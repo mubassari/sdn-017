@@ -23,6 +23,8 @@ import {
     faAlignJustify,
     faAlignLeft,
     faAlignRight,
+    faArrowRightLong,
+    faBars,
     faBroom,
     faBold,
     faCaretDown,
@@ -37,6 +39,7 @@ import {
     faLink,
     faListOl,
     faListUl,
+    faLocationDot,
     faMoon,
     faParagraph,
     faPenToSquare,
@@ -49,6 +52,7 @@ import {
     faTrash,
     faUnderline,
     faUndoAlt,
+    faQuoteLeft,
 } from "@fortawesome/free-solid-svg-icons";
 
 /* add icons to the library */
@@ -61,6 +65,8 @@ library.add(
     faAlignJustify,
     faAlignLeft,
     faAlignRight,
+    faArrowRightLong,
+    faBars,
     faBroom,
     faBold,
     faCaretDown,
@@ -75,6 +81,7 @@ library.add(
     faLink,
     faListOl,
     faListUl,
+    faLocationDot,
     faMoon,
     faParagraph,
     faPenToSquare,
@@ -86,7 +93,8 @@ library.add(
     faTimes,
     faTrash,
     faUnderline,
-    faUndoAlt
+    faUndoAlt,
+    faQuoteLeft
 );
 
 createInertiaApp({

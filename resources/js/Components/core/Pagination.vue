@@ -11,7 +11,7 @@ defineProps({
     <span class="text-sm text-gray-700 dark:text-gray-400">
       Menampilkan
       <template v-if="dari || ke">
-        data <span class="font-semibold text-gray-900 dark:text-white">{{ dari }}</span> - <span
+        data <span class="font-semibold text-gray-900 dark:text-white">{{ dari }}</span> &ndash; <span
         class="font-semibold text-gray-900 dark:text-white">{{ ke }}</span>, dari
       </template>
        total <span

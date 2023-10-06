@@ -3,7 +3,7 @@ import { ref, onMounted, onUnmounted } from "vue";
 import { AdminNavbar, AdminSidebar, Toast } from "~Components/layouts"
 import { Head } from "@inertiajs/vue3";
 
-let sidebarIsOpen = ref(false);
+const sidebarIsOpen = ref(false);
 
 onMounted(() => {
     window.addEventListener("resize", handleWindowSizeChange);

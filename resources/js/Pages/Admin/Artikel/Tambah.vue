@@ -5,7 +5,7 @@ import { FormArtikel } from "~Components/forms"
 import { useForm } from "@inertiajs/vue3";
 import { ref } from 'vue';
 
-let title = ref('Tambah Artikel');
+const title = ref('Tambah Artikel');
 
 const artikel = useForm({
   judul: '',

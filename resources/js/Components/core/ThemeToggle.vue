@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onBeforeMount } from 'vue';
-let themeIsDark = ref(true);
+const themeIsDark = ref(true);
 
 onBeforeMount(() => {
   if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
