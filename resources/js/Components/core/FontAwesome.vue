@@ -1,0 +1,99 @@
+<script setup>
+/* import the fontawesome core */
+import { library } from "@fortawesome/fontawesome-svg-core";
+
+/* import font awesome icon component */
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+
+/* import specific icons */
+import {
+  fa1,
+  fa2,
+  fa3,
+  faAngleUp,
+  faAlignCenter,
+  faAlignJustify,
+  faAlignLeft,
+  faAlignRight,
+  faArrowRightLong,
+  faBars,
+  faBroom,
+  faBold,
+  faCaretDown,
+  faCaretLeft,
+  faCaretRight,
+  faCaretUp,
+  faColumns,
+  faCompress,
+  faEye,
+  faHeading,
+  faHouse,
+  faItalic,
+  faLink,
+  faListOl,
+  faListUl,
+  faLocationDot,
+  faMoon,
+  faNewspaper,
+  faParagraph,
+  faPenToSquare,
+  faPlus,
+  faRedoAlt,
+  faStrikethrough,
+  faSun,
+  faTable,
+  faTimes,
+  faTrash,
+  faUnderline,
+  faUndoAlt,
+  faQuoteLeft,
+} from "@fortawesome/free-solid-svg-icons";
+
+/* add icons to the library */
+library.add(
+  fa1,
+  fa2,
+  fa3,
+  faAngleUp,
+  faAlignCenter,
+  faAlignJustify,
+  faAlignLeft,
+  faAlignRight,
+  faArrowRightLong,
+  faBars,
+  faBroom,
+  faBold,
+  faCaretDown,
+  faCaretLeft,
+  faCaretRight,
+  faCaretUp,
+  faColumns,
+  faCompress,
+  faEye,
+  faHeading,
+  faHouse,
+  faItalic,
+  faLink,
+  faListOl,
+  faListUl,
+  faLocationDot,
+  faMoon,
+  faNewspaper,
+  faParagraph,
+  faPenToSquare,
+  faPlus,
+  faRedoAlt,
+  faStrikethrough,
+  faSun,
+  faTable,
+  faTimes,
+  faTrash,
+  faUnderline,
+  faUndoAlt,
+  faQuoteLeft
+);
+</script>
+
+<template>
+  <FontAwesomeIcon></FontAwesomeIcon>
+</template>
