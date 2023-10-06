@@ -56,6 +56,10 @@ return [
 
     'asset_url' => env('ASSET_URL', null),
 
+    'pagination' => [
+        'page_name' => 'hal', // Change 'page' to 'hal'
+    ],
+    
     /*
     |--------------------------------------------------------------------------
     | Application Timezone

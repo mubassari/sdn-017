@@ -7,6 +7,8 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AdminArtikelController;
 
 // General Controller
+use App\Http\Controllers\MainController;
+use App\Http\Controllers\ArtikelController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,18 +21,20 @@ use App\Http\Controllers\Admin\AdminArtikelController;
 |
 */
 
-Route::get('',function () {
-  return \Inertia\Inertia::render('Index');
-})->name('index');
+Route::get('',[MainController::class, 'beranda'])->name('index');
+Route::prefix('artikel')->name('admin.')->group(function() {
+  Route::get('',[ArtikelController::class, 'beranda'])->name('artikel.index');
+  Route::get('tampil',[ArtikelController::class, 'tampil'])->name('artikel.tampil');
+});
 
-Route::prefix('admin')->name('admin.')->namespace('App\Http\Controllers\Admin')->group(function() {
-  Route::get('','AdminController@beranda')->name('beranda');
+Route::prefix('admin')->name('admin.')->group(function() {
+  Route::get('',[AdminController::class, 'beranda'])->name('beranda');
   Route::prefix('artikel')->name('artikel.')->group(function(){
-    Route::get('','AdminArtikelController@index')->name('index');
-    Route::get('tambah','AdminArtikelController@tambah')->name('tambah');
-    Route::post('','AdminArtikelController@simpan')->name('simpan');
-    Route::get('ubah/{artikel}','AdminArtikelController@ubah')->name('ubah');
-    Route::post('{artikel}','AdminArtikelController@perbarui')->name('perbarui');
-    Route::delete('{artikel}','AdminArtikelController@hapus')->name('hapus');
+    Route::get('',[AdminArtikelController::class, 'index'])->name('index');
+    Route::get('tambah',[AdminArtikelController::class, 'tambah'])->name('tambah');
+    Route::post('',[AdminArtikelController::class, 'simpan'])->name('simpan');
+    Route::get('ubah/{artikel}',[AdminArtikelController::class, 'ubah'])->name('ubah');
+    Route::post('{artikel}',[AdminArtikelController::class, 'perbarui'])->name('perbarui');
+    Route::delete('{artikel}',[AdminArtikelController::class, 'hapus'])->name('hapus');
   });
 });
