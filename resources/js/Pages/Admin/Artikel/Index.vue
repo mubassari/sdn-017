@@ -2,7 +2,7 @@
 import { Pagination } from '~Components/core'
 import { AdminLayout } from '~Layouts';
 import { router } from "@inertiajs/vue3";
-import { ref } from 'vue';
+import { ref } from '@vue/reactivity';
 
 const title = ref('Daftar Artikel');
 defineProps({ list_artikel: { type: Object, required: true } })
@@ -19,12 +19,19 @@ const deleteData = (route) => {
   <AdminLayout :title="title">
     <div class="w-full p-4">
       <h1 class="mb-3 text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">{{ title }}</h1>
-      <div class="items-center justify-between block sm:flex md:divide-x md:divide-gray-100 dark:divide-gray-700">
+      <div class="items-center block sm:flex space-x-2">
         <Link :href="route('admin.artikel.tambah')">
         <button type="button" title="Tambah"
           class="inline-flex items-center justify-center w-1/2 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 sm:w-auto dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
           <font-awesome-icon icon="plus" class="mr-2"></font-awesome-icon>
           Tambah Artikel
+        </button>
+        </Link>
+        <Link :href="route('admin.kategori.index')">
+        <button type="button" title="Tambah"
+          class="inline-flex items-center justify-center w-1/2 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 sm:w-auto dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+          <font-awesome-icon icon="folder-plus" class="mr-2"></font-awesome-icon>
+          Tambah Kategori
         </button>
         </Link>
       </div>
@@ -60,7 +67,7 @@ const deleteData = (route) => {
               </td>
               <td class="px-6 py-4">
                 <span
-                  class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">
+                  class="bg-blue-100 text-blue-800 text-xs font-semibold mr-3 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800">
                   {{ artikel.kategori }}
                 </span>
               </td>

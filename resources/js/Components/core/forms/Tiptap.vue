@@ -74,7 +74,7 @@ const setLink = (isLink) => {
 </script>
 
 <template>
-  <div class="mb-5">
+  <div>
     <div class="mb-3 whitespace-nowrap overflow-x-auto">
       <div class="relative inline-flex align-middle flex-col items-start justify-center">
         <div class="relative inline-flex align-middle rounded-md py-1 px-2 leading-tight text-xs ">

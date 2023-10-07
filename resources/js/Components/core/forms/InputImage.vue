@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { ref } from '@vue/reactivity';
 
 const props = defineProps({
   modelValue: { type: [Object, String] },
@@ -39,7 +39,7 @@ const removeImage = () => {
 </script>
 
 <template>
-  <div class="mb-5">
+  <div>
     <label :for="name" class="block text-xl mb-2 font-medium"
       :class="{ 'text-red-700 dark:text-red-500': error, 'text-gray-900 dark:text-white': !error }">
       {{ title }}

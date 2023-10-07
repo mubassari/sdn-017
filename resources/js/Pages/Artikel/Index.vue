@@ -25,7 +25,7 @@ import { MainLayout } from '~Layouts';
                   class="bg-blue-100 text-blue-800 text-xs font-semibold mr-3 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800">
                   Artikel
                 </span>
-                <span class="pl-3 text-sm text-gray-500 dark:text-gray-400">
+                <span class="ml-3 text-sm text-gray-500 dark:text-gray-400">
                   Senin, 01 November 2023
                 </span>
               </div>
@@ -50,7 +50,7 @@ import { MainLayout } from '~Layouts';
                   class="bg-blue-100 text-blue-800 text-xs font-semibold mr-3 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800">
                   Artikel
                 </span>
-                <span class="pl-3 text-sm text-gray-500 dark:text-gray-400">
+                <span class="ml-3 text-sm text-gray-500 dark:text-gray-400">
                   Senin, 01 November 2023
                 </span>
               </div>
@@ -75,7 +75,7 @@ import { MainLayout } from '~Layouts';
                   class="bg-blue-100 text-blue-800 text-xs font-semibold mr-3 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800">
                   Artikel
                 </span>
-                <span class="pl-3 text-sm text-gray-500 dark:text-gray-400">
+                <span class="ml-3 text-sm text-gray-500 dark:text-gray-400">
                   Senin, 01 November 2023
                 </span>
               </div>
@@ -100,7 +100,7 @@ import { MainLayout } from '~Layouts';
                   class="bg-blue-100 text-blue-800 text-xs font-semibold mr-3 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800">
                   Artikel
                 </span>
-                <span class="pl-3 text-sm text-gray-500 dark:text-gray-400">
+                <span class="ml-3 text-sm text-gray-500 dark:text-gray-400">
                   Senin, 01 November 2023
                 </span>
               </div>
@@ -125,7 +125,7 @@ import { MainLayout } from '~Layouts';
                   class="bg-blue-100 text-blue-800 text-xs font-semibold mr-3 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800">
                   Artikel
                 </span>
-                <span class="pl-3 text-sm text-gray-500 dark:text-gray-400">
+                <span class="ml-3 text-sm text-gray-500 dark:text-gray-400">
                   Senin, 01 November 2023
                 </span>
               </div>
@@ -150,7 +150,7 @@ import { MainLayout } from '~Layouts';
                   class="bg-blue-100 text-blue-800 text-xs font-semibold mr-3 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800">
                   Artikel
                 </span>
-                <span class="pl-3 text-sm text-gray-500 dark:text-gray-400">
+                <span class="ml-3 text-sm text-gray-500 dark:text-gray-400">
                   Senin, 01 November 2023
                 </span>
               </div>

@@ -3,7 +3,7 @@ import { AdminLayout } from '~Layouts';
 import { Card } from "~Components/core"
 import { FormArtikel } from "~Components/forms"
 import { useForm } from "@inertiajs/vue3";
-import { ref } from 'vue';
+import { ref } from '@vue/reactivity';
 
 const title = ref('Ubah Artikel');
 

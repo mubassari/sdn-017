@@ -24,9 +24,21 @@ class KategoriRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'nama' => 'required|unique:kategori,nama|string',
+            'nama' => 'required|string|unique:kategori,nama',
+            'slug' => 'string|unique:kategori,slug',
         ];
 
         return $rules;
+    }
+
+    public function withValidator($validator)
+    {
+        $validator->after(function ($validator) {
+            $disallowedWords = ['Admin', 'Kategori', 'Galeri', 'Berita', 'Sambutan'];
+
+            if (in_array(strtolower($this->input('nama')), array_map('strtolower', $disallowedWords))) {
+                $validator->errors()->add('nama', "Pilihan nilai tidak sesuai.");
+            }
+        });
     }
 }
