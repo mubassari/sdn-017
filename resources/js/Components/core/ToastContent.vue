@@ -1,7 +1,7 @@
 <script setup>
 import { onMounted } from 'vue';
 
-const props = defineProps({ pesan: { type: String }, durasi: { type: Number, default: 2000 } })
+const props = defineProps({ pesan: { type: String }, durasi: { type: Number, default: 3000 } })
 const emits = defineEmits(['remove'])
 
 onMounted(() => setTimeout(() => emits('remove'), props.durasi))

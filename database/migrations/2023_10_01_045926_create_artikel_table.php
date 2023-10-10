@@ -21,7 +21,7 @@ class CreateArtikelTable extends Migration
             $table->string('sampul')->default('default.png');
             $table->unsignedBigInteger('kategori_id')->nullable();
 
-            $table->foreign('kategori_id')->references('id')->on('kategori')->onDelete('set null');
+            $table->foreign('kategori_id')->references('id')->on('kategori')->onDelete('no action');
             $table->timestamps();
         });
     }

@@ -23,10 +23,6 @@ use App\Http\Controllers\ArtikelController;
 */
 
 Route::get('',[MainController::class, 'beranda'])->name('index');
-Route::prefix('artikel')->name('admin.')->group(function() {
-  Route::get('',[ArtikelController::class, 'beranda'])->name('artikel.index');
-  Route::get('tampil',[ArtikelController::class, 'tampil'])->name('artikel.tampil');
-});
 
 Route::prefix('admin')->name('admin.')->group(function() {
   Route::get('',[AdminController::class, 'beranda'])->name('index');
@@ -44,4 +40,9 @@ Route::prefix('admin')->name('admin.')->group(function() {
     Route::post('{kategori}',[AdminKategoriController::class, 'perbarui'])->name('perbarui');
     Route::delete('{kategori}',[AdminKategoriController::class, 'hapus'])->name('hapus');
   });
+});
+
+Route::prefix('{kategori}')->name('artikel.')->group(function() {
+  Route::get('',[ArtikelController::class, 'beranda'])->name('index');
+  Route::get('{artikel}',[ArtikelController::class, 'tampil'])->name('tampil');
 });

@@ -22,12 +22,13 @@ class AdminArtikelController extends Controller
         ->paginate(10)
         ->through(function($data) {
             return [
-                'id'       => $data->id,
-                'judul'    => $data->judul,
-                'sampul'   => $data->path_sampul,
-                'kategori' => $data->kategori->nama,
-                'slug'     => $data->slug,
-                'waktu'    => $data->waktu,
+                'id'            => $data->id,
+                'judul'         => $data->judul,
+                'sampul'        => $data->path_sampul,
+                'kategori'      => $data->kategori->nama,
+                'kategori_slug' => $data->kategori->slug,
+                'slug'          => $data->slug,
+                'waktu'         => $data->waktu,
             ];
         })
         ->withQueryString();
@@ -48,7 +49,7 @@ class AdminArtikelController extends Controller
 
             if ($request->hasFile('sampul')){
                 $name_file = $request->sampul->hashName();
-                if (!$request->sampul->move('img/artikel', $name_file)) {
+                if (!$request->sampul->storeAs('public/img/artikel', $name_file)) {
                     return back()->withInput()->with('alert', [
                         'status' => 'danger',
                         'pesan'  => 'Terjadi kesalahan saat mengunggah gambar. Silakan coba lagi!'
@@ -101,14 +102,14 @@ class AdminArtikelController extends Controller
 
             if ($request->hasFile('sampul') && $request->file('sampul')->isValid()){
                 $name_file = $request->sampul->hashName();
-                if(!$request->sampul->move('img/artikel', $name_file)) {
+                if(!$request->sampul->storeAs('public/img/artikel', $name_file)) {
                     return back()->withInput()->with('alert', [
                         'status' => 'danger',
                         'pesan'  => 'Terjadi kesalahan saat mengunggah gambar. Silakan coba lagi!'
                     ]);
                 }
 
-                if (Storage::exists("img/artikel/$artikel->sampul") && $artikel->sampul !== 'default.png' && !Storage::delete("img/artikel/$artikel->sampul")){
+                if (Storage::exists("public/img/artikel/$artikel->sampul") && $artikel->sampul !== 'default.png' && !Storage::delete("public/img/artikel/$artikel->sampul")){
                     return back()->withInput()->with('alert', [
                         'status' => 'danger',
                         'pesan'  => 'Terjadi kesalahan saat menghapus gambar lama. Silakan coba lagi!'
@@ -141,7 +142,7 @@ class AdminArtikelController extends Controller
         try {
             $artikel->delete();
 
-            if (Storage::exists("img/artikel/$artikel->sampul") && $artikel->sampul !== 'default.png' && !Storage::delete('img/artikel/' . $artikel->sampul)) {
+            if (Storage::exists("public/img/artikel/$artikel->sampul") && $artikel->sampul !== 'default.png' && !Storage::delete('public/img/artikel/' . $artikel->sampul)) {
                 return back()->withInput()->with('alert', [
                     'status' => 'danger',
                     'pesan'  => 'Terjadi kesalahan saat menghapus gambar. Silakan coba lagi!'

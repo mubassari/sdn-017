@@ -2,7 +2,9 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Kategori;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Inertia\Middleware;
 
 class HandleInertiaRequests extends Middleware
@@ -36,8 +38,13 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
+        $isAdminPage = Str::startsWith($request->route()->getName(), 'admin.');
+
         return array_merge(parent::share($request), [
-            'alert' => session('alert')
+            'page_content' => $isAdminPage ?  [] : [
+                'list_kategori' => Kategori::select('id','nama', 'slug')->get()
+            ],
+            'alert'    => session('alert')
         ]);
     }
 }

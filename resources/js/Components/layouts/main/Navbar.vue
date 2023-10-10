@@ -1,55 +1,57 @@
 <script setup>
 import { ThemeToggle } from '~Components/core'
 import { ref } from 'vue'
+import { usePage } from '@inertiajs/vue3'
+
+const page = usePage()
+
 // Menu
 const menuContent = ref([
-    {
-        title: 'Home',
-        uri: '/',
-        submenu: null
-    },
-    {
-        title: 'Artikel',
-        uri: null,
-        submenu: [
-            {
-                title: 'Pemberitahuan',
-                uri: 'pemberitahuan',
-            }, {
-                title: 'Berita',
-                uri: 'berita',
-            }
-        ],
-    },
-    {
-        title: 'Kontak',
-        uri: '/artikel',
-        submenu: null
-    },
-    {
-        title: 'Lainnya',
-        uri: null,
-        submenu: [
-            {
-                title: 'Pemberitahuan',
-                uri: 'pemberitahuan',
-            }, {
-                title: 'Berita',
-                uri: 'berita',
-            }
-        ],
-    },
+  {
+    title: 'Home',
+    uri: '/',
+    submenu: null
+  },
+  {
+    title: 'Artikel',
+    uri: null,
+    submenu: page.props.page_content.list_kategori.map(el => {
+      return {
+        title: el.nama,
+        uri: el.slug
+      }
+    }
+    ),
+  },
+  {
+    title: 'Kontak',
+    uri: '/artikel',
+    submenu: null
+  },
+  {
+    title: 'Lainnya',
+    uri: null,
+    submenu: [
+      {
+        title: 'Pemberitahuan',
+        uri: 'pemberitahuan',
+      }, {
+        title: 'Berita',
+        uri: 'berita',
+      }
+    ],
+  },
 ])
 
 const navbarToggleHide = ref(true);
 const submenuOpened = ref(null)
 
 const openSubmenu = (index) => {
-    submenuOpened.value = submenuOpened.value == index ? null : index
+  submenuOpened.value = submenuOpened.value == index ? null : index
 }
 const hideNavbar = () => {
-    navbarToggleHide.value = !navbarToggleHide.value;
-    submenuOpened.value = null
+  navbarToggleHide.value = !navbarToggleHide.value;
+  submenuOpened.value = null
 }
 // End Menu
 </script>

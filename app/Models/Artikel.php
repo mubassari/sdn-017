@@ -6,6 +6,7 @@ use App\Models\Kategori;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class Artikel extends Model
@@ -32,7 +33,7 @@ class Artikel extends Model
     public function getPathSampulAttribute()
     {
         if ($this->sampul) {
-            return asset('img/artikel/' . $this->sampul);
+            return Storage::url('img/artikel/' . $this->sampul);
         }
     }
 

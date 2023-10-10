@@ -28,6 +28,9 @@ watch(() => props.modelValue, (value) => {
 
 onBeforeMount(() => {
   formEditor.value = new Editor({
+    parseOptions: {
+      preserveWhitespace: 'full'
+    },
     extensions: [
       StarterKit.configure({
         blockquote: false,
@@ -278,6 +281,14 @@ const setLink = (isLink) => {
 
 .ProseMirror {
   @apply max-w-full;
+}
+
+.ProseMirror * {
+  @apply whitespace-pre-wrap
+}
+
+.ProseMirror * >a {
+  @apply text-blue-500 dark:text-blue-600;
 }
 
 .ProseMirror>table {

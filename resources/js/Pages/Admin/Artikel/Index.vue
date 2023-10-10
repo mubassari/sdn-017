@@ -72,11 +72,11 @@ const deleteData = (route) => {
                 </span>
               </td>
               <td class="px-6 py-4 text-right whitespace-nowrap">
-                <a href="#" title="Lihat"
+                <Link :href="route('artikel.tampil', [artikel.kategori_slug, artikel.slug])" title="Lihat"
                   class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm p-2.5 mr-2 mb-2 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
-                  <font-awesome-icon icon="eye"></font-awesome-icon>
-                  <span class="sr-only">Lihat</span>
-                </a>
+                <font-awesome-icon icon="eye"></font-awesome-icon>
+                <span class="sr-only">Lihat</span>
+                </Link>
                 <Link :href="route('admin.artikel.ubah', artikel.id)" title="Ubah"
                   class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-2.5 mr-2 mb-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                 <font-awesome-icon icon="pen-to-square"></font-awesome-icon>

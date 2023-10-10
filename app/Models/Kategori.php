@@ -66,4 +66,14 @@ class Kategori extends Model
     {
         return $this->hasMany(Artikel::class);
     }
+
+    /**
+     * Get latest of the Artikel for the Kategori
+     *
+     * 
+     */
+    public function LatestArtikel($latest = 4)
+    {
+        return $this->hasMany(Artikel::class)->orderByDesc('created_at')->limit($latest)->get();
+    }
 }
