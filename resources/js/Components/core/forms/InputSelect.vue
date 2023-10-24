@@ -6,7 +6,7 @@ const page = usePage()
 const kategori_list = ref([{ id: 0, nama: 'Pilih Kategori' }, ...page.props.kategori])
 
 const props = defineProps({
-  modelValue: { type: Number },
+  modelValue: { type: [Number, String] },
   error: { type: String },
   title: { type: String, default: 'Masukkan Teks' },
   type: { type: String, default: 'text' },

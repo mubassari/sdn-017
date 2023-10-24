@@ -219,7 +219,7 @@ onUnmounted(() => unloopJumbotron());
                         class="space-y-4 md:grid xl:grid-cols-4 md:grid-cols-2 sm:gap-3 xl:gap-5 md:space-y-0">
                         <div v-for="artikel in list_kategori[currentArticleShownId - 1].artikel" :key="artikel.id"
                             class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                            <img class="rounded-t-lg w-full" :src="artikel.sampul" />
+                            <img class="rounded-t-lg w-full object-cover aspect-square" :src="artikel.sampul" />
                             <div class="p-5">
                                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                                     {{ artikel.judul }}

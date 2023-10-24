@@ -25,8 +25,7 @@ class ArtikelRequest extends FormRequest
     {
         $rules = [
             'judul'       => 'required|string',
-            'isi'         => 'required|string|max:65535',
-            'sampul'      => 'sometimes|nullable',
+            'isi'         => 'required|string',
             'kategori_id' => 'required|exists:kategori,id'
         ];
 
@@ -41,10 +40,6 @@ class ArtikelRequest extends FormRequest
      */
     public function withValidator($validator)
     {
-        $validator->sometimes('sampul', ['image', 'mimes:jpeg,png,jpg', 'max:1024'], function ($input) {
-            // Check if the 'sampul' input is not empty and is an instance of UploadedFile
-            return !empty($input->sampul) && $input->sampul instanceof \Illuminate\Http\UploadedFile;
-        });
         $validator->after(function ($validator) {
             if (in_array($this->isi, ["", "<br>", "<p><br></p>"])) {
                 $validator->errors()->add('isi', 'Isian ini wajib diisi');

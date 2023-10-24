@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Str;
 
 class Artikel extends Model
@@ -18,7 +19,7 @@ class Artikel extends Model
         'judul',
         'isi',
         'slug',
-        'sampul',
+        'user_id',
         'kategori_id'
     ];
 
@@ -32,9 +33,27 @@ class Artikel extends Model
 
     public function getPathSampulAttribute()
     {
-        if ($this->sampul) {
-            return Storage::url('img/artikel/' . $this->sampul);
+        $imgSrc = 'storage/public/images/default.png';
+
+        $pattern = '/<img[^>]+src=["\']([^"\']+)["\']/';
+        if (preg_match($pattern, $this->isi, $matches)) {
+            // Check if a match was found
+            $imgSrc = $matches[1]; // Extract the src attribute
         }
+        // Set the extracted src as the value of $this->isi
+        return $imgSrc;
+    }
+
+    public function getIsiWithPathAttribute()
+    {
+        $content = $this->isi;
+        preg_match_all('/<img[^>]+src="([^">]+)"(?:[^>]+id="([^">]+)")?/', $content, $matches, PREG_SET_ORDER);
+        foreach ($matches as $key => $imageTag) {
+            $src  = $matches[$key][1];
+            $uuid  = $matches[$key][2];
+            $content = str_replace($matches[$key][0], '<img src="' . URL::asset($src) . '" id="' . $uuid . '"', $content);
+        }
+        return $content;
     }
 
     public function getWaktuAttribute()

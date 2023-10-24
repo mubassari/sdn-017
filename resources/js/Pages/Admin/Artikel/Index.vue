@@ -19,10 +19,10 @@ const deleteData = (route) => {
   <AdminLayout :title="title">
     <div class="w-full p-4">
       <h1 class="mb-3 text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">{{ title }}</h1>
-      <div class="items-center block sm:flex space-x-2">
+      <div class="items-center sm:flex sm:space-x-2">
         <Link :href="route('admin.artikel.tambah')">
         <button type="button" title="Tambah"
-          class="inline-flex items-center justify-center w-1/2 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 sm:w-auto dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+          class="inline-flex items-center justify-center w-1/2 px-3 py-2 mr-2 mb-2 sm:mb-0 text-sm font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 sm:w-auto dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
           <font-awesome-icon icon="plus" class="mr-2"></font-awesome-icon>
           Tambah Artikel
         </button>

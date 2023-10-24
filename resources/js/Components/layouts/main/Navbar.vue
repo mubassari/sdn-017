@@ -18,7 +18,7 @@ const menuContent = ref([
     submenu: page.props.page_content.list_kategori.map(el => {
       return {
         title: el.nama,
-        uri: el.slug
+        uri: ['artikel.index', el.slug]
       }
     }
     ),
@@ -89,7 +89,7 @@ const hideNavbar = () => {
                 class="md:z-20 md:absolute md:mt-3 w-full md:w-44 mt-3 md:-translate-x-5 bg-white divide divide-gray-100 rounded-lg shadow dark:bg-gray-700">
                 <ul class="py-2 text-sm text-gray-700 dark:text-gray-200">
                   <li v-for="(submenu, indexSubmenu) in menu.submenu" :key="indexSubmenu">
-                    <Link :href="submenu.uri"
+                    <Link :href="Array.isArray(submenu.uri) ? route(submenu.uri[0], submenu.uri[1]) : submenu.uri"
                       class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                     {{ submenu.title }}
                     </Link>

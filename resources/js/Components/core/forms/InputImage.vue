@@ -5,7 +5,7 @@ const props = defineProps({
   modelValue: { type: [Object, String] },
   error: { type: String },
   accept: { type: String, default: 'image/*' },
-  title: { type: String, default: 'Masukkan Gambar' },
+  title: { type: String },
   name: { type: String, required: true }
 });
 const emits = defineEmits(['update:modelValue', 'clearError']);
@@ -40,7 +40,7 @@ const removeImage = () => {
 
 <template>
   <div>
-    <label :for="name" class="block text-xl mb-2 font-medium"
+    <label v-if="title" :for="name" class="block text-xl mb-2 font-medium"
       :class="{ 'text-red-700 dark:text-red-500': error, 'text-gray-900 dark:text-white': !error }">
       {{ title }}
     </label>

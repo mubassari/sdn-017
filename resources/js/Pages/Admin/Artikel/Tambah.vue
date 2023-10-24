@@ -9,7 +9,6 @@ const title = ref('Tambah Artikel');
 
 const artikel = useForm({
   judul: '',
-  sampul: null,
   isi: '',
   kategori_id: 0,
 })

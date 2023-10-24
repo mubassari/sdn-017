@@ -2,8 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\Kategori;
 use App\Models\Artikel;
+use App\Models\Gambar;
+use App\Models\GambarArtikel;
+use App\Models\Kategori;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 
@@ -20,11 +22,12 @@ class ArtikelSeeder extends Seeder
 
         foreach(Kategori::all() as $kategori){ // loop through all kategoris 
             for ($i = 0; $i < 11; $i++) {
-                $paragraph = '';
-                $paragraph_length = rand(10, 20);
+                $src = "https://placekitten.com/" . rand(200, 500) . "/" . rand(200, 500);
+                $paragraph = "<img src='" . $src . "'/>";
+                $paragraph_length = rand(20, 30);
 
                 for ($p = 0; $p < $paragraph_length; $p++) {
-                    $paragraph .= "<p>".$faker->realText(rand(100, 200))."</p>";
+                    $paragraph .= "<p>".$faker->realText(rand(250, 500))."</p>";
                 }
 
                 $judul = $faker->realText(50);
@@ -34,6 +37,7 @@ class ArtikelSeeder extends Seeder
                     'judul'       => $judul,
                     'isi'         => $post,
                     'slug'        => Str::slug($judul),
+                    'user_id'     => 1,
                     'kategori_id' => $kategori->id
                 ]);
             }

@@ -12,7 +12,6 @@ const props = defineProps({ artikel: { type: Object, required: true } })
 const artikel = useForm({
   id: props.artikel.id,
   judul: props.artikel.judul,
-  sampul: props.artikel.sampul,
   isi: props.artikel.isi,
   kategori_id: props.artikel.kategori_id,
 })

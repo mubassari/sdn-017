@@ -1,6 +1,7 @@
 <script setup>
 import { ref, watch, onBeforeMount, onBeforeUnmount } from 'vue';
 import { Editor, EditorContent } from '@tiptap/vue-3'
+import { ModalInputLink, ModalInputImage } from '~Components/core/modal'
 import StarterKit from "@tiptap/starter-kit";
 import Underline from "@tiptap/extension-underline";
 import Link from "@tiptap/extension-link";
@@ -9,6 +10,8 @@ import Table from "@tiptap/extension-table";
 import TableRow from "@tiptap/extension-table-row";
 import TableCell from "@tiptap/extension-table-cell";
 import TableHeader from "@tiptap/extension-table-header";
+import Image from '@tiptap/extension-image';
+
 
 const props = defineProps({
   modelValue: { type: String, default: '' },
@@ -53,6 +56,10 @@ onBeforeMount(() => {
       TableRow,
       TableHeader,
       TableCell,
+      Image.configure({
+        inline: true,
+        allowBase64: true,
+      }),
     ],
     editorProps: {
       attributes: {
@@ -66,18 +73,26 @@ onBeforeMount(() => {
 
 onBeforeUnmount(() => formEditor.value.destroy())
 
-const setLink = (isLink) => {
-  if (!isLink) {
-    const href = window.prompt('Masukkan Tautan');
-    formEditor.value.chain().focus().setLink({ href }).run()
-  } else {
-    formEditor.value.chain().focus().unsetLink().run()
-  }
+const modalState = ref({
+  ModalInputLink: false,
+  ModalInputImage: false
+})
+
+const setLink = (value) => {
+  formEditor.value.chain().focus().setLink({ value }).run();
+  modalState.value.ModalInputLink = false
+};
+
+const setImage = (src) => {
+  formEditor.value.chain().focus().setImage({ src }).run()
+  modalState.value.ModalInputImage = false
 }
 </script>
 
 <template>
   <div>
+    <ModalInputLink v-if="modalState.ModalInputLink" @input="setLink" @close="modalState.ModalInputLink = false" />
+    <ModalInputImage v-if="modalState.ModalInputImage" @input="setImage" @close="modalState.ModalInputImage = false" />
     <div class="mb-3 whitespace-nowrap overflow-x-auto">
       <div class="relative inline-flex align-middle flex-col items-start justify-center">
         <div class="relative inline-flex align-middle rounded-md py-1 px-2 leading-tight text-xs ">
@@ -237,13 +252,24 @@ const setLink = (isLink) => {
       <div class="relative inline-flex align-middle flex-col items-start justify-center">
         <div class="relative inline-flex align-middle rounded-md py-1 px-2 leading-tight text-xs">
           <button
-            class="inline-flex items-center px-4 py-2 text-sm font-medium border focus:z-10 focus:ring-2 rounded-l-lg"
-            title="Tautan" @click="setLink(formEditor.isActive('link'))"
+            class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white"
+            title="Gambar" @click="modalState.ModalInputImage = true">
+            <font-awesome-icon icon="image"></font-awesome-icon>
+          </button>
+        </div>
+        <div class="relative inline-flex align-middle rounded-md py-1 px-2 leading-tight text-xs">
+          <button class="inline-flex items-center px-4 py-2 text-sm font-medium border focus:z-10 focus:ring-2 rounded-lg"
+            title="Tautan"
+            @click="formEditor.isActive('link') ? formEditor.chain().focus().unsetLink().run() : modalState.ModalInputLink = true"
             :class="formEditor.isActive('link') ? buttonIsActive : buttonIsUnactive">
             <font-awesome-icon icon="link"></font-awesome-icon>
           </button>
+        </div>
+      </div>
+      <div class="relative inline-flex align-middle flex-col items-start justify-center">
+        <div class="relative inline-flex align-middle rounded-md py-1 px-2 leading-tight text-xs">
           <button
-            class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-r-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white"
+            class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white"
             title="Bersihkan" @click="
               formEditor.chain().focus().unsetAllMarks().run();
             formEditor.chain().focus().clearNodes().run();
@@ -287,8 +313,13 @@ const setLink = (isLink) => {
   @apply whitespace-pre-wrap
 }
 
-.ProseMirror * >a {
+.ProseMirror *>a {
   @apply text-blue-500 dark:text-blue-600;
+}
+
+.ProseMirror *>img.ProseMirror-selectednode {
+  outline: 2px solid #3B82F6;
+  outline-offset: 2px;
 }
 
 .ProseMirror>table {
