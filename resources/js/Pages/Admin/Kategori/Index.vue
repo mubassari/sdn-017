@@ -58,27 +58,27 @@ const batalAksiKategori = () => {
         {{ title }}
       </h1>
     </div>
-    <div class="relative overflow-x-auto px-5 space-y-3">
+    <div class="relative px-5 space-y-3 overflow-x-auto">
       <div class="py-1">
         <form v-if="editKategori == null" class="flex space-x-3">
           <InputGeneral v-model="formKategori.nama" name="nama" :required="true" />
           <button type="button" title="Tambah"
             @click="formKategori.post(route('admin.kategori.simpan')); batalAksiKategori();"
-            class="inline-flex items-center justify-center w-1/2 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 sm:w-auto dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            class="inline-flex items-center justify-center w-1/2 px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 sm:w-auto dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
             <font-awesome-icon icon="plus" class="mr-2"></font-awesome-icon>
             Tambah Kategori
           </button>
         </form>
         <button v-else type="button" title="Tambah" @click="batalAksiKategori"
-          class="inline-flex items-center justify-center w-1/2 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 sm:w-auto dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+          class="inline-flex items-center justify-center w-1/2 px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 sm:w-auto dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
           <font-awesome-icon icon="plus" class="mr-2"></font-awesome-icon>
           Tambah Kategori
         </button>
       </div>
       <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
       <div v-for="( kategori, index ) in list_kategori.data" :key="kategori.id"
-        class="bg-white border dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 rounded">
-        <div class="p-3 text-gray-900 dark:text-white flex justify-between items-center">
+        class="bg-white border rounded dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700">
+        <div class="flex items-center justify-between p-3 text-gray-900 dark:text-white">
           <div class="text-base font-semibold">
             <span v-if="editKategori !== index">{{ kategori.nama }}</span>
             <form class="flex space-x-2" v-else

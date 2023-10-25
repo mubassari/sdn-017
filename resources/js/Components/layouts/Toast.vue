@@ -18,7 +18,7 @@ onUnmounted(() => removeFinishEventListener())
 <template>
   <TransitionGroup tag="div" enter-from-class="translate-x-full opacity-0" enter-active-class="duration-500"
     leave-active-class="duration-500" leave-to-class="translate-x-full opacity-0"
-    class="fixed top-4 right-4 z-100 space-y-4 w-full max-w-xs ">
+    class="fixed w-full max-w-xs space-y-4 top-4 right-4 z-100 ">
     <ToastContent v-for="(item, index) in toast.items" :key="item.key" :pesan="item.pesan" @remove="toast.remove(index)" />
   </TransitionGroup>
 </template>

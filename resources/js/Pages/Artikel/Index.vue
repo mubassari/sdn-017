@@ -11,16 +11,16 @@ const props = defineProps({
 
 <template>
   <MainLayout :title="kategori.nama">
-    <div class="pt-24 bg-white dark:bg-gray-900 flex flex-col items-center justify-center ">
+    <div class="flex flex-col items-center justify-center pt-24 bg-white dark:bg-gray-900 ">
       <h1
-        class="my-3 text-3xl font-extrabold tracking-tight leading-none text-gray-900 dark:text-white text-center uppercase md:text-4xl lg:text-5xl">
+        class="my-3 text-3xl font-extrabold leading-none tracking-tight text-center text-gray-900 uppercase dark:text-white md:text-4xl lg:text-5xl">
         {{ kategori.nama }}
       </h1>
-      <div class="py-4 px-4 mx-auto max-w-screen-xl md:py-16 lg:px-6">
+      <div class="max-w-screen-xl px-4 py-4 mx-auto md:py-16 lg:px-6">
         <div class="space-y-4 md:grid xl:grid-cols-4 md:grid-cols-2 sm:gap-3 xl:gap-5 md:space-y-0">
           <div v-for="artikel in list_artikel.data" :key="artikel.id"
             class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-            <img class="rounded-t-lg w-full object-cover aspect-square" :src="artikel.sampul" />
+            <img class="object-cover w-full rounded-t-lg aspect-square" :src="artikel.sampul" />
             <div class="p-5">
               <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                 {{ artikel.judul }}
@@ -43,7 +43,7 @@ const props = defineProps({
           </div>
         </div>
         <Pagination :links="list_artikel.links" :dari="list_artikel.from" :ke="list_artikel.to"
-          :total="list_artikel.total" class="pt-10 px-5 m-2" />
+          :total="list_artikel.total" class="px-5 pt-10 m-2" />
       </div>
     </div>
   </MainLayout>

@@ -22,14 +22,14 @@ const deleteData = (route) => {
       <div class="items-center sm:flex sm:space-x-2">
         <Link :href="route('admin.artikel.tambah')">
         <button type="button" title="Tambah"
-          class="inline-flex items-center justify-center w-1/2 px-3 py-2 mr-2 mb-2 sm:mb-0 text-sm font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 sm:w-auto dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+          class="inline-flex items-center justify-center w-1/2 px-3 py-2 mb-2 mr-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg sm:mb-0 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 sm:w-auto dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
           <font-awesome-icon icon="plus" class="mr-2"></font-awesome-icon>
           Tambah Artikel
         </button>
         </Link>
         <Link :href="route('admin.kategori.index')">
         <button type="button" title="Tambah"
-          class="inline-flex items-center justify-center w-1/2 px-3 py-2 text-sm font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 sm:w-auto dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+          class="inline-flex items-center justify-center w-1/2 px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 sm:w-auto dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
           <font-awesome-icon icon="folder-plus" class="mr-2"></font-awesome-icon>
           Tambah Kategori
         </button>
@@ -58,9 +58,9 @@ const deleteData = (route) => {
           <template v-if="list_artikel.data.length > 0">
             <tr v-for="(artikel, key) in list_artikel.data" :key="key"
               class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700">
-              <th scope="row" class="px-6 py-4 font-medium uppercase text-gray-900 whitespace-nowrap dark:text-white">
+              <th scope="row" class="px-6 py-4 font-medium text-gray-900 uppercase whitespace-nowrap dark:text-white">
                 <div class="text-base font-semibold">{{ artikel.judul }}</div>
-                <div class="font-normal text-gray-500 italic">{{ artikel.waktu }}</div>
+                <div class="italic font-normal text-gray-500">{{ artikel.waktu }}</div>
               </th>
               <td class="w-32 px-6 py-4">
                 <img v-if="artikel.sampul" :src="artikel.sampul" :alt="artikel.judul" class="rounded">
@@ -92,7 +92,7 @@ const deleteData = (route) => {
           </template>
           <template v-else>
             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700">
-              <td colspan="3" class="px-6 py-4 text-center whitespace-nowrap text-base">Tidak Ada Data</td>
+              <td colspan="3" class="px-6 py-4 text-base text-center whitespace-nowrap">Tidak Ada Data</td>
             </tr>
           </template>
         </tbody>

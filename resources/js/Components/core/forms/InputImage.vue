@@ -40,13 +40,13 @@ const removeImage = () => {
 
 <template>
   <div>
-    <label v-if="title" :for="name" class="block text-xl mb-2 font-medium"
+    <label v-if="title" :for="name" class="block mb-2 text-xl font-medium"
       :class="{ 'text-red-700 dark:text-red-500': error, 'text-gray-900 dark:text-white': !error }">
       {{ title }}
     </label>
-    <figure class="relative max-w-xs mb-2 mx-auto" v-if="imagePreview">
+    <figure class="relative max-w-xs mx-auto mb-2" v-if="imagePreview">
       <img class="rounded-lg" :src="imagePreview">
-      <figcaption class="absolute px-4 text-lg text-white top-3 right-0">
+      <figcaption class="absolute right-0 px-4 text-lg text-white top-3">
         <button type="button"
           class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
           @click="removeImage">
@@ -54,7 +54,7 @@ const removeImage = () => {
         </button>
       </figcaption>
     </figure>
-    <input class="file block w-full text-sm rounded-lg cursor-pointer"
+    <input class="block w-full text-sm rounded-lg cursor-pointer file"
       :class="{ 'bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500 focus:border-red-500 dark:bg-red-100 dark:border-red-400': error, 'text-gray-900 border-gray-300 bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400': !error }"
       :name="name" :id="name" type="file" :accept="accept"
       @input="$emit('update:modelValue', $event.target.files[0]); $emit('clearError', name)" @change="previewImage">

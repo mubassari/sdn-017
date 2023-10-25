@@ -8,7 +8,7 @@ onMounted(() => setTimeout(() => emits('remove'), props.durasi))
 </script>
 
 <template>
-  <div class="flex items-center p-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800 border border-gray-400"
+  <div class="flex items-center p-4 text-gray-500 bg-white border border-gray-400 rounded-lg shadow dark:text-gray-400 dark:bg-gray-800"
     role="alert">
     <div class="ml-3 text-sm font-normal">{{ pesan }}</div>
     <button type="button" @click="$emit('remove')"

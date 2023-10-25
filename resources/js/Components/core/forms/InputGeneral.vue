@@ -12,7 +12,7 @@ const emits = defineEmits(['update:modelValue', 'clearError']);
 
 <template>
   <div>
-    <label v-if="title" :for="name" class="block text-xl mb-2 font-medium"
+    <label v-if="title" :for="name" class="block mb-2 text-xl font-medium"
       :class="{ 'text-red-700 dark:text-red-500': error, 'text-gray-900 dark:text-white': !error }">
       {{ title }}
     </label>

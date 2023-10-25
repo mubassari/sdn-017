@@ -1,11 +1,11 @@
 <script setup></script>
 <template>
   <!-- Footer -->
-  <footer class="scroll-my-20 p-4 bg-gray-100 sm:p-6 dark:bg-gray-800">
+  <footer class="p-4 bg-gray-100 scroll-my-20 sm:p-6 dark:bg-gray-800">
 
     <div
-      class="bg-gray-100 dark:bg-gray-800 flex md:flex-row flex-col md:justify-between justify-center text-center text-sm space-y-5 md:space-x-5 md:space-y-0">
-      <ul class="flex md:flex-row flex-col items-center justify-center md:space-x-3 text-left">
+      class="flex flex-col justify-center space-y-5 text-sm text-center bg-gray-100 dark:bg-gray-800 md:flex-row md:justify-between md:space-x-5 md:space-y-0">
+      <ul class="flex flex-col items-center justify-center text-left md:flex-row md:space-x-3">
         <li class="flex items-center space-x-2">
           <font-awesome-icon icon="location-dot" size="sm" class="mr-1"></font-awesome-icon>
           <span>Jl. A. Yani Gg. 17 Agustus</span>

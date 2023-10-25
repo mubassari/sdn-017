@@ -29,5 +29,5 @@ defineProps({ title: { type: String, default: '' } })
         <slot />
     </div>
     <div v-if="!sidebarIsOpen" drawer-backdrop="" @click="sidebarIsOpen = !sidebarIsOpen"
-        class="bg-gray-900 bg-opacity-50 visible sm:invisible dark:bg-opacity-80 fixed inset-0 z-30"></div>
+        class="fixed inset-0 z-30 visible bg-gray-900 bg-opacity-50 sm:invisible dark:bg-opacity-80"></div>
 </template>

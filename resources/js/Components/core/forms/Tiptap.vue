@@ -50,7 +50,7 @@ onBeforeMount(() => {
       Table.configure({
         resizable: false,
         HTMLAttributes: {
-          class: "w-full text-sm text-left font-medium text-gray-900 whitespace-nowrap dark:text-white border dark:border-gray-500 border-separate"
+          class: "w-full text-sm font-medium text-left text-gray-900 border border-separate whitespace-nowrap dark:text-white dark:border-gray-500"
         },
       }),
       TableRow,
@@ -93,11 +93,11 @@ const setImage = (src) => {
   <div>
     <ModalInputLink v-if="modalState.ModalInputLink" @input="setLink" @close="modalState.ModalInputLink = false" />
     <ModalInputImage v-if="modalState.ModalInputImage" @input="setImage" @close="modalState.ModalInputImage = false" />
-    <div class="mb-3 whitespace-nowrap overflow-x-auto">
-      <div class="relative inline-flex align-middle flex-col items-start justify-center">
-        <div class="relative inline-flex align-middle rounded-md py-1 px-2 leading-tight text-xs ">
+    <div class="mb-3 overflow-x-auto whitespace-nowrap">
+      <div class="relative inline-flex flex-col items-start justify-center align-middle">
+        <div class="relative inline-flex px-2 py-1 text-xs leading-tight align-middle rounded-md ">
           <button
-            class="inline-flex items-center px-4 py-2 text-sm font-medium border focus:z-10 focus:ring-2 rounded-l-lg"
+            class="inline-flex items-center px-4 py-2 text-sm font-medium border rounded-l-lg focus:z-10 focus:ring-2"
             title="Tebal" @click="formEditor.chain().focus().toggleBold().run()"
             :class="formEditor.isActive('bold') ? buttonIsActive : buttonIsUnactive">
             <font-awesome-icon icon="bold"></font-awesome-icon>
@@ -113,15 +113,15 @@ const setImage = (src) => {
             <font-awesome-icon icon="strikethrough"></font-awesome-icon>
           </button>
           <button
-            class="inline-flex items-center px-4 py-2 text-sm font-medium border focus:z-10 focus:ring-2 rounded-r-lg"
+            class="inline-flex items-center px-4 py-2 text-sm font-medium border rounded-r-lg focus:z-10 focus:ring-2"
             title="Garis Bawah" @click="formEditor.chain().focus().toggleUnderline().run()"
             :class="formEditor.isActive('underline') ? buttonIsActive : buttonIsUnactive">
             <font-awesome-icon icon="underline"></font-awesome-icon>
           </button>
         </div>
-        <div class="relative inline-flex align-middle rounded-md py-1 px-2 leading-tight text-xs ">
+        <div class="relative inline-flex px-2 py-1 text-xs leading-tight align-middle rounded-md ">
           <button
-            class="inline-flex items-center px-4 py-2 text-sm font-medium border focus:z-10 focus:ring-2 rounded-l-lg"
+            class="inline-flex items-center px-4 py-2 text-sm font-medium border rounded-l-lg focus:z-10 focus:ring-2"
             title="Rata Kiri" @click="formEditor.chain().focus().setTextAlign('left').run()"
             :class="formEditor.isActive({ textAlign: 'left' }) ? buttonIsActive : buttonIsUnactive">
             <font-awesome-icon icon="align-left"></font-awesome-icon>
@@ -137,17 +137,17 @@ const setImage = (src) => {
             <font-awesome-icon icon="align-right"></font-awesome-icon>
           </button>
           <button
-            class="inline-flex items-center px-4 py-2 text-sm font-medium border focus:z-10 focus:ring-2 rounded-r-lg"
+            class="inline-flex items-center px-4 py-2 text-sm font-medium border rounded-r-lg focus:z-10 focus:ring-2"
             title="Rata Kiri-Kanan" @click="formEditor.chain().focus().setTextAlign('justify').run()"
             :class="formEditor.isActive({ textAlign: 'justify' }) ? buttonIsActive : buttonIsUnactive">
             <font-awesome-icon icon="align-justify"></font-awesome-icon>
           </button>
         </div>
       </div>
-      <div class="relative inline-flex align-middle flex-col items-start justify-center">
-        <div class="relative inline-flex align-middle rounded-md py-1 px-2 leading-tight text-xs ">
+      <div class="relative inline-flex flex-col items-start justify-center align-middle">
+        <div class="relative inline-flex px-2 py-1 text-xs leading-tight align-middle rounded-md ">
           <button
-            class="inline-flex items-center px-4 py-2 text-sm font-medium border focus:z-10 focus:ring-2 rounded-l-lg"
+            class="inline-flex items-center px-4 py-2 text-sm font-medium border rounded-l-lg focus:z-10 focus:ring-2"
             title="Heading 1" @click="formEditor.chain().focus().toggleHeading({ level: 1 }).run()"
             :class="formEditor.isActive('heading', { level: 1 }) ? buttonIsActive : buttonIsUnactive">
             <font-awesome-icon icon="heading"></font-awesome-icon><font-awesome-icon icon="1"></font-awesome-icon>
@@ -158,15 +158,15 @@ const setImage = (src) => {
             <font-awesome-icon icon="heading"></font-awesome-icon><font-awesome-icon icon="2"></font-awesome-icon>
           </button>
           <button
-            class="inline-flex items-center px-4 py-2 text-sm font-medium border focus:z-10 focus:ring-2 rounded-r-lg"
+            class="inline-flex items-center px-4 py-2 text-sm font-medium border rounded-r-lg focus:z-10 focus:ring-2"
             title="Heading 3" @click="formEditor.chain().focus().toggleHeading({ level: 3 }).run()"
             :class="formEditor.isActive('heading', { level: 3 }) ? buttonIsActive : buttonIsUnactive">
             <font-awesome-icon icon="heading"></font-awesome-icon><font-awesome-icon icon="3"></font-awesome-icon>
           </button>
         </div>
-        <div class="relative inline-flex align-middle rounded-md py-1 px-2 leading-tight text-xs ">
+        <div class="relative inline-flex px-2 py-1 text-xs leading-tight align-middle rounded-md ">
           <button
-            class="inline-flex items-center px-4 py-2 text-sm font-medium border focus:z-10 focus:ring-2 rounded-l-lg"
+            class="inline-flex items-center px-4 py-2 text-sm font-medium border rounded-l-lg focus:z-10 focus:ring-2"
             title="Paragraf" @click="formEditor.chain().focus().setParagraph().run()"
             :class="formEditor.isActive('paragraph') ? buttonIsActive : buttonIsUnactive">
             <font-awesome-icon icon="paragraph"></font-awesome-icon>
@@ -177,15 +177,15 @@ const setImage = (src) => {
             <font-awesome-icon icon="list-ul"></font-awesome-icon>
           </button>
           <button
-            class="iinline-flex items-center px-4 py-2 text-sm font-medium border focus:z-10 focus:ring-2 rounded-r-lg"
+            class="items-center px-4 py-2 text-sm font-medium border rounded-r-lg iinline-flex focus:z-10 focus:ring-2"
             title="List Angka" @click="formEditor.chain().focus().toggleOrderedList().run()"
             :class="formEditor.isActive('orderedList') ? buttonIsActive : buttonIsUnactive">
             <font-awesome-icon icon="list-ol"></font-awesome-icon>
           </button>
         </div>
       </div>
-      <div class="relative inline-flex align-middle flex-col items-start justify-center">
-        <div class="relative inline-flex align-middle rounded-md py-1 px-2 leading-tight text-xs ">
+      <div class="relative inline-flex flex-col items-start justify-center align-middle">
+        <div class="relative inline-flex px-2 py-1 text-xs leading-tight align-middle rounded-md ">
           <button
             class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-l-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white"
             title="Tambah Tabel"
@@ -210,7 +210,7 @@ const setImage = (src) => {
             <font-awesome-icon icon="table"></font-awesome-icon>&nbsp;<font-awesome-icon icon="times"></font-awesome-icon>
           </button>
         </div>
-        <div class="relative inline-flex align-middle rounded-md py-1 px-2 leading-tight text-xs">
+        <div class="relative inline-flex px-2 py-1 text-xs leading-tight align-middle rounded-md">
           <button
             class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-l-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white"
             title="Tambah Kolom di Kiri" @click="formEditor.chain().focus().addColumnBefore().run()">
@@ -249,16 +249,16 @@ const setImage = (src) => {
           </button>
         </div>
       </div>
-      <div class="relative inline-flex align-middle flex-col items-start justify-center">
-        <div class="relative inline-flex align-middle rounded-md py-1 px-2 leading-tight text-xs">
+      <div class="relative inline-flex flex-col items-start justify-center align-middle">
+        <div class="relative inline-flex px-2 py-1 text-xs leading-tight align-middle rounded-md">
           <button
             class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white"
             title="Gambar" @click="modalState.ModalInputImage = true">
             <font-awesome-icon icon="image"></font-awesome-icon>
           </button>
         </div>
-        <div class="relative inline-flex align-middle rounded-md py-1 px-2 leading-tight text-xs">
-          <button class="inline-flex items-center px-4 py-2 text-sm font-medium border focus:z-10 focus:ring-2 rounded-lg"
+        <div class="relative inline-flex px-2 py-1 text-xs leading-tight align-middle rounded-md">
+          <button class="inline-flex items-center px-4 py-2 text-sm font-medium border rounded-lg focus:z-10 focus:ring-2"
             title="Tautan"
             @click="formEditor.isActive('link') ? formEditor.chain().focus().unsetLink().run() : modalState.ModalInputLink = true"
             :class="formEditor.isActive('link') ? buttonIsActive : buttonIsUnactive">
@@ -266,8 +266,8 @@ const setImage = (src) => {
           </button>
         </div>
       </div>
-      <div class="relative inline-flex align-middle flex-col items-start justify-center">
-        <div class="relative inline-flex align-middle rounded-md py-1 px-2 leading-tight text-xs">
+      <div class="relative inline-flex flex-col items-start justify-center align-middle">
+        <div class="relative inline-flex px-2 py-1 text-xs leading-tight align-middle rounded-md">
           <button
             class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white"
             title="Bersihkan" @click="
@@ -277,7 +277,7 @@ const setImage = (src) => {
             <font-awesome-icon icon="broom"></font-awesome-icon>
           </button>
         </div>
-        <div class="relative inline-flex align-middle rounded-md py-1 px-2 leading-tight text-xs">
+        <div class="relative inline-flex px-2 py-1 text-xs leading-tight align-middle rounded-md">
           <button
             class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-l-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white"
             title="Kembali" @click="formEditor.chain().focus().undo().run()">

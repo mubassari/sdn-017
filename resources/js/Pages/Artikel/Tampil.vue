@@ -11,16 +11,16 @@ const props = defineProps({
 <template>
   <MainLayout :title="artikel.judul">
 
-    <main class="py-24 bg-white dark:bg-gray-900 antialiased">
-      <div class="flex justify-between px-4 mx-auto max-w-screen-xl ">
+    <main class="py-24 antialiased bg-white dark:bg-gray-900">
+      <div class="flex justify-between max-w-screen-xl px-4 mx-auto ">
         <article
-          class="mx-auto w-full max-w-2xl format format-sm sm:format-base lg:format-lg format-blue dark:format-invert">
+          class="w-full max-w-2xl mx-auto format format-sm sm:format-base lg:format-lg format-blue dark:format-invert">
           <header class="mb-4 lg:mb-6 not-format ">
             <h1
               class="mb-4 text-5xl font-extrabold leading-tight text-center text-gray-900 lg:mb-6 lg:text-6xl dark:text-white">
               {{ artikel.judul }}
             </h1>
-            <div class="my-5 divide-x-2 divide-gray-500 dark:divide-gray-700 flex justify-center">
+            <div class="flex justify-center my-5 divide-x-2 divide-gray-500 dark:divide-gray-700">
               <Link :href="route('artikel.index', artikel.kategori_slug)"
                 class="bg-blue-100 text-blue-800 text-xs font-semibold mr-3 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800">
               {{ artikel.kategori }}
@@ -38,15 +38,15 @@ const props = defineProps({
     </main>
 
     <section aria-label="Artikel Terkait" class="py-8 lg:py-24 bg-gray-50 dark:bg-gray-800">
-      <div class="px-4 mx-auto max-w-screen-xl">
+      <div class="max-w-screen-xl px-4 mx-auto">
         <h2
-          class="mb-16 text-2xl font-extrabold tracking-tight leading-none text-gray-900 dark:text-white text-center uppercase md:text-4xl lg:text-5xl">
+          class="mb-16 text-2xl font-extrabold leading-none tracking-tight text-center text-gray-900 uppercase dark:text-white md:text-4xl lg:text-5xl">
           Artikel Terkait
         </h2>
-        <div class="grid gap-12 sm:grid-cols-2 lg:grid-cols-4 justify-center">
+        <div class="grid justify-center gap-12 sm:grid-cols-2 lg:grid-cols-4">
           <div v-for="artikel in artikel_terkait" :key="artikel.id"
             class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-            <img class="rounded-t-lg w-full object-cover aspect-square" :src="artikel.sampul" />
+            <img class="object-cover w-full rounded-t-lg aspect-square" :src="artikel.sampul" />
             <div class="p-5">
               <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                 {{ artikel.judul }}
