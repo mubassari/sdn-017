@@ -1,6 +1,9 @@
 <script setup>
 import { MainLayout } from '~Layouts';
 import { ref, onMounted, onUnmounted } from 'vue'
+import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel'
+
+import 'vue3-carousel/dist/carousel.css'
 
 const props = defineProps({ 'list_kategori': { type: Object, required: true } })
 
@@ -24,62 +27,43 @@ const jumbotronContent = ref([
         slug: 'apa-kabar'
     },
 ]);
-
-const currentJumbotron = ref(0);
-const intervalJumbotron = ref(null);
-
-const loopJumbotron = () => {
-    clearInterval(intervalJumbotron.value)
-    intervalJumbotron.value = setInterval(() => {
-        if (currentJumbotron.value != jumbotronContent.value.length - 1) {
-            currentJumbotron.value = currentJumbotron.value + 1
-        } else {
-            currentJumbotron.value = 0
-        }
-    }, 5000);
-}
-
-const unloopJumbotron = () => clearInterval(intervalJumbotron.value)
-// End Jumbotron
-
-
-onMounted(() => loopJumbotron());
-onUnmounted(() => unloopJumbotron());
-
 </script>
 <template>
     <MainLayout title="Halaman Utama">
         <main>
             <!-- Slide -->
-            <Transition enter-from-class="-translate-y-full scale-x-50 opacity-0" enter-active-class="duration-500"
-                leave-active-class="duration-500" leave-to-class="-translate-y-full scale-x-50 opacity-0" mode="out-in">
-                <section :key="currentJumbotron" @mouseenter="unloopJumbotron" @mouseleave="loopJumbotron"
-                    class="bg-fixed bg-cover bg-center bg-no-repeat bg-gray-700 bg-blend-multiply"
-                    :style="`background-image: url('${jumbotronContent[currentJumbotron].sampul}')`">
-                    <div
-                        class="px-4 text-center min-h-[100svh] flex flex-col items-center justify-center hover:backdrop-blur-sm transition ease-out duration-200">
-                        <h1
-                            class="mb-10 text-4xl font-extrabold tracking-tight leading-none text-white md:text-5xl lg:text-6xl">
-                            {{ jumbotronContent[currentJumbotron].judul }}
-                        </h1>
-                        <div class="flex space-y-4 flex-row justify-center sm:space-y-0 sm:space-x-4">
-                            <a :href="jumbotronContent[currentJumbotron].slug"
-                                v-if="jumbotronContent[currentJumbotron].slug" :key="currentJumbotron"
-                                class="max-w-fit py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
-                                Baca Selengkapnya
-                                <font-awesome-icon icon="arrow-right-long" class="ml-1"></font-awesome-icon>
-                            </a>
-                            <span v-else class="max-w-fit py-3 px-5 text-base font-medium text-center">
-                                &nbsp;
-                            </span>
+            <Carousel :autoplay="5000" :wrap-around="true" :pauseAutoplayOnHover="true">
+                <Slide v-for="jumbotron in jumbotronContent" :key="jumbotron.slug">
+                    <section class="bg-fixed bg-gray-700 bg-center bg-no-repeat bg-cover bg-blend-multiply"
+                        :style="`background-image: url('${jumbotron.sampul}')`">
+                        <div
+                            class="px-4 text-center min-h-[100svh] w-screen flex flex-col items-center justify-center hover:backdrop-blur-sm transition ease-out duration-200">
+                            <h1
+                                class="mb-10 text-4xl font-extrabold leading-none tracking-tight text-white md:text-5xl lg:text-6xl">
+                                {{ jumbotron.judul }}
+                            </h1>
+                            <div class="flex flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+                                <a v-if="jumbotron.slug" :href="jumbotron.slug" :key="jumbotron.slug"
+                                    class="px-5 py-3 text-base font-medium text-center text-white bg-blue-700 rounded-lg max-w-fit hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
+                                    Baca Selengkapnya
+                                    <font-awesome-icon icon="arrow-right-long" class="ml-1"></font-awesome-icon>
+                                </a>
+                                <span v-else class="px-5 py-3 text-base font-medium text-center max-w-fit">
+                                    &nbsp;
+                                </span>
+                            </div>
                         </div>
-                    </div>
-                </section>
-            </Transition>
+                    </section>
+                </Slide>
+
+                <template #addons>
+                    <Navigation />
+                </template>
+            </Carousel>
             <!-- End Slide -->
 
             <!-- Sambutan -->
-            <section class="scroll-my-20 py-4 bg-white dark:bg-gray-900">
+            <section class="py-4 bg-white scroll-my-20 dark:bg-gray-900">
                 <div class="max-w-screen-xl px-4 py-8 mx-auto text-center lg:py-16 lg:px-6">
                     <figure class="max-w-screen-md mx-auto">
                         <div class="flex flex-col items-center justify-center mb-6">
@@ -108,11 +92,11 @@ onUnmounted(() => unloopJumbotron());
             <!-- End Sambutan -->
 
             <!-- Visi-Misi-Tujuan -->
-            <section class="scroll-my-20 py-4 bg-white dark:bg-gray-900">
-                <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
+            <section class="py-4 bg-white scroll-my-20 dark:bg-gray-900">
+                <div class="max-w-screen-xl px-4 py-8 mx-auto lg:py-16 lg:px-6">
                     <div class="space-y-8 lg:grid lg:grid-cols-3 sm:gap-6 xl:gap-10 lg:space-y-0">
                         <div
-                            class="flex flex-col p-6 mx-auto max-w-lg text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow dark:border-gray-600 xl:p-8 dark:bg-gray-800 dark:text-white">
+                            class="flex flex-col max-w-lg p-6 mx-auto text-center text-gray-900 bg-white border border-gray-100 rounded-lg shadow dark:border-gray-600 xl:p-8 dark:bg-gray-800 dark:text-white">
                             <h3 class="text-3xl font-extrabold uppercase">Visi</h3>
                             <hr class="w-48 h-1 mx-auto my-4 bg-gray-100 border-0 rounded md:my-10 dark:bg-gray-700">
                             <!-- List -->
@@ -124,7 +108,7 @@ onUnmounted(() => unloopJumbotron());
                             </ul>
                         </div>
                         <div
-                            class="flex flex-col p-6 mx-auto max-w-lg text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow dark:border-gray-600 xl:p-8 dark:bg-gray-800 dark:text-white">
+                            class="flex flex-col max-w-lg p-6 mx-auto text-center text-gray-900 bg-white border border-gray-100 rounded-lg shadow dark:border-gray-600 xl:p-8 dark:bg-gray-800 dark:text-white">
                             <h3 class="text-3xl font-extrabold uppercase">Misi</h3>
                             <hr class="w-48 h-1 mx-auto my-4 bg-gray-100 border-0 rounded md:my-10 dark:bg-gray-700">
                             <!-- List -->
@@ -159,7 +143,7 @@ onUnmounted(() => unloopJumbotron());
                             </ul>
                         </div>
                         <div
-                            class="flex flex-col p-6 mx-auto max-w-lg text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow dark:border-gray-600 xl:p-8 dark:bg-gray-800 dark:text-white">
+                            class="flex flex-col max-w-lg p-6 mx-auto text-center text-gray-900 bg-white border border-gray-100 rounded-lg shadow dark:border-gray-600 xl:p-8 dark:bg-gray-800 dark:text-white">
                             <h3 class="text-3xl font-extrabold uppercase">Tujuan</h3>
                             <hr class="w-48 h-1 mx-auto my-4 bg-gray-100 border-0 rounded md:my-10 dark:bg-gray-700">
                             <!-- List -->
@@ -200,12 +184,12 @@ onUnmounted(() => unloopJumbotron());
             <!-- End Visi Misi Tujuan -->
 
             <!-- Artikel -->
-            <section class="scroll-my-20 py-10 bg-white dark:bg-gray-900 flex flex-col items-center justify-center ">
+            <section class="flex flex-col items-center justify-center py-10 bg-white scroll-my-20 dark:bg-gray-900 ">
                 <h1
-                    class="mb-3 text-3xl font-extrabold tracking-tight leading-none text-gray-900 dark:text-white text-center uppercase md:text-4xl lg:text-5xl">
+                    class="mb-3 text-3xl font-extrabold leading-none tracking-tight text-center text-gray-900 uppercase dark:text-white md:text-4xl lg:text-5xl">
                     Artikel Terbaru
                 </h1>
-                <div class="flex items-center justify-center pt-10 flex-wrap">
+                <div class="flex flex-wrap items-center justify-center pt-10">
                     <button v-for="kategori in list_kategori" :key="kategori.id" type="button"
                         @click="currentArticleShownId = kategori.id"
                         class="rounded-full text-base font-medium px-5 py-2.5 text-center mr-3 mb-3 border focus:ring-4 focus:outline-none transition ease-out"
@@ -213,13 +197,13 @@ onUnmounted(() => unloopJumbotron());
                         {{ kategori.nama }}
                     </button>
                 </div>
-                <div class="py-4 px-4 mx-auto max-w-screen-xl md:py-16 lg:px-6">
+                <div class="max-w-screen-xl px-4 py-4 mx-auto md:py-16 lg:px-6">
                     <TransitionGroup tag="div" enter-from-class="opacity-0" enter-active-class="duration-500"
                         leave-active-class="duration-500" leave-to-class="opacity-0"
                         class="space-y-4 md:grid xl:grid-cols-4 md:grid-cols-2 sm:gap-3 xl:gap-5 md:space-y-0">
                         <div v-for="artikel in list_kategori[currentArticleShownId - 1].artikel" :key="artikel.id"
                             class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                            <img class="rounded-t-lg w-full object-cover aspect-square" :src="artikel.sampul" />
+                            <img class="object-cover w-full rounded-t-lg aspect-square" :src="artikel.sampul" />
                             <div class="p-5">
                                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                                     {{ artikel.judul }}
@@ -248,12 +232,18 @@ onUnmounted(() => unloopJumbotron());
                     class="py-2.5 px-5 m-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 uppercase text-center">
                 Lihat Lebih Banyak
                 </Link>
-                <span v-else class="text-3xl font-extrabold uppercase italic text-gray-400 dark:text-gray-700">
+                <span v-else class="text-3xl italic font-extrabold text-gray-400 uppercase dark:text-gray-700">
                     Tidak Ada Artikel
                 </span>
             </section>
             <!-- End Artikel -->
-
         </main>
     </MainLayout>
 </template>
+
+<style lang="scss">
+.carousel__prev,
+.carousel__next {
+  @apply text-white hover:text-blue-700;
+}
+</style>

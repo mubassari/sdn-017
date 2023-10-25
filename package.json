@@ -39,6 +39,7 @@
         "@tiptap/vue-3": "^2.1.11",
         "flowbite": "^1.8.1",
         "laravel-mix-alias": "^1.0.3",
-        "vue": "^3.3.4"
+        "vue": "^3.3.4",
+        "vue3-carousel": "^0.3.1"
     }
 }
