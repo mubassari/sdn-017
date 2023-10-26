@@ -26,7 +26,7 @@ mix.webpackConfig({
     resolve: {
         extensions: [".*",".wasm",".mjs",".js",".jsx",".json",".vue"],
         alias: {
-            "ziggy": path.resolve("vendor/tightenco/ziggy/dist/vue"),
+            "ziggy": path.resolve("vendor/tightenco/ziggy/dist/vue.es"),
             "~Components": path.resolve(__dirname, "resources/js/Components"),
             "~Layouts": path.resolve(__dirname, "resources/js/Layouts"),
             "~Stores": path.resolve(__dirname, "resources/js/stores"),

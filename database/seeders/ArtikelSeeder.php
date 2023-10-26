@@ -21,7 +21,7 @@ class ArtikelSeeder extends Seeder
         $faker = \Faker\Factory::create('id_ID');
 
         foreach(Kategori::all() as $kategori){ // loop through all kategoris 
-            for ($i = 0; $i < 11; $i++) {
+            for ($i = 0; $i < 17; $i++) {
                 $src = "https://placekitten.com/" . rand(200, 500) . "/" . rand(200, 500);
                 $paragraph = "<img src='" . $src . "'/>";
                 $paragraph_length = rand(20, 30);

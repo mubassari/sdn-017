@@ -62,7 +62,7 @@ const hideNavbar = () => {
         <img src="https://flowbite.com/docs/images/logo.svg" class="h-8 mr-3" alt="Flowbite Logo">
       </a>
       <div class="flex md:order-2">
-        <ThemeToggle />
+        <ThemeToggle class="hidden md:block" />
         <button type="button" @click="hideNavbar"
           class="inline-flex items-center justify-center w-10 h-10 p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
           aria-controls="navbar-sticky" aria-expanded="false">
@@ -99,6 +99,9 @@ const hideNavbar = () => {
             </template>
           </li>
         </ul>
+        <div class="flex justify-end mt-4 md:hidden">
+          <ThemeToggle />
+        </div>
       </div>
     </div>
   </nav>

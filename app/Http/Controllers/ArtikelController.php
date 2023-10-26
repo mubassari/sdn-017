@@ -18,7 +18,7 @@ class ArtikelController extends Controller
             $list_artikel = Artikel::select('id', 'isi', 'judul', 'slug', 'kategori_id')
                 ->where('kategori_id', $kategori->id)
                 ->orderBy('id', 'desc')
-                ->paginate(10)
+                ->paginate(12)
                 ->through(function($data) use ($kategori) {
                     return [
                         'id'       => $data->id,
