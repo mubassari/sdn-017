@@ -7,6 +7,26 @@ const page = usePage()
 
 const sekolah = page.props.sekolah
 
+const nonEmptySosmedValues = Object.values(sekolah.sosmed).filter(value => value !== "");
+
+const sosmedMenu = {
+  title: "Sosial Media",
+  uri: null,
+  submenu: []
+};
+
+if (nonEmptySosmedValues.length > 0) {
+
+  for (const key in sekolah.sosmed) {
+    if (sekolah.sosmed[key] !== "") {
+      sosmedMenu.submenu.push({
+        title: key.charAt(0).toUpperCase() + key.slice(1),
+        uri: sekolah.sosmed[key]
+      });
+    }
+  }
+}
+
 // Menu
 const menuContent = ref([
   {
@@ -30,19 +50,7 @@ const menuContent = ref([
     uri: '/artikel',
     submenu: null
   },
-  {
-    title: 'Lainnya',
-    uri: null,
-    submenu: [
-      {
-        title: 'Pemberitahuan',
-        uri: 'pemberitahuan',
-      }, {
-        title: 'Berita',
-        uri: 'berita',
-      }
-    ],
-  },
+  sosmedMenu
 ])
 
 const navbarToggleHide = ref(true);
