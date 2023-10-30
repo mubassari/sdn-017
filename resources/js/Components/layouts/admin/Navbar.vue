@@ -1,5 +1,11 @@
 <script setup>
 import { ThemeToggle } from '~Components/core'
+import { router, usePage } from '@inertiajs/vue3'
+
+const page = usePage()
+
+const sekolah = page.props.sekolah
+
 defineEmits(["toggleSidebar"])
 </script>
 <template>
@@ -12,10 +18,11 @@ defineEmits(["toggleSidebar"])
                         <span class="sr-only">Open sidebar</span>
                         <font-awesome-icon icon="bars" size="2x"></font-awesome-icon>
                     </button>
-                    <a href="https://flowbite.com" class="flex ml-2 md:mr-24">
-                        <img src="https://flowbite.com/docs/images/logo.svg" class="h-8 mr-3" alt="FlowBite Logo" />
-                        <span
-                            class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">Flowbite</span>
+                    <a :href="route('admin.index')" class="flex ml-2 md:mr-24">
+                        <img :src="sekolah.umum.logo" class="h-8 mr-3" :alt="sekolah.umum.nama" />
+                        <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">
+                            {{ sekolah.umum.nama }}
+                        </span>
                     </a>
                 </div>
                 <div class="flex items-center">

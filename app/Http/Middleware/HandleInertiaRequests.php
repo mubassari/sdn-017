@@ -3,6 +3,8 @@
 namespace App\Http\Middleware;
 
 use App\Models\Kategori;
+use App\Settings\SekolahSettings;
+use App\Settings\SosmedSekolahSettings;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Inertia\Middleware;
@@ -44,7 +46,12 @@ class HandleInertiaRequests extends Middleware
             'page_content' => $isAdminPage ?  [] : [
                 'list_kategori' => Kategori::select('id','nama', 'slug')->get()
             ],
-            'alert'    => session('alert')
+            'alert'    => session('alert'),
+            'sekolah'  => [
+                'umum'   => new SekolahSettings,
+                'sosmed' => new SosmedSekolahSettings,
+            ],
+            'scroll_position' => session('scroll_position'),
         ]);
     }
 }

@@ -1,9 +1,12 @@
 <script setup>
 import { MainLayout } from '~Layouts';
-import { ref, onMounted, onUnmounted } from 'vue'
-import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel'
-
+import { ref } from '@vue/reactivity'
+import { Carousel, Slide, Navigation } from 'vue3-carousel'
+import { usePage } from '@inertiajs/vue3'
 import 'vue3-carousel/dist/carousel.css'
+
+const page = usePage()
+const sekolah = page.props.sekolah
 
 const props = defineProps({ 'list_kategori': { type: Object, required: true } })
 
@@ -62,47 +65,38 @@ const jumbotronContent = ref([
             </Carousel>
             <!-- End Slide -->
 
-            <!-- Sambutan -->
+            <!-- Visi-Misi-Tujuan -->
             <section class="py-4 bg-white scroll-my-20 dark:bg-gray-900">
-                <div class="max-w-screen-xl px-4 py-8 mx-auto text-center lg:py-16 lg:px-6">
-                    <figure class="max-w-screen-md mx-auto">
+                <div class="max-w-screen-xl px-4 py-8 mx-auto lg:py-16 lg:px-6">
+                    <figure class="max-w-screen-md mx-auto my-10">
                         <div class="flex flex-col items-center justify-center mb-6">
                             <img class="w-40 h-40 mb-3 rounded-full"
                                 src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/michael-gouch.png"
                                 alt="profile picture">
-                            <div class="font-medium text-gray-900 dark:text-white">Micheal Gough</div>
-                            <div class="text-sm font-light text-gray-500 dark:text-gray-400">CEO at Google</div>
+                            <div class="text-lg font-medium text-gray-900 dark:text-white">
+                                Micheal Gough
+                            </div>
+                            <div class="text-base font-light text-gray-500 dark:text-gray-400">
+                                Kepala Sekolah {{ sekolah.umum.nama }}
+                            </div>
                         </div>
-                        <blockquote>
-                            <p class="text-2xl font-medium text-gray-900 dark:text-white">"Flowbite is just awesome. It
-                                contains
-                                tons of predesigned components and pages starting from login screen to complex dashboard.
-                                Perfect choice for your next SaaS application...</p>
-                        </blockquote>
                         <figcaption class="flex flex-col items-center justify-center mt-6">
-                            <a href="#" class="mb-3 font-medium text-blue-600 dark:text-blue-500 hover:underline">
-                                Baca sambutan lengkap
+                            <a href="#" class="mb-3 text-base font-bold text-blue-600 dark:text-blue-500 hover:underline">
+                                Baca sambutan
                                 <font-awesome-icon icon="arrow-right-long" class="ml-1"></font-awesome-icon>
                             </a>
-
                         </figcaption>
                     </figure>
-                </div>
-            </section>
-            <!-- End Sambutan -->
-
-            <!-- Visi-Misi-Tujuan -->
-            <section class="py-4 bg-white scroll-my-20 dark:bg-gray-900">
-                <div class="max-w-screen-xl px-4 py-8 mx-auto lg:py-16 lg:px-6">
-                    <div class="space-y-8 lg:grid lg:grid-cols-3 sm:gap-6 xl:gap-10 lg:space-y-0">
+                    <div class="gap-6 space-y-8 lg:grid lg:grid-cols-3 lg:space-y-0">
                         <div
                             class="flex flex-col max-w-lg p-6 mx-auto text-center text-gray-900 bg-white border border-gray-100 rounded-lg shadow dark:border-gray-600 xl:p-8 dark:bg-gray-800 dark:text-white">
                             <h3 class="text-3xl font-extrabold uppercase">Visi</h3>
                             <hr class="w-48 h-1 mx-auto my-4 bg-gray-100 border-0 rounded md:my-10 dark:bg-gray-700">
                             <!-- List -->
-                            <ul role="list" class="mb-8 text-center divide-y-2 divide-gray-100 dark:divide-gray-700">
+                            <ul role="list" class="mb-8 text-left divide-y-2 divide-gray-100 dark:divide-gray-700">
                                 <li class="flex items-center py-4">
-                                    <span>“Terwujudnya Peserta Didik Yang Beriman, Cerdas, Terampil, Mandiri Dan Berwawasan
+                                    <span>“Terwujudnya Peserta Didik Yang Beriman, Cerdas, Terampil, Mandiri Dan
+                                        Berwawasan
                                         Lingkungan”</span>
                                 </li>
                             </ul>
@@ -112,7 +106,7 @@ const jumbotronContent = ref([
                             <h3 class="text-3xl font-extrabold uppercase">Misi</h3>
                             <hr class="w-48 h-1 mx-auto my-4 bg-gray-100 border-0 rounded md:my-10 dark:bg-gray-700">
                             <!-- List -->
-                            <ul role="list" class="mb-8 text-center divide-y-2 divide-gray-100 dark:divide-gray-700">
+                            <ul role="list" class="mb-8 text-left divide-y-2 divide-gray-100 dark:divide-gray-700">
                                 <li class="flex items-center py-4">
                                     <span>
                                         Menanamkan Keimanan dan Ketaqwaan melalui pengalaman ajaran Agama
@@ -147,7 +141,7 @@ const jumbotronContent = ref([
                             <h3 class="text-3xl font-extrabold uppercase">Tujuan</h3>
                             <hr class="w-48 h-1 mx-auto my-4 bg-gray-100 border-0 rounded md:my-10 dark:bg-gray-700">
                             <!-- List -->
-                            <ul role="list" class="mb-8 text-center divide-y-2 divide-gray-100 dark:divide-gray-700">
+                            <ul role="list" class="mb-8 text-left divide-y-2 divide-gray-100 dark:divide-gray-700">
                                 <li class="flex items-center py-4">
                                     <span>
                                         Mengembangkan budaya sekolah yang religius melalui kegiatan keagamaan
@@ -244,6 +238,6 @@ const jumbotronContent = ref([
 <style lang="scss">
 .carousel__prev,
 .carousel__next {
-  @apply text-white hover:text-blue-700;
+    @apply text-white hover:text-blue-700;
 }
 </style>

@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AdminArtikelController;
 use App\Http\Controllers\Admin\AdminKategoriController;
+use App\Http\Controllers\Admin\AdminSekolahController;
 
 // General Controller
 use App\Http\Controllers\MainController;
@@ -39,6 +40,13 @@ Route::prefix('admin')->name('admin.')->group(function() {
     Route::post('',[AdminKategoriController::class, 'simpan'])->name('simpan');
     Route::post('{kategori}',[AdminKategoriController::class, 'perbarui'])->name('perbarui');
     Route::delete('{kategori}',[AdminKategoriController::class, 'hapus'])->name('hapus');
+  });
+  Route::prefix('sekolah')->name('sekolah.')->group(function(){
+    Route::get('',[AdminSekolahController::class, 'index'])->name('index');
+    Route::name('simpan.')->group(function(){
+      Route::post('umum',[AdminSekolahController::class, 'simpanUmum'])->name('umum');
+      Route::post('sosmed',[AdminSekolahController::class, 'simpanSosmed'])->name('sosmed');
+    });
   });
 });
 

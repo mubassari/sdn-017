@@ -1,9 +1,11 @@
 <script setup>
 import { ThemeToggle } from '~Components/core'
-import { ref } from 'vue'
+import { ref } from '@vue/reactivity'
 import { usePage } from '@inertiajs/vue3'
 
 const page = usePage()
+
+const sekolah = page.props.sekolah
 
 // Menu
 const menuContent = ref([
@@ -56,10 +58,34 @@ const hideNavbar = () => {
 // End Menu
 </script>
 <template>
-  <nav class="fixed top-0 left-0 z-20 w-full bg-white border-b border-gray-200 dark:bg-gray-900 dark:border-gray-600">
+  <div
+    class="flex-col justify-center hidden px-3 py-1 space-y-5 text-sm text-center bg-gray-100 md:flex dark:bg-gray-800 md:flex-row md:justify-between md:space-x-5 md:space-y-0">
+    <ul class="flex flex-col items-center justify-center text-left md:flex-row md:space-x-3">
+      <li class="flex items-center space-x-2" v-if="sekolah.umum.email">
+        <font-awesome-icon icon="envelope" size="sm" class="mr-1"></font-awesome-icon>
+        <span>{{ sekolah.umum.email }}</span>
+      </li>
+      <li class="flex items-center space-x-2" v-if="sekolah.umum.telepon">
+        <font-awesome-icon icon="phone" size="sm" class="mr-1"></font-awesome-icon>
+        <span>{{ sekolah.umum.telepon }}</span>
+      </li>
+      <li class="flex items-center space-x-2" v-if="sekolah.umum.alamat">
+        <font-awesome-icon icon="location-dot" size="sm" class="mr-1"></font-awesome-icon>
+        <span>{{ sekolah.umum.alamat }}</span>
+      </li>
+    </ul>
+    <div>
+      <Link :href="route('admin.index')"
+        class="mb-3 text-xs font-bold text-blue-600 dark:text-blue-500 hover:underline">
+      Admin Panel
+      <font-awesome-icon icon="arrow-right-long" class="ml-1"></font-awesome-icon>
+      </Link>
+    </div>
+  </div>
+  <nav class="sticky top-0 left-0 z-20 w-full bg-white border-b border-gray-200 dark:bg-gray-900 dark:border-gray-600">
     <div class="flex flex-wrap items-center justify-between max-w-screen-xl p-4 mx-auto">
-      <a href="https://flowbite.com/" class="flex items-center">
-        <img src="https://flowbite.com/docs/images/logo.svg" class="h-8 mr-3" alt="Flowbite Logo">
+      <a :href="route('index')" class="flex items-center">
+        <img :src="sekolah.umum.logo" class="h-8 mr-3" :alt="sekolah.umum.nama" />
       </a>
       <div class="flex md:order-2">
         <ThemeToggle class="hidden md:block" />
@@ -83,7 +109,7 @@ const hideNavbar = () => {
               <button type="button" @click="openSubmenu(index)"
                 class="flex items-center justify-between w-full py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
                 <span>{{ menu.title }}</span>
-                <font-awesome-icon icon="caret-down" class="ml-2.5"></font-awesome-icon>
+                <font-awesome-icon icon="angle-down" class="ml-2.5"></font-awesome-icon>
               </button>
               <div :class="submenuOpened !== index ? 'hidden' : 'block'"
                 class="w-full mt-3 bg-white divide-gray-100 rounded-lg shadow md:z-20 md:absolute md:mt-3 md:w-44 md:-translate-x-5 divide dark:bg-gray-700">

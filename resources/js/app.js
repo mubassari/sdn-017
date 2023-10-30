@@ -1,7 +1,7 @@
 require("./bootstrap");
 
 import { createApp, h } from "vue";
-import { createInertiaApp, Link } from "@inertiajs/vue3";
+import { createInertiaApp, Link, usePage } from "@inertiajs/vue3";
 
 // Ziggy
 import { ZiggyVue } from "ziggy";
@@ -9,9 +9,12 @@ import { Ziggy } from "./ziggy";
 
 import { FontAwesome } from "~Components/core";
 
+const page = usePage();
+
 createInertiaApp({
     resolve: async (name) => (await import(`./Pages/${name}`)).default,
-    title: (title) => (title === "" ? "SI PHBS" : `${title} | SI PHBS`),
+    title: (title) =>
+        title === "" ? page.props.sekolah.nama : `${title} | ${page.props.sekolah.nama}`,
     setup({ el, App, props, plugin }) {
         createApp({ render: () => h(App, props) })
             .use(plugin)

@@ -7,9 +7,17 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 /* import specific icons */
 import {
+  faFacebook,
+  faInstagram,
+  faTiktok,
+  faTwitter,
+} from '@fortawesome/free-brands-svg-icons';
+
+import {
   fa1,
   fa2,
   fa3,
+  faAngleDown,
   faAngleUp,
   faAlignCenter,
   faAlignJustify,
@@ -26,6 +34,7 @@ import {
   faCaretUp,
   faColumns,
   faCompress,
+  faEnvelope,
   faEye,
   faFloppyDisk,
   faFolderPlus,
@@ -43,7 +52,9 @@ import {
   faParagraph,
   faPenToSquare,
   faPlus,
+  faPhone,
   faRedoAlt,
+  faSchool,
   faStrikethrough,
   faSun,
   faTable,
@@ -56,9 +67,14 @@ import {
 
 /* add icons to the library */
 library.add(
+  faFacebook,
+  faInstagram,
+  faTiktok,
+  faTwitter,
   fa1,
   fa2,
   fa3,
+  faAngleDown,
   faAngleUp,
   faAlignCenter,
   faAlignJustify,
@@ -75,6 +91,7 @@ library.add(
   faCaretUp,
   faColumns,
   faCompress,
+  faEnvelope,
   faEye,
   faFloppyDisk,
   faFolderPlus,
@@ -91,8 +108,10 @@ library.add(
   faNewspaper,
   faParagraph,
   faPenToSquare,
+  faPhone,
   faPlus,
   faRedoAlt,
+  faSchool,
   faStrikethrough,
   faSun,
   faTable,
