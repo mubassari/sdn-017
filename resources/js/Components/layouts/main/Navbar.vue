@@ -91,7 +91,7 @@ const hideNavbar = () => {
     </div>
   </div>
   <nav class="sticky top-0 left-0 z-20 w-full bg-white border-b border-gray-200 dark:bg-gray-900 dark:border-gray-600">
-    <div class="flex flex-wrap items-center justify-between max-w-screen-xl p-4 mx-auto">
+    <div class="flex flex-wrap items-center justify-between max-w-screen-xl max-h-screen p-4 mx-auto overflow-y-scroll">
       <a :href="route('index')" class="flex items-center">
         <img :src="sekolah.umum.logo" class="h-8 mr-3" :alt="sekolah.umum.nama" />
       </a>

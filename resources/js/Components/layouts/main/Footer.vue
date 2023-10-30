@@ -32,11 +32,11 @@ const sekolah = page.props.sekolah
       </div>
     </div>
     <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
-    <div class="sm:flex sm:items-center sm:justify-between">
+    <div class="text-center sm:flex sm:items-center sm:justify-between">
       <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© {{ new Date().getFullYear() }}
         <Link :href="route('index')" class="hover:underline">{{ sekolah.umum.nama }}</Link>
       </span>
-      <div class="flex mt-4 space-x-6 sm:justify-center sm:mt-0">
+      <div class="flex justify-center mt-4 space-x-6 sm:mt-0">
         <a v-if="sekolah.sosmed.facebook" :href="sekolah.sosmed.facebook" target="_blank"
           class="text-gray-500 hover:text-gray-900 dark:hover:text-white">
           <font-awesome-icon icon="fa-brands fa-facebook" size="sm"></font-awesome-icon>
