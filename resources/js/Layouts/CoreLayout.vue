@@ -9,7 +9,7 @@ defineProps({title: { type: String, default: '' } })
 
 <template>
     <Head :title="title">
-    <link rel="shortcut icon" :href="sekolah.ikon" type="image/x-icon">
+    <link rel="shortcut icon" :href="sekolah.umum.ikon" type="image/x-icon">
     </Head>
     <slot />
 </template>

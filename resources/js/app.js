@@ -14,7 +14,7 @@ const page = usePage();
 createInertiaApp({
     resolve: async (name) => (await import(`./Pages/${name}`)).default,
     title: (title) =>
-        title === "" ? page.props.sekolah.nama : `${title} | ${page.props.sekolah.nama}`,
+        title === "" ? page.props.sekolah.umum.nama : `${title} | ${page.props.sekolah.umum.nama}`,
     setup({ el, App, props, plugin }) {
         createApp({ render: () => h(App, props) })
             .use(plugin)
