@@ -7,26 +7,6 @@ const page = usePage()
 
 const sekolah = page.props.sekolah
 
-const nonEmptySosmedValues = Object.values(sekolah.sosmed).filter(value => value !== "");
-
-const sosmedMenu = {
-  title: "Sosial Media",
-  uri: null,
-  submenu: []
-};
-
-if (nonEmptySosmedValues.length > 0) {
-
-  for (const key in sekolah.sosmed) {
-    if (sekolah.sosmed[key] !== "") {
-      sosmedMenu.submenu.push({
-        title: key.charAt(0).toUpperCase() + key.slice(1),
-        uri: sekolah.sosmed[key]
-      });
-    }
-  }
-}
-
 // Menu
 const menuContent = ref([
   {
@@ -50,8 +30,28 @@ const menuContent = ref([
     uri: '/artikel',
     submenu: null
   },
-  sosmedMenu
 ])
+
+const nonEmptySosmedValues = Object.values(sekolah.sosmed).filter(value => value !== "");
+
+if (nonEmptySosmedValues.length > 0) {
+  const sosmedMenu = {
+    title: "Sosial Media",
+    uri: null,
+    submenu: []
+  };
+
+  for (const key in sekolah.sosmed) {
+    if (sekolah.sosmed[key] !== "") {
+      sosmedMenu.submenu.push({
+        title: key.charAt(0).toUpperCase() + key.slice(1),
+        uri: sekolah.sosmed[key]
+      });
+    }
+  }
+
+  menuContent.value.push(sosmedMenu);
+}
 
 const navbarToggleHide = ref(true);
 const submenuOpened = ref(null)
@@ -83,8 +83,7 @@ const hideNavbar = () => {
       </li>
     </ul>
     <div>
-      <Link :href="route('admin.index')"
-        class="mb-3 text-xs font-bold text-blue-600 dark:text-blue-500 hover:underline">
+      <Link :href="route('admin.index')" class="mb-3 text-xs font-bold text-blue-600 dark:text-blue-500 hover:underline">
       Admin Panel
       <font-awesome-icon icon="arrow-right-long" class="ml-1"></font-awesome-icon>
       </Link>
@@ -95,17 +94,8 @@ const hideNavbar = () => {
       <a :href="route('index')" class="flex items-center">
         <img :src="sekolah.umum.logo" class="h-8 mr-3" :alt="sekolah.umum.nama" />
       </a>
-      <div class="flex md:order-2">
-        <ThemeToggle class="hidden md:block" />
-        <button type="button" @click="hideNavbar"
-          class="inline-flex items-center justify-center w-10 h-10 p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-          aria-controls="navbar-sticky" aria-expanded="false">
-          <span class="sr-only">Open main menu</span>
-          <font-awesome-icon icon="bars" size="2x"></font-awesome-icon>
-        </button>
-      </div>
 
-      <div class="items-center justify-between w-full md:flex md:w-auto md:order-1"
+      <div class="items-center justify-between order-2 w-full md:flex md:w-auto"
         :class="navbarToggleHide ? 'hidden' : ''">
         <ul
           class="flex flex-col max-h-screen gap-3 p-4 mt-4 overflow-auto font-medium border border-gray-100 rounded-lg md:p-0 bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
@@ -133,10 +123,20 @@ const hideNavbar = () => {
             </template>
           </li>
         </ul>
-        <div class="flex justify-end mt-4 md:hidden">
+        <div class="flex justify-end mt-4 md:ml-8 md:mt-0">
           <ThemeToggle />
         </div>
       </div>
+
+      <div class="flex order-1">
+        <button type="button" @click="hideNavbar"
+          class="inline-flex items-center justify-center w-10 h-10 p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+          aria-controls="navbar-sticky" aria-expanded="false">
+          <span class="sr-only">Open main menu</span>
+          <font-awesome-icon icon="bars" size="2x"></font-awesome-icon>
+        </button>
+      </div>
+
     </div>
   </nav>
 </template>
