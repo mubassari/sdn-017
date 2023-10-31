@@ -39,7 +39,7 @@ const removeImage = () => {
 </script>
 
 <template>
-  <div>
+  <div class="mb-5">
     <label v-if="title" :for="name" class="block mb-2 text-xl font-medium"
       :class="{ 'text-red-700 dark:text-red-500': error, 'text-gray-900 dark:text-white': !error }">
       {{ title }}

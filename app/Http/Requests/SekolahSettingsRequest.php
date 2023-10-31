@@ -28,6 +28,8 @@ class SekolahSettingsRequest extends FormRequest
             'nama'    => 'required|string|max:25',
             'logo'    => 'sometimes|nullable',
             'ikon'    => 'sometimes|nullable',
+            'npsn'    => 'sometimes|nullable|numeric',
+            'nss'     => 'sometimes|nullable|numeric',
             'alamat'  => 'sometimes|nullable|string|max:225',
             'telepon' =>  [
                 'sometimes',

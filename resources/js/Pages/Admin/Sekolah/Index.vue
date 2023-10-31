@@ -16,6 +16,8 @@ const umum = useForm({
   nama: props.umum.nama,
   logo: props.umum.logo,
   ikon: props.umum.ikon,
+  npsn: props.umum.npsn,
+  nss: props.umum.nss,
   alamat: props.umum.alamat,
   telepon: props.umum.telepon,
   email: props.umum.email,

@@ -90,7 +90,7 @@ const setImage = (src) => {
 </script>
 
 <template>
-  <div>
+  <div class="mb-5">
     <ModalInputLink v-if="modalState.ModalInputLink" @input="setLink" @close="modalState.ModalInputLink = false" />
     <ModalInputImage v-if="modalState.ModalInputImage" @input="setImage" @close="modalState.ModalInputImage = false" />
     <div class="mb-3 overflow-x-auto whitespace-nowrap">

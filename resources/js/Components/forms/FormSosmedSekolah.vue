@@ -12,16 +12,16 @@ const clearError = (name) => props.sekolah.clearErrors(name)
 <template>
   <form @submit.prevent="">
     <div class="mb-6">
-      <div class="grid grid-cols-1 gap-5 mb-5 md:grid-cols-2">
-        <InputGeneral class="mb-5" v-model="sekolah.facebook" :error="sekolah.errors.facebook" @clear-error="clearError"
+      <div class="grid grid-cols-1 md:gap-5 md:grid-cols-2">
+        <InputGeneral v-model="sekolah.facebook" :error="sekolah.errors.facebook" @clear-error="clearError"
           title="Facebook" name="facebook" />
-        <InputGeneral class="mb-5" v-model="sekolah.instagram" :error="sekolah.errors.instagram" @clear-error="clearError"
+        <InputGeneral v-model="sekolah.instagram" :error="sekolah.errors.instagram" @clear-error="clearError"
           title="Instagram" name="instagram" />
       </div>
-      <div class="grid grid-cols-1 gap-5 mb-5 md:grid-cols-2">
-        <InputGeneral class="mb-5" v-model="sekolah.tiktok" :error="sekolah.errors.tiktok" @clear-error="clearError"
+      <div class="grid grid-cols-1 md:gap-5 md:grid-cols-2">
+        <InputGeneral v-model="sekolah.tiktok" :error="sekolah.errors.tiktok" @clear-error="clearError"
           title="Tiktok" name="tiktok" />
-        <InputGeneral class="mb-5" v-model="sekolah.twitter" :error="sekolah.errors.twitter" @clear-error="clearError"
+        <InputGeneral v-model="sekolah.twitter" :error="sekolah.errors.twitter" @clear-error="clearError"
           title="Twitter" name="twitter" />
       </div>
     </div>

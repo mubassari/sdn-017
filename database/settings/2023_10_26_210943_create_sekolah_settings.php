@@ -9,6 +9,8 @@ return new class extends SettingsMigration
         $this->migrator->add('sekolah.nama', 'Nama Sekolah');
         $this->migrator->add('sekolah.logo', '/storage/gambar/sekolah/default.png');
         $this->migrator->add('sekolah.ikon', '/storage/gambar/sekolah/default.png');
+        $this->migrator->add('sekolah.npsn', '');
+        $this->migrator->add('sekolah.nss', '');
         $this->migrator->add('sekolah.alamat', '');
         $this->migrator->add('sekolah.telepon', '');
         $this->migrator->add('sekolah.email', '');

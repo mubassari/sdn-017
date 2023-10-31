@@ -12,12 +12,12 @@ const clearError = (name) => props.artikel.clearErrors(name)
 <template>
   <form @submit.prevent="">
     <div class="mb-6">
-      <InputGeneral class="mb-5" v-model="artikel.judul" :error="artikel.errors.judul" @clear-error="clearError"
+      <InputGeneral v-model="artikel.judul" :error="artikel.errors.judul" @clear-error="clearError"
         title="Judul Artikel" name="judul" :required="true" />
       <InputSelect v-model="artikel.artikel_kategori_id" :error="artikel.errors.artikel_kategori_id" @clear-error="clearError"
         title="Kategori Artikel" name="artikel_kategori_id" :required="true" />
       <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
-      <Tiptap class="mb-5" v-model="artikel.isi" :error="artikel.errors.isi" @clear-error="clearError" />
+      <Tiptap v-model="artikel.isi" :error="artikel.errors.isi" @clear-error="clearError" />
     </div>
 
     <div class="inline-flex rounded-md shadow-sm" role="group">

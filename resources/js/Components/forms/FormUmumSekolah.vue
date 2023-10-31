@@ -20,20 +20,26 @@ const clearError = (name) => props.sekolah.clearErrors(name)
 <template>
   <form @submit.prevent="">
     <div class="mb-6">
-      <InputGeneral class="mb-5" v-model="sekolah.nama" :error="sekolah.errors.nama" @clear-error="clearError"
+      <InputGeneral v-model="sekolah.nama" :error="sekolah.errors.nama" @clear-error="clearError"
         title="Nama Sekolah" name="nama" :required="true" />
-      <div class="grid grid-cols-1 gap-5 mb-5 md:grid-cols-2">
+      <div class="grid grid-cols-1 md:gap-5 md:grid-cols-2">
         <InputImage v-model="sekolah.logo" :error="sekolah.errors.logo" @clear-error="clearError" title="Logo Sekolah"
           name="logo" ref="inputLogoSekolah" accept="image/jpeg,image/png,image/jpg" />
         <InputImage v-model="sekolah.ikon" :error="sekolah.errors.ikon" @clear-error="clearError" title="Ikon Sekolah"
           name="ikon" ref="inputIkonSekolah" accept="image/jpeg,image/png,image/jpg" />
       </div>
-      <InputGeneral class="mb-5" v-model="sekolah.alamat" :error="sekolah.errors.alamat" @clear-error="clearError"
+      <div class="grid grid-cols-1 md:gap-5 md:grid-cols-2">
+        <InputGeneral v-model="sekolah.npsn" :error="sekolah.errors.npsn" @clear-error="clearError"
+          title="NPSN" name="npsn" />
+        <InputGeneral v-model="sekolah.nss" :error="sekolah.errors.nss" @clear-error="clearError"
+          title="NSS" name="nss"/>
+      </div>
+      <InputGeneral v-model="sekolah.alamat" :error="sekolah.errors.alamat" @clear-error="clearError"
         title="Alamat" name="alamat" :required="true" />
-      <div class="grid grid-cols-1 gap-5 mb-5 md:grid-cols-2">
-        <InputGeneral class="mb-5" v-model="sekolah.telepon" :error="sekolah.errors.telepon" @clear-error="clearError"
+      <div class="grid grid-cols-1 md:gap-5 md:grid-cols-2">
+        <InputGeneral v-model="sekolah.telepon" :error="sekolah.errors.telepon" @clear-error="clearError"
           title="Nomor Telepon" name="telepon" />
-        <InputGeneral class="mb-5" v-model="sekolah.email" :error="sekolah.errors.email" @clear-error="clearError"
+        <InputGeneral v-model="sekolah.email" :error="sekolah.errors.email" @clear-error="clearError"
           title="Email" name="email" type="email"/>
       </div>
     </div>
