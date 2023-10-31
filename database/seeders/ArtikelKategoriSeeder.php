@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
-class KategoriSeeder extends Seeder
+class ArtikelKategoriSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,9 +14,9 @@ class KategoriSeeder extends Seeder
     public function run()
     {
         
-        \DB::table('kategori')->delete();
+        \DB::table('artikel_kategori')->delete();
         
-        \DB::table('kategori')->insert(array (
+        \DB::table('artikel_kategori')->insert(array (
             0 => 
             array (
                 'id'   => 1,

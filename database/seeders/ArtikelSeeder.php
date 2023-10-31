@@ -3,9 +3,9 @@
 namespace Database\Seeders;
 
 use App\Models\Artikel;
+use App\Models\ArtikelKategori;
 use App\Models\Gambar;
 use App\Models\GambarArtikel;
-use App\Models\Kategori;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 
@@ -20,7 +20,7 @@ class ArtikelSeeder extends Seeder
     {
         $faker = \Faker\Factory::create('id_ID');
 
-        foreach(Kategori::all() as $kategori){ // loop through all kategoris 
+        foreach(ArtikelKategori::all() as $kategori){ // loop through all kategoris 
             for ($i = 0; $i < 17; $i++) {
                 $src = "https://placekitten.com/" . rand(200, 500) . "/" . rand(200, 500);
                 $paragraph = "<img src='" . $src . "'/>";
@@ -38,7 +38,7 @@ class ArtikelSeeder extends Seeder
                     'isi'         => $post,
                     'slug'        => Str::slug($judul),
                     'user_id'     => 1,
-                    'kategori_id' => $kategori->id
+                    'artikel_kategori_id' => $kategori->id
                 ]);
             }
         }   

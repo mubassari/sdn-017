@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Models\Kategori;
+use App\Models\ArtikelKategori;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Model;
@@ -20,7 +20,7 @@ class Artikel extends Model
         'isi',
         'slug',
         'user_id',
-        'kategori_id'
+        'artikel_kategori_id'
     ];
 
     protected $guarded = [
@@ -90,12 +90,12 @@ class Artikel extends Model
     }
 
     /**
-     * Get the Kategori that owns the Artikel
+     * Get the ArtikelKategori that owns the Artikel
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function Kategori(): BelongsTo
+    public function ArtikelKategori(): BelongsTo
     {
-        return $this->belongsTo(Kategori::class);
+        return $this->belongsTo(ArtikelKategori::class);
     }
 }

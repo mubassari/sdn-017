@@ -86,14 +86,14 @@ class AdminSekolahController extends Controller
                 if(!Storage::put($imagePath, $request[$column])) {
                     return back()->withInput()->with('alert', [
                         'status' => 'danger',
-                        'pesan'  => 'Terjadi kesalahan saat mengunggah gambar. Silakan coba lagi!'
+                        'pesan'  => 'Terjadi kesalahan saat mengunggah ' . $column . '. Silakan coba lagi!'
                     ]);
                 }
 
                 if (Storage::exists($imagePath . '/' . $nameImage) && $nameImage !== 'default.png' && !Storage::delete($imagePath . '/' . $nameImage)){
                     return back()->withInput()->with('alert', [
                         'status' => 'danger',
-                        'pesan'  => 'Terjadi kesalahan saat menghapus gambar lama. Silakan coba lagi!'
+                        'pesan'  => 'Terjadi kesalahan saat menghapus ' . $column . 'lama. Silakan coba lagi!'
                     ]);
                 }
                 $name_file = Storage::url($imagePath . '/' . $name_file);
@@ -106,7 +106,7 @@ class AdminSekolahController extends Controller
             DB::rollback();
             return back()->withInput()->with('alert', [
                 'status' => 'danger',
-                'pesan'  => 'Terjadi kesalahan saat mengunggah gambar. Silakan coba lagi!'
+                'pesan'  => 'Terjadi kesalahan saat mengunggah ' . $column . '. Silakan coba lagi!'
             ]);
         }
     }

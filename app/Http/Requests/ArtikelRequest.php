@@ -26,7 +26,7 @@ class ArtikelRequest extends FormRequest
         $rules = [
             'judul'       => 'required|string',
             'isi'         => 'required|string',
-            'kategori_id' => 'required|exists:kategori,id'
+            'artikel_kategori_id' => 'required|exists:kategori,id'
         ];
 
         return $rules;

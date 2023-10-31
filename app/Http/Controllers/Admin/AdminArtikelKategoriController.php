@@ -3,42 +3,42 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\KategoriRequest;
-use App\Models\Kategori;
+use App\Http\Requests\ArtikelKategoriRequest;
+use App\Models\ArtikelKategori;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 
-class AdminKategoriController extends Controller
+class AdminArtikelKategoriController extends Controller
 {
   public function index() {
-    $list_kategori = Kategori::select('id','nama', 'slug')
+    $list_kategori = ArtikelKategori::select('id','nama', 'slug')
         ->orderBy('id', 'desc')
         ->paginate(10)
-        ->through(function ($user) {
+        ->through(function ($kategori) {
             return [
-                'id'     => $user->id,
-                'nama'   => $user->nama,
-                'slug'   => $user->slug,
-                'forbid' => $user->id > 2,
+                'id'     => $kategori->id,
+                'nama'   => $kategori->nama,
+                'slug'   => $kategori->slug,
+                'forbid' => $kategori->id > 2,
             ];
         })
         ->withQueryString();
-    return Inertia::render('Admin/Kategori/Index', compact('list_kategori'));
+    return Inertia::render('Admin/ArtikelKategori/Index', compact('list_kategori'));
   }
 
-  public function simpan(KategoriRequest $request)
+  public function simpan(ArtikelKategoriRequest $request)
   {
       DB::beginTransaction();
       try {
           $validated = $request->validated();
-          $kategori = Kategori::create($validated);
+          $kategori = ArtikelKategori::create($validated);
 
           $kategori->save();
 
           DB::commit();
 
-          return redirect()->route('admin.kategori.index')->with('alert', [
+          return redirect()->route('admin.artikel.kategori.index')->with('alert', [
               'status' => 'success',
               'pesan'  => 'Anda berhasil menyimpan data Kategori!'
           ]);
@@ -51,7 +51,7 @@ class AdminKategoriController extends Controller
       }
   }
 
-  public function perbarui(KategoriRequest $request, Kategori $kategori)
+  public function perbarui(ArtikelKategoriRequest $request, ArtikelKategori $kategori)
   {
       $idKategori = $kategori->id;
       if($idKategori > 2) {
@@ -64,7 +64,7 @@ class AdminKategoriController extends Controller
 
             DB::commit();
 
-            return redirect()->route('admin.kategori.index')->with('alert', [
+            return redirect()->route('admin.artikel.kategori.index')->with('alert', [
                 'status' => 'success',
                 'pesan'  => 'Anda berhasil memperbarui data Kategori!'
             ]);
@@ -83,7 +83,7 @@ class AdminKategoriController extends Controller
       }
   }
 
-  public function hapus(Kategori $kategori)
+  public function hapus(ArtikelKategori $kategori)
   {
       $idKategori = $kategori->id;
       if($idKategori > 2) {
@@ -93,7 +93,7 @@ class AdminKategoriController extends Controller
 
             DB::commit();
 
-            return redirect()->route('admin.kategori.index')->with('alert', [
+            return redirect()->route('admin.artikel.kategori.index')->with('alert', [
                 'status' => 'success',
                 'pesan'  => 'Anda berhasil menghapus data Kategori!'
             ]);

@@ -10,7 +10,7 @@ const title = ref('Tambah Artikel');
 const artikel = useForm({
   judul: '',
   isi: '',
-  kategori_id: 0,
+  artikel_kategori_id: 0,
 })
 
 </script>

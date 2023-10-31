@@ -8,10 +8,10 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
-class Kategori extends Model
+class ArtikelKategori extends Model
 {
     use HasFactory;
-    protected $table = 'kategori';
+    protected $table = 'artikel_kategori';
 
     protected $fillable = [
         'nama',

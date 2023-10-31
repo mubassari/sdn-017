@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Kategori;
+use App\Models\ArtikelKategori;
 use Inertia\Inertia;
 
 class MainController extends Controller
 {
     public function beranda()
     {
-        $list_kategori = Kategori::select('id','nama', 'slug')->get()->map(function($kategori) {
+        $list_kategori = ArtikelKategori::select('id', 'nama', 'slug')->get()->map(function($kategori) {
             return [
                 'id'      => $kategori->id,
                 'nama'    => $kategori->nama,

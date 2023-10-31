@@ -13,7 +13,7 @@ const artikel = useForm({
   id: props.artikel.id,
   judul: props.artikel.judul,
   isi: props.artikel.isi,
-  kategori_id: props.artikel.kategori_id,
+  artikel_kategori_id: props.artikel.artikel_kategori_id,
 })
 
 </script>

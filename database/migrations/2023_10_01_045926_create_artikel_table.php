@@ -19,10 +19,10 @@ class CreateArtikelTable extends Migration
             $table->text('isi')->nullable();
             $table->string('slug');
             $table->unsignedBigInteger('user_id')->nullable();
-            $table->unsignedBigInteger('kategori_id')->nullable();
+            $table->unsignedBigInteger('artikel_kategori_id')->nullable();
 
             $table->foreign('user_id')->references('id')->on('user')->onDelete('no action');
-            $table->foreign('kategori_id')->references('id')->on('kategori')->onDelete('no action');
+            $table->foreign('artikel_kategori_id')->references('id')->on('artikel_kategori')->onDelete('no action');
             $table->timestamps();
         });
     }

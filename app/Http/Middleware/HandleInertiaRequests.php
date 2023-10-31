@@ -2,7 +2,7 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\Kategori;
+use App\Models\ArtikelKategori;
 use App\Settings\SekolahSettings;
 use App\Settings\SosmedSekolahSettings;
 use Illuminate\Http\Request;
@@ -44,7 +44,7 @@ class HandleInertiaRequests extends Middleware
 
         return array_merge(parent::share($request), [
             'page_content' => $isAdminPage ?  [] : [
-                'list_kategori' => Kategori::select('id','nama', 'slug')->get()
+                'list_kategori' => ArtikelKategori::select('id','nama', 'slug')->get()
             ],
             'alert'    => session('alert'),
             'sekolah'  => [

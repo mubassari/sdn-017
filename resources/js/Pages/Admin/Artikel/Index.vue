@@ -40,7 +40,7 @@ const deleteData = (route) => {
             Tambah Artikel
           </button>
           </Link>
-          <Link :href="route('admin.kategori.index')" >
+          <Link :href="route('admin.artikel.kategori.index')" >
           <button type="button" title="Tambah"
             class="inline-flex items-center justify-center w-1/2 px-3 py-2 mb-2 mr-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 sm:w-auto dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
             <font-awesome-icon icon="folder-plus" class="mr-2"></font-awesome-icon>

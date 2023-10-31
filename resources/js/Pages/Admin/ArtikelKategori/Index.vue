@@ -63,7 +63,7 @@ const batalAksiKategori = () => {
         <form v-if="editKategori == null" class="flex space-x-3">
           <InputGeneral v-model="formKategori.nama" name="nama" :required="true" />
           <button type="button" title="Tambah"
-            @click="formKategori.post(route('admin.kategori.simpan')); batalAksiKategori();"
+            @click="formKategori.post(route('admin.artikel.kategori.simpan')); batalAksiKategori();"
             class="inline-flex items-center justify-center w-1/2 px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 sm:w-auto dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
             <font-awesome-icon icon="plus" class="mr-2"></font-awesome-icon>
             Tambah Kategori
@@ -82,7 +82,7 @@ const batalAksiKategori = () => {
           <div class="text-base font-semibold">
             <span v-if="editKategori !== index">{{ kategori.nama }}</span>
             <form class="flex space-x-2" v-else
-              @submit.prevent="formKategori.post(route('admin.kategori.perbarui', kategori.id)); batalAksiKategori()">
+              @submit.prevent="formKategori.post(route('admin.artikel.kategori.perbarui', kategori.id)); batalAksiKategori()">
               <InputGeneral v-model="formKategori.nama" name="nama" :required="true" />
               <button type="submit" title="Ubah"
                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 p-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
@@ -102,7 +102,7 @@ const batalAksiKategori = () => {
               <font-awesome-icon icon="pen-to-square"></font-awesome-icon>
               <span class="sr-only">Ubah</span>
             </button>
-            <button @click.prevent="deleteKategori(route('admin.kategori.hapus', kategori.id))" title="Hapus"
+            <button @click.prevent="deleteKategori(route('admin.artikel.kategori.hapus', kategori.id))" title="Hapus"
               class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-3 p-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">
               <font-awesome-icon icon="trash"></font-awesome-icon>
               <span class="sr-only">Hapus</span>

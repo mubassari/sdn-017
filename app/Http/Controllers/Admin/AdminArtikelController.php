@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ArtikelRequest;
 use App\Models\Artikel;
+use App\Models\ArtikelKategori;
 use App\Models\Gambar;
 use App\Models\GambarArtikel;
-use App\Models\Kategori;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -17,7 +17,7 @@ use Inertia\Inertia;
 class AdminArtikelController extends Controller
 {
     public function index(Request $request){
-        $list_artikel = Artikel::select('id', 'isi', 'judul', 'slug', 'kategori_id')
+        $list_artikel = Artikel::select('id', 'isi', 'judul', 'slug', 'artikel_kategori_id')
         ->orderBy('id', 'desc')
         ->when($request->input('cari'), function ($query, $role) {
             $query->where('artikel.judul', 'like', "%$role%");
@@ -28,8 +28,8 @@ class AdminArtikelController extends Controller
                 'id'            => $data->id,
                 'judul'         => $data->judul,
                 'sampul'        => $data->path_sampul,
-                'kategori'      => $data->kategori->nama,
-                'kategori_slug' => $data->kategori->slug,
+                'kategori'      => $data->ArtikelKategori->nama,
+                'kategori_slug' => $data->ArtikelKategori->slug,
                 'slug'          => $data->slug,
                 'waktu'         => $data->waktu,
             ];
@@ -39,7 +39,7 @@ class AdminArtikelController extends Controller
     }
     
     public function tambah(){
-        $kategori = Kategori::select('id','nama')->get();
+        $kategori = ArtikelKategori::select('id','nama')->get();
         return Inertia::render('Admin/Artikel/Tambah', compact('kategori'));
     }
 
@@ -83,13 +83,13 @@ class AdminArtikelController extends Controller
 
     public function ubah(Artikel $artikel)
     {
-        $kategori = Kategori::select('id','nama')->get();
+        $kategori = ArtikelKategori::select('id','nama')->get();
         $artikel = collect([$artikel])->transform(function($artikel) {
             return [
                 'id'          => $artikel->id,
                 'judul'       => $artikel->judul,
                 'isi'         => $artikel->isi_with_path,
-                'kategori_id' => $artikel->kategori_id,
+                'artikel_kategori_id' => $artikel->artikel_kategori_id,
             ];
         })->first();
         return Inertia::render('Admin/Artikel/Ubah', compact('artikel', 'kategori'));
@@ -106,7 +106,7 @@ class AdminArtikelController extends Controller
 
             // Update the Artikel record with the provided data
             $artikel->judul       = $validated['judul'];
-            $artikel->kategori_id = $validated['kategori_id'];
+            $artikel->artikel_kategori_id = $validated['artikel_kategori_id'];
 
             // Update the content with images and Artikel ID
             $isiWithImages        = $this->handleImages($request);
