@@ -1,19 +1,19 @@
 <script setup>
 import { AdminLayout } from '~Layouts';
 import { Card } from "~Components/core"
-import { FormArtikel } from "~Components/forms"
+import { FormGTK } from "~Components/forms"
 import { useForm } from "@inertiajs/vue3";
 import { ref } from '@vue/reactivity';
 
-const title = ref('Ubah Artikel');
+const title = ref('Ubah GTK');
 
-const props = defineProps({ artikel: { type: Object, required: true } })
+const props = defineProps({ gtk: { type: Object, required: true } })
 
-const artikel = useForm({
-  id: props.artikel.id,
-  judul: props.artikel.judul,
-  isi: props.artikel.isi,
-  artikel_kategori_id: props.artikel.artikel_kategori_id,
+const gtk = useForm({
+  id: props.gtk.id,
+  nama: props.gtk.nama,
+  sampul: props.gtk.sampul,
+  gtk_jabatan_id: props.gtk.gtk_jabatan_id,
 })
 
 </script>
@@ -26,7 +26,7 @@ const artikel = useForm({
       </h1>
     </div>
     <Card>
-      <FormArtikel :artikel="artikel" @submit="artikel.post(route('admin.artikel.perbarui', artikel.id))" />
+      <FormGTK :gtk="gtk" @submit="gtk.post(route('admin.gtk.perbarui', gtk.id))" />
     </Card>
   </AdminLayout>
 </template>

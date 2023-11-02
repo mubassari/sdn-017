@@ -27,8 +27,8 @@ const menuContent = ref([
         title: 'Umum',
         uri: 'admin.sekolah.index',
       }, {
-        title: 'Sosial Media',
-        uri: 'admin.sekolah.index',
+        title: 'GTK',
+        uri: 'admin.gtk.index',
       }
     ],
   },

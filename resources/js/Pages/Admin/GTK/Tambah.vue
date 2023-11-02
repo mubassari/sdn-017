@@ -1,16 +1,16 @@
 <script setup>
 import { AdminLayout } from '~Layouts';
 import { Card } from "~Components/core"
-import { FormArtikel } from "~Components/forms"
+import { FormGTK } from "~Components/forms"
 import { useForm } from "@inertiajs/vue3";
 import { ref } from '@vue/reactivity';
 
-const title = ref('Tambah Artikel');
+const title = ref('Tambah GTK');
 
-const artikel = useForm({
-  judul: '',
-  isi: '',
-  artikel_kategori_id: 0,
+const gtk = useForm({
+  nama: '',
+  sampul: null,
+  gtk_jabatan_id: 0,
 })
 
 </script>
@@ -23,7 +23,7 @@ const artikel = useForm({
       </h1>
     </div>
     <Card>
-      <FormArtikel :artikel="artikel" @submit="artikel.post(route('admin.artikel.simpan'))" />
+      <FormGTK :gtk="gtk" @submit="gtk.post(route('admin.gtk.simpan'))" />
     </Card>
   </AdminLayout>
 </template>

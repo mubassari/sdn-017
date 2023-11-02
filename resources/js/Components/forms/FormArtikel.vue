@@ -1,5 +1,9 @@
 <script setup>
+import { usePage } from '@inertiajs/vue3'
 import {  InputGeneral, InputSelect, Tiptap } from "~Components/core/forms";
+
+const page = usePage()
+const lists = ref([{ id: 0, nama: 'Pilih Kategori' }, ...page.props.kategori])
 
 const props = defineProps({
   artikel: { type: Object, required: true },
@@ -15,7 +19,7 @@ const clearError = (name) => props.artikel.clearErrors(name)
       <InputGeneral v-model="artikel.judul" :error="artikel.errors.judul" @clear-error="clearError"
         title="Judul Artikel" name="judul" :required="true" />
       <InputSelect v-model="artikel.artikel_kategori_id" :error="artikel.errors.artikel_kategori_id" @clear-error="clearError"
-        title="Kategori Artikel" name="artikel_kategori_id" :required="true" />
+        title="Kategori Artikel" name="artikel_kategori_id" :required="true" :lists="lists"/>
       <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
       <Tiptap v-model="artikel.isi" :error="artikel.errors.isi" @clear-error="clearError" />
     </div>

@@ -34,7 +34,7 @@ class ArtikelKategoriRequest extends FormRequest
     public function withValidator($validator)
     {
         $validator->after(function ($validator) {
-            $disallowedWords = ['Admin', 'Kategori', 'Galeri', 'Sambutan'];
+            $disallowedWords = ['Admin', 'Kategori', 'Galeri', 'Sambutan', 'GTK'];
 
             if (in_array(strtolower($this->input('nama')), array_map('strtolower', $disallowedWords))) {
                 $validator->errors()->add('nama', "Pilihan nilai tidak sesuai.");
