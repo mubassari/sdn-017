@@ -109,7 +109,7 @@ class AdminGTKController extends Controller
                     ]);
                 }
 
-                if (Storage::exists("public/gambar/gtk/$gtk->sampul") && $gtk->sampul !== 'default.png' && !Storage::delete("public/gambar/gtk/$gtk->sampul")){
+                if (Storage::exists("public/gambar/gtk/$gtk->sampul") && $gtk->sampul !== '/gambar/default-person.png' && !Storage::delete("public/gambar/gtk/$gtk->sampul")){
                     return back()->withInput()->with('alert', [
                         'status' => 'danger',
                         'pesan'  => 'Terjadi kesalahan saat menghapus gambar lama. Silakan coba lagi!'
@@ -142,7 +142,7 @@ class AdminGTKController extends Controller
         try {
             $gtk->delete();
 
-            if (Storage::exists("public/gambar/gtk/$gtk->sampul") && $gtk->sampul !== 'default.png' && !Storage::delete('public/gambar/gtk/' . $gtk->sampul)) {
+            if (Storage::exists("public/gambar/gtk/$gtk->sampul") && $gtk->sampul !== '/gambar/default-person.png' && !Storage::delete('public/gambar/gtk/' . $gtk->sampul)) {
                 return back()->withInput()->with('alert', [
                     'status' => 'danger',
                     'pesan'  => 'Terjadi kesalahan saat menghapus gambar. Silakan coba lagi!'

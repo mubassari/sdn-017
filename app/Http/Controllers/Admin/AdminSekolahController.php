@@ -90,7 +90,7 @@ class AdminSekolahController extends Controller
                     ]);
                 }
 
-                if (Storage::exists($imagePath . '/' . $nameImage) && $nameImage !== 'default.png' && !Storage::delete($imagePath . '/' . $nameImage)){
+                if (Storage::exists($imagePath . '/' . $nameImage) && $nameImage !== '/gambar/default-sekolah.png' && !Storage::delete($imagePath . '/' . $nameImage)){
                     return back()->withInput()->with('alert', [
                         'status' => 'danger',
                         'pesan'  => 'Terjadi kesalahan saat menghapus ' . $column . 'lama. Silakan coba lagi!'
