@@ -10,7 +10,10 @@ const page = usePage()
 
 const removeFinishEventListener = router.on('finish', () => {
   if (page.props.errors.nama) {
-    toast.add({ pesan: page.props.errors.nama })
+    toast.add({
+      status: 'danger',
+      pesan: page.props.errors.nama
+    })
   }
 })
 
@@ -60,10 +63,10 @@ const batalAksiJabatan = () => {
     </div>
     <div class="relative px-5 space-y-3 overflow-x-auto">
       <div class="py-1">
-        <form v-if="editJabatan == null" class="flex space-x-3">
+        <form v-if="editJabatan == null" class="flex space-x-3"
+          @submit.prevent="formJabatan.post(route('admin.gtk.jabatan.simpan')); batalAksiJabatan();">
           <InputGeneral v-model="formJabatan.nama" name="nama" :required="true" />
           <button type="button" title="Tambah Jabatan GTK"
-            @click="formJabatan.post(route('admin.gtk.jabatan.simpan')); batalAksiJabatan();"
             class="inline-flex items-center justify-center w-1/2 px-3 py-2 mb-5 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 sm:w-auto dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             :disabled="formJabatan.nama.length < 1">
             <font-awesome-icon icon="plus" class="mr-2"></font-awesome-icon>

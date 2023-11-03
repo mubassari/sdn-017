@@ -60,10 +60,10 @@ const batalAksiKategori = () => {
     </div>
     <div class="relative px-5 space-y-3 overflow-x-auto">
       <div class="py-1">
-        <form v-if="editKategori == null" class="flex space-x-3">
+        <form v-if="editKategori == null" class="flex space-x-3"
+          @submit.prevent="formKategori.post(route('admin.artikel.kategori.simpan')); batalAksiKategori();">
           <InputGeneral v-model="formKategori.nama" name="nama" :required="true" />
           <button type="button" title="Tambah"
-            @click="formKategori.post(route('admin.artikel.kategori.simpan')); batalAksiKategori();"
             class="inline-flex items-center justify-center w-1/2 px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 sm:w-auto dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
             <font-awesome-icon icon="plus" class="mr-2"></font-awesome-icon>
             Tambah Kategori

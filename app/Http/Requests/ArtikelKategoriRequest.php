@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Str;
 
 class ArtikelKategoriRequest extends FormRequest
 {
@@ -36,7 +37,7 @@ class ArtikelKategoriRequest extends FormRequest
         $validator->after(function ($validator) {
             $disallowedWords = ['Admin', 'Kategori', 'Galeri', 'Sambutan', 'GTK'];
 
-            if (in_array(strtolower($this->input('nama')), array_map('strtolower', $disallowedWords))) {
+            if (in_array(Str::slug($this->input('nama')), array_map('Str::slug', $disallowedWords))) {
                 $validator->errors()->add('nama', "Pilihan nilai tidak sesuai.");
             }
         });
