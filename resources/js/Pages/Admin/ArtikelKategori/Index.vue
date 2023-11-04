@@ -63,8 +63,10 @@ const batalAksiKategori = () => {
         <form v-if="editKategori == null" class="flex space-x-3"
           @submit.prevent="formKategori.post(route('admin.artikel.kategori.simpan')); batalAksiKategori();">
           <InputGeneral v-model="formKategori.nama" name="nama" :required="true" />
-          <button type="button" title="Tambah"
-            class="inline-flex items-center justify-center w-1/2 px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 sm:w-auto dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+          <button type="submit" title="Tambah"
+            class="inline-flex items-center justify-center w-1/2 px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 sm:w-auto dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            :disabled="formKategori.processing || !formKategori.isDirty"
+            :class="{ 'cursor-not-allowed': formKategori.processing || !formKategori.isDirty }">
             <font-awesome-icon icon="plus" class="mr-2"></font-awesome-icon>
             Tambah Kategori
           </button>
@@ -80,12 +82,14 @@ const batalAksiKategori = () => {
         class="bg-white border rounded dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700">
         <div class="flex items-center justify-between p-3 text-gray-900 dark:text-white">
           <div class="text-base font-semibold">
-            <span v-if="editKategori !== index">{{ kategori.nama }}</span>
+            <span v-if="editKategori !== kategori.id">{{ kategori.nama }}</span>
             <form class="flex space-x-2" v-else
               @submit.prevent="formKategori.post(route('admin.artikel.kategori.perbarui', kategori.id)); batalAksiKategori()">
               <InputGeneral v-model="formKategori.nama" name="nama" :required="true" />
               <button type="submit" title="Ubah"
-                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 p-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 p-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                :disabled="formKategori.nama.length < 1 || formKategori.processing || !formKategori.isDirty"
+                :class="{ 'cursor-not-allowed': formKategori.processing || !formKategori.isDirty }">
                 <font-awesome-icon icon="floppy-disk"></font-awesome-icon>
                 <span class="sr-only">Simpan</span>
               </button>
@@ -96,7 +100,7 @@ const batalAksiKategori = () => {
               </button>
             </form>
           </div>
-          <div v-if="editKategori !== index && kategori.forbid" class="space-x-2">
+          <div v-if="editKategori !== kategori.id && kategori.forbid" class="space-x-2">
             <button @click="ubahKategori(index)" title="Ubah"
               class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 p-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
               <font-awesome-icon icon="pen-to-square"></font-awesome-icon>

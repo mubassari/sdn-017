@@ -30,9 +30,9 @@ const props = defineProps({ list_jabatan: { type: Object, required: true } })
 
 const formJabatan = useForm({ ...defaultJabatan.value })
 
-const ubahJabatan = (index) => {
+const ubahJabatan = (index, id) => {
   clearError()
-  editJabatan.value = index;
+  editJabatan.value = id;
   formJabatan.id = props.list_jabatan.data[index].id;
   formJabatan.nama = props.list_jabatan.data[index].nama;
 }
@@ -66,9 +66,10 @@ const batalAksiJabatan = () => {
         <form v-if="editJabatan == null" class="flex space-x-3"
           @submit.prevent="formJabatan.post(route('admin.gtk.jabatan.simpan')); batalAksiJabatan();">
           <InputGeneral v-model="formJabatan.nama" name="nama" :required="true" />
-          <button type="button" title="Tambah Jabatan GTK"
+          <button type="submit" title="Tambah Jabatan GTK"
             class="inline-flex items-center justify-center w-1/2 px-3 py-2 mb-5 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 sm:w-auto dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-            :disabled="formJabatan.nama.length < 1">
+            :disabled="formJabatan.nama.length < 1 || formJabatan.processing || !formJabatan.isDirty"
+            :class="{ 'cursor-not-allowed': formJabatan.processing || !formJabatan.isDirty }">
             <font-awesome-icon icon="plus" class="mr-2"></font-awesome-icon>
             Tambah Jabatan
           </button>
@@ -85,12 +86,13 @@ const batalAksiJabatan = () => {
           class="bg-white border rounded dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700">
           <div class="flex items-center justify-between p-3 text-gray-900 dark:text-white">
             <div class="text-base font-semibold">
-              <span v-if="editJabatan !== index">{{ jabatan.nama }}</span>
+              <span v-if="editJabatan !== jabatan.id">{{ jabatan.nama }}</span>
               <form class="flex space-x-2" v-else
                 @submit.prevent="formJabatan.post(route('admin.gtk.jabatan.perbarui', jabatan.id)); batalAksiJabatan()">
                 <InputGeneral v-model="formJabatan.nama" name="nama" :required="true" />
                 <button type="submit" title="Ubah"
-                  class="text-white mb-5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 p-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                  class="text-white mb-5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 p-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" :disabled="formJabatan.nama.length < 1 || formJabatan.processing || !formJabatan.isDirty"
+            :class="{ 'cursor-not-allowed': formJabatan.processing || !formJabatan.isDirty }">
                   <font-awesome-icon icon="floppy-disk"></font-awesome-icon>
                   <span class="sr-only">Simpan</span>
                 </button>
@@ -101,8 +103,8 @@ const batalAksiJabatan = () => {
                 </button>
               </form>
             </div>
-            <div v-if="editJabatan !== index" class="space-x-2">
-              <button @click="ubahJabatan(index)" title="Ubah"
+            <div v-if="editJabatan !== jabatan.id" class="space-x-2">
+              <button @click="ubahJabatan(index, jabatan.id)" title="Ubah"
                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 p-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                 <font-awesome-icon icon="pen-to-square"></font-awesome-icon>
                 <span class="sr-only">Ubah</span>
