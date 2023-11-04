@@ -38,7 +38,7 @@ defineProps({ title: { type: String, default: '' } })
         <AdminNavbar @toggleSidebar="sidebarIsOpen = !sidebarIsOpen" />
         <AdminSidebar :sidebarIsOpen="sidebarIsOpen" />
 
-        <div class="pt-20 sm:ml-64">
+        <div class="grid grid-cols-1 px-4 pt-24 sm:ml-64 xl:grid-cols-2 xl:gap-4 dark:bg-gray-900">
             <slot />
         </div>
         <div v-if="!sidebarIsOpen" drawer-backdrop="" @click="sidebarIsOpen = !sidebarIsOpen"

@@ -93,7 +93,7 @@ const setImage = (src) => {
   <div class="mb-5">
     <ModalInputLink v-if="modalState.ModalInputLink" @input="setLink" @close="modalState.ModalInputLink = false" />
     <ModalInputImage v-if="modalState.ModalInputImage" @input="setImage" @close="modalState.ModalInputImage = false" />
-    <div class="sticky z-10 mb-3 overflow-x-auto bg-white border border-gray-200 rounded-lg shadow top-20 dark:bg-gray-800 dark:border-gray-700 whitespace-nowrap">
+    <div class="sticky z-10 mb-3 overflow-x-auto bg-white rounded-lg shadow top-20 dark:bg-gray-800 whitespace-nowrap">
       <div class="relative inline-flex flex-col items-start justify-center align-middle">
         <div class="relative inline-flex px-2 py-1 text-xs leading-tight align-middle rounded-md ">
           <button

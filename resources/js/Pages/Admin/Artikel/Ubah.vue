@@ -20,12 +20,12 @@ const artikel = useForm({
 
 <template>
   <AdminLayout :title="title">
-    <div class="w-full p-4">
+    <div class="mb-4 col-span-full xl:mb-2">
       <h1 class="mb-3 text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">
         {{ title }}
       </h1>
     </div>
-    <Card>
+    <Card class="mb-4 col-span-full xl:mb-2">
       <FormArtikel :artikel="artikel" @submit="artikel.post(route('admin.artikel.perbarui', artikel.id))" />
     </Card>
   </AdminLayout>
