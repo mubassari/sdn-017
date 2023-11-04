@@ -9,14 +9,16 @@ const cari = ref(null)
 defineProps({ list_artikel: { type: Object, required: true } })
 
 watch(
-  cari,
-  _.debounce((value) => {
-    router.get(
-      router.page.url,
-      { cari: value },
-      { preserveState: true, replace: true }
-    );
-  }, 100)
+  cari, async () => {
+    await loadLodash();
+    await _.debounce((value) => {
+      router.get(
+        router.page.url,
+        { cari: value },
+        { preserveState: true, replace: true }
+      );
+    }, 100)
+  }
 );
 
 const deleteData = (route) => {

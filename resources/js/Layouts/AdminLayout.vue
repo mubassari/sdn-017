@@ -1,7 +1,7 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from "vue";
 import { AdminNavbar, AdminSidebar, Toast } from "~Components/layouts"
-import { Head, usePage, router } from "@inertiajs/vue3";
+import { usePage, router } from "@inertiajs/vue3";
 import CoreLayout from './CoreLayout.vue'
 
 const sidebarIsOpen = ref(false);

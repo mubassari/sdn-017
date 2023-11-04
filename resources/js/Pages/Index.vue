@@ -1,9 +1,24 @@
 <script setup>
 import { MainLayout } from '~Layouts';
-import { ref } from '@vue/reactivity'
-import { Carousel, Slide, Navigation } from 'vue3-carousel'
+import { ref, onMounted } from 'vue';
 import { usePage } from '@inertiajs/vue3'
 import 'vue3-carousel/dist/carousel.css'
+
+let Carousel, Slide, Navigation;
+
+onMounted(async () => {
+  try {
+    // Dynamically import 'vue3-carousel'
+    const carouselModule = await import('vue3-carousel');
+    Carousel = carouselModule.Carousel;
+    Slide = carouselModule.Slide;
+    Navigation = carouselModule.Navigation;
+    
+    // Now you can use Carousel, Slide, and Navigation in your component
+  } catch (error) {
+    console.error("An error occurred while dynamically importing 'vue3-carousel':", error);
+  }
+});
 
 const page = usePage()
 const sekolah = page.props.sekolah
@@ -177,8 +192,44 @@ const jumbotronContent = ref([
             </section>
             <!-- End Visi Misi Tujuan -->
 
+            <section class="py-10 bg-white scroll-my-20 dark:bg-gray-900">
+                <div class="max-w-screen-md mx-auto mb-8 lg:mb-16">
+                    <h1 class="mb-5 text-3xl font-extrabold leading-none tracking-tight text-center text-gray-900 uppercase dark:text-white md:text-4xl lg:text-5xl">
+                        Guru & Tenaga Kependidikan
+                    </h1>        
+                </div>
+                <div class="max-w-screen-xl px-4 py-4 mx-auto md:py-16 lg:px-6">
+                    <div class="grid grid-cols-1 gap-8 lg:gap-16 md:grid-cols-3">
+                        <a href="#" class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                                Noteworthy technology acquisitions 2021
+                            </h5>
+                            <p class="font-normal text-gray-700 dark:text-gray-400">
+                                Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.
+                            </p>
+                        </a>
+                        <a href="#" class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                                Noteworthy technology acquisitions 2021
+                            </h5>
+                            <p class="font-normal text-gray-700 dark:text-gray-400">
+                                Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.
+                            </p>
+                        </a>
+                        <a href="#" class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                                Noteworthy technology acquisitions 2021
+                            </h5>
+                            <p class="font-normal text-gray-700 dark:text-gray-400">
+                                Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.
+                            </p>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
             <!-- Artikel -->
-            <section class="flex flex-col items-center justify-center py-10 bg-white scroll-my-20 dark:bg-gray-900 ">
+            <section class="flex flex-col items-center justify-center py-10 bg-white scroll-my-20 dark:bg-gray-900">
                 <h1
                     class="mb-3 text-3xl font-extrabold leading-none tracking-tight text-center text-gray-900 uppercase dark:text-white md:text-4xl lg:text-5xl">
                     Artikel Terbaru

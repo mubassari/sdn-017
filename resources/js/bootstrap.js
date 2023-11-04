@@ -1,5 +1,12 @@
-window._ = require('lodash');
+let _;
 
+// Later in your code when you need lodash
+async function loadLodash() {
+  if (!_ && typeof window === 'object') {
+    const lodashModule = await import('lodash');
+    _ = lodashModule.default;
+  }
+}
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
  * to our Laravel back-end. This library automatically handles sending the
