@@ -179,32 +179,41 @@ const jumbotronContent = ref([
 
             <section class="py-10 bg-white scroll-my-20 dark:bg-gray-900">
                 <div class="max-w-screen-md mx-auto mb-8 lg:mb-16">
-                    <h1 class="mb-5 text-3xl font-extrabold leading-none tracking-tight text-center text-gray-900 uppercase dark:text-white md:text-4xl lg:text-5xl">
+                    <h1
+                        class="mb-5 text-3xl font-extrabold leading-none tracking-tight text-center text-gray-900 uppercase dark:text-white md:text-4xl lg:text-5xl">
                         Guru & Tenaga Kependidikan
-                    </h1>        
+                    </h1>
                 </div>
                 <div class="max-w-screen-xl px-4 py-4 mx-auto md:py-16 lg:px-6">
                     <div class="space-y-4 md:grid xl:grid-cols-4 md:grid-cols-2 sm:gap-3 xl:gap-5 md:space-y-0">
-                        <a href="#" class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                            <font-awesome-icon icon="times" class="mb-3 text-gray-500 w-7 h-7 dark:text-gray-400"></font-awesome-icon>
+                        <a href="#"
+                            class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                            <font-awesome-icon icon="times"
+                                class="mb-3 text-gray-500 w-7 h-7 dark:text-gray-400"></font-awesome-icon>
                             <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                               Tentang sekolah
+                                Tentang sekolah
                             </h5>
                         </a>
-                        <a href="#" class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                            <font-awesome-icon icon="times" class="mb-3 text-gray-500 w-7 h-7 dark:text-gray-400"></font-awesome-icon>
+                        <a href="#"
+                            class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                            <font-awesome-icon icon="times"
+                                class="mb-3 text-gray-500 w-7 h-7 dark:text-gray-400"></font-awesome-icon>
                             <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                                 Sambutan Kepala Sekolah
                             </h5>
                         </a>
-                        <a href="#" class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                            <font-awesome-icon icon="times" class="mb-3 text-gray-500 w-7 h-7 dark:text-gray-400"></font-awesome-icon>
+                        <a href="#"
+                            class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                            <font-awesome-icon icon="times"
+                                class="mb-3 text-gray-500 w-7 h-7 dark:text-gray-400"></font-awesome-icon>
                             <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                                 Visi-Misi-Tujuan
                             </h5>
                         </a>
-                        <a href="#" class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                            <font-awesome-icon icon="times" class="mb-3 text-gray-500 w-7 h-7 dark:text-gray-400"></font-awesome-icon>
+                        <a href="#"
+                            class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                            <font-awesome-icon icon="times"
+                                class="mb-3 text-gray-500 w-7 h-7 dark:text-gray-400"></font-awesome-icon>
                             <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                                 Guru & Tenaga Kependidikan
                             </h5>
@@ -268,12 +277,22 @@ const jumbotronContent = ref([
             </section>
             <!-- End Artikel -->
         </main>
+        <div
+            class="w-10 h-10 m-0 text-gray-900 bg-white hover:text-blue-700 dark:hover:text-blue-500 md:w-16 md:h-16 dark:bg-gray-900 dark:text-white">
+        </div>
     </MainLayout>
 </template>
 
 <style lang="scss">
+.carousel__prev {
+    @apply rounded-r-md;
+}
+
+.carousel__next {
+    @apply rounded-l-md;
+}
+
 .carousel__prev,
 .carousel__next {
-    @apply text-white hover:text-blue-700;
-}
-</style>
+    @apply w-10 h-10 m-0 text-gray-900 bg-white hover:text-blue-700 dark:hover:text-blue-500 md:w-16 md:h-16 dark:bg-gray-900 dark:text-white;
+}</style>
