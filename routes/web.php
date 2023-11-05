@@ -12,7 +12,8 @@ use App\Http\Controllers\Admin\AdminSekolahController;
 
 // General Controller
 use App\Http\Controllers\Main\MainController;
-use App\Http\Controllers\Main\ArtikelController;
+use App\Http\Controllers\Main\MainArtikelController;
+use App\Http\Controllers\Main\MainSekolahController;
 
 /*
 |--------------------------------------------------------------------------
@@ -73,6 +74,8 @@ Route::prefix('admin')->name('admin.')->group(function() {
     Route::delete('{gtk}',[AdminGTKController::class, 'hapus'])->name('hapus');
   });
 });
+
+Route::get('visi-misi-tujuan',[MainSekolahController::class, 'visi_misi_tujuan'])->name('visi_misi_tujuan');
 
 Route::prefix('{kategori}')->name('artikel.')->group(function() {
   Route::get('',[MainArtikelController::class, 'beranda'])->name('index');

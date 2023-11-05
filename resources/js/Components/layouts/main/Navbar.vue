@@ -10,8 +10,8 @@ const sekolah = page.props.sekolah
 // Menu
 const menuContent = ref([
   {
-    title: 'Home',
-    uri: '/',
+    title: 'Beranda',
+    uri: 'index',
     submenu: null
   },
   {
@@ -24,6 +24,28 @@ const menuContent = ref([
       }
     }
     ),
+  },
+  {
+    title: 'Sekolah',
+    uri: null,
+    submenu: [
+      {
+        uri: "index",
+        title: "Tentang Sekolah",
+      },
+      {
+        uri: "index",
+        title: "Sambutan Kepala Sekolah",
+      },
+      {
+        uri: "visi_misi_tujuan",
+        title: "Visi, Misi & Tujuan",
+      },
+      {
+        uri: "index",
+        title: "Guru & Tenaga Kependidikan",
+      },
+    ]
   },
   {
     title: 'Kontak',
@@ -45,7 +67,7 @@ if (nonEmptySosmedValues.length > 0) {
     if (sekolah.sosmed[key] !== "") {
       sosmedMenu.submenu.push({
         title: key.charAt(0).toUpperCase() + key.slice(1),
-        uri: sekolah.sosmed[key]
+        uri: 'https://' + sekolah.sosmed[key]
       });
     }
   }
@@ -100,9 +122,12 @@ const hideNavbar = () => {
         <ul
           class="flex flex-col max-h-screen gap-3 p-4 mt-4 overflow-auto font-medium border border-gray-100 rounded-lg md:p-0 bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
           <li v-for="(menu, index) in menuContent" :key="index">
-            <component :is="(menu.uri && !menu.uri.startsWith('#')) ? 'Link' : 'a'" :href="menu.uri" v-if="!menu.submenu"
+            <component :is="(menu.uri && !(menu.uri.startsWith('#') || menu.uri.startsWith('/'))) ? 'Link' : 'a'"
+              :href="!(menu.uri.startsWith('#') || menu.uri.startsWith('/')) ? route(menu.uri) : menu.uri"
+              v-if="!menu.submenu"
               class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
-              {{ menu.title }}</component>
+              {{ menu.title }}
+            </component>
             <template v-else>
               <button type="button" @click="openSubmenu(index)"
                 class="flex items-center justify-between w-full py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
@@ -110,13 +135,21 @@ const hideNavbar = () => {
                 <font-awesome-icon icon="angle-down" class="ml-2.5"></font-awesome-icon>
               </button>
               <div :class="submenuOpened !== index ? 'hidden' : 'block'"
-                class="w-full mt-3 bg-white divide-gray-100 rounded-lg shadow md:z-20 md:absolute md:mt-3 md:w-44 md:-translate-x-5 divide dark:bg-gray-700">
+                class="w-full mt-3 divide-gray-100 rounded-lg shadow bg-gray-50 md:z-20 md:absolute md:mt-3 md:w-44 md:-translate-x-5 divide dark:bg-gray-700">
                 <ul class="py-2 text-sm text-gray-700 dark:text-gray-200">
                   <li v-for="(submenu, indexSubmenu) in menu.submenu" :key="indexSubmenu">
-                    <Link :href="Array.isArray(submenu.uri) ? route(submenu.uri[0], submenu.uri[1]) : submenu.uri"
+                    <Link v-if="Array.isArray(submenu.uri)" :href="route(submenu.uri[0], submenu.uri[1])"
                       class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                     {{ submenu.title }}
                     </Link>
+                    <Link v-else-if="!submenu.uri.startsWith('https://')" :href="route(submenu.uri)"
+                      class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                    {{ submenu.title }}
+                    </Link>
+                    <a v-else :href="submenu.uri" target="_blank"
+                      class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                      {{ submenu.title }}
+                    </a>
                   </li>
                 </ul>
               </div>
