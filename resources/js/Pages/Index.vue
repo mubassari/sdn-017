@@ -1,24 +1,9 @@
 <script setup>
 import { MainLayout } from '~Layouts';
-import { ref, onMounted } from 'vue';
+import { ref } from '@vue/reactivity'
+import { Carousel, Slide, Navigation } from 'vue3-carousel'
 import { usePage } from '@inertiajs/vue3'
 import 'vue3-carousel/dist/carousel.css'
-
-let Carousel, Slide, Navigation;
-
-onMounted(async () => {
-  try {
-    // Dynamically import 'vue3-carousel'
-    const carouselModule = await import('vue3-carousel');
-    Carousel = carouselModule.Carousel;
-    Slide = carouselModule.Slide;
-    Navigation = carouselModule.Navigation;
-    
-    // Now you can use Carousel, Slide, and Navigation in your component
-  } catch (error) {
-    console.error("An error occurred while dynamically importing 'vue3-carousel':", error);
-  }
-});
 
 const page = usePage()
 const sekolah = page.props.sekolah

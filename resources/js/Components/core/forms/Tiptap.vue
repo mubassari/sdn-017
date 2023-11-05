@@ -1,19 +1,16 @@
 <script setup>
 import { ref, watch, onBeforeMount, onBeforeUnmount } from 'vue';
+import { Editor, EditorContent } from '@tiptap/vue-3'
 import { ModalInputLink, ModalInputImage } from '~Components/core/modal'
-
-const isTiptapLoaded = ref(false);
-let Editor;
-let EditorContent;
-let StarterKit;
-let Underline;
-let Link;
-let TextAlign;
-let Table;
-let TableRow;
-let TableCell;
-let TableHeader;
-let Image;
+import StarterKit from "@tiptap/starter-kit";
+import Underline from "@tiptap/extension-underline";
+import Link from "@tiptap/extension-link";
+import TextAlign from "@tiptap/extension-text-align";
+import Table from "@tiptap/extension-table";
+import TableRow from "@tiptap/extension-table-row";
+import TableCell from "@tiptap/extension-table-cell";
+import TableHeader from "@tiptap/extension-table-header";
+import Image from '@tiptap/extension-image';
 
 const props = defineProps({
   modelValue: { type: String, default: '' },
@@ -31,92 +28,47 @@ watch(() => props.modelValue, (value) => {
   formEditor.value.commands.setContent(value, false)
 })
 
-const loadTiptap = async () => {
-  try {
-    const [
-      tiptapModule,
-      StarterKitModule,
-      UnderlineModule,
-      LinkModule,
-      TextAlignModule,
-      TableModule,
-      TableRowModule,
-      TableCellModule,
-      TableHeaderModule,
-      ImageModule,
-    ] = await Promise.all([
-      import('@tiptap/vue-3'),
-      import('@tiptap/starter-kit'),
-      import('@tiptap/extension-underline'),
-      import('@tiptap/extension-link'),
-      import('@tiptap/extension-text-align'),
-      import('@tiptap/extension-table'),
-      import('@tiptap/extension-table-row'),
-      import('@tiptap/extension-table-cell'),
-      import('@tiptap/extension-table-header'),
-      import('@tiptap/extension-image'),
-    ]);
-
-    Editor = tiptapModule.Editor;
-    EditorContent = tiptapModule.EditorContent;
-    StarterKit = StarterKitModule.default;
-    Underline = UnderlineModule.default;
-    Link = LinkModule.default;
-    TextAlign = TextAlignModule.default;
-    Table = TableModule.default;
-    TableRow = TableRowModule.default;
-    TableCell = TableCellModule.default;
-    TableHeader = TableHeaderModule.default;
-    Image = ImageModule.default;
-
-    formEditor.value = new Editor({
-      parseOptions: {
-        preserveWhitespace: 'full'
-      },
-      extensions: [
-        StarterKit.configure({
-          blockquote: false,
-          codeBlock: false,
-          heading: { levels: [1, 2, 3] },
-          listItem: true,
-          paragraph: true,
-        }),
-        Underline,
-        Link.configure({
-          openOnClick: false,
-        }),
-        TextAlign.configure({ types: ["heading", "paragraph", 'list'] }),
-        Table.configure({
-          resizable: false,
-          HTMLAttributes: {
-            class: "w-full text-sm font-medium text-left text-gray-900 border border-separate whitespace-nowrap dark:text-white dark:border-gray-500"
-          },
-        }),
-        TableRow,
-        TableHeader,
-        TableCell,
-        Image.configure({
-          inline: true,
-          allowBase64: true,
-        }),
-      ],
-      editorProps: {
-        attributes: {
-          class: 'format lg:format-lg dark:format-invert block p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500',
+onBeforeMount(() => {
+  formEditor.value = new Editor({
+    parseOptions: {
+      preserveWhitespace: 'full'
+    },
+    extensions: [
+      StarterKit.configure({
+        blockquote: false,
+        codeBlock: false,
+        heading: { levels: [1, 2, 3] },
+        listItem: true,
+        paragraph: true,
+      }),
+      Underline,
+      Link.configure({
+        openOnClick: false,
+      }),
+      TextAlign.configure({ types: ["heading", "paragraph", 'list'] }),
+      Table.configure({
+        resizable: false,
+        HTMLAttributes: {
+          class: "w-full text-sm font-medium text-left text-gray-900 border border-separate whitespace-nowrap dark:text-white dark:border-gray-500"
         },
+      }),
+      TableRow,
+      TableHeader,
+      TableCell,
+      Image.configure({
+        inline: true,
+        allowBase64: true,
+      }),
+    ],
+    editorProps: {
+      attributes: {
+        class: 'format lg:format-lg dark:format-invert block p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500',
       },
-      content: props.modelValue,
-      onUpdate: () => emits('update:modelValue', formEditor.value.getHTML()),
-    })
-
-    isTiptapLoaded.value = true;
-    // Now you can use Carousel, Slide, and Navigation in your component
-  } catch (error) {
-    console.error("An error occurred while dynamically importing 'tiptap-vue-3':", error);
-  }
-}
-
-onBeforeMount(() => loadTiptap())
+    },
+    content: props.modelValue,
+    onUpdate: () => emits('update:modelValue', formEditor.value.getHTML()),
+  })
+})
 
 onBeforeUnmount(() => formEditor.value.destroy())
 
@@ -140,7 +92,7 @@ const setImage = (src) => {
   <div class="mb-5">
     <ModalInputLink v-if="modalState.ModalInputLink" @input="setLink" @close="modalState.ModalInputLink = false" />
     <ModalInputImage v-if="modalState.ModalInputImage" @input="setImage" @close="modalState.ModalInputImage = false" />
-    <div class="sticky z-10 mb-3 overflow-x-auto bg-white border border-gray-200 rounded-lg shadow top-20 dark:bg-gray-800 dark:border-gray-700 whitespace-nowrap">
+    <div class="sticky z-10 mb-3 overflow-x-auto bg-white rounded-lg shadow top-20 dark:bg-gray-800 whitespace-nowrap">
       <div class="relative inline-flex flex-col items-start justify-center align-middle">
         <div class="relative inline-flex px-2 py-1 text-xs leading-tight align-middle rounded-md ">
           <button
@@ -320,7 +272,7 @@ const setImage = (src) => {
             title="Bersihkan" @click="
               formEditor.chain().focus().unsetAllMarks().run();
             formEditor.chain().focus().clearNodes().run();
-                          ">
+            ">
             <font-awesome-icon icon="broom"></font-awesome-icon>
           </button>
         </div>
