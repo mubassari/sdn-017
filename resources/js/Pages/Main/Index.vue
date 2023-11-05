@@ -88,7 +88,7 @@ const sekolahContent = ref([
             </Carousel>
             <!-- End Slide -->
 
-            <section class="py-10 bg-white scroll-my-20 dark:bg-gray-900">
+            <section class="flex flex-col items-center justify-center py-10 bg-white scroll-my-20 dark:bg-gray-900">
                 <div class="max-w-screen-md mx-auto my-8 lg:my-16">
                     <h1
                         class="my-5 text-2xl font-extrabold leading-none tracking-tight text-center text-gray-900 uppercase dark:text-white md:text-3xl lg:text-4xl">
