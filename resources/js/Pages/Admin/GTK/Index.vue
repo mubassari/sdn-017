@@ -85,10 +85,11 @@ const deleteData = (route) => {
               <tr v-for="(gtk, key) in list_gtk.data" :key="key"
                 class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700">
                 <td class="w-32 px-6 py-4">
-                  <img v-if="gtk.sampul" :src="gtk.sampul" :alt="gtk.nama" class="rounded">
+                  <img v-if="gtk.foto" :src="gtk.foto" :alt="gtk.nama" class="rounded">
                 </td>
                 <td class="px-6 py-4">
-                  {{ gtk.nama }}
+                  <div class="text-lg font-semibold text-gray-900 dark:text-white">{{ gtk.nama }}</div>
+                  <div class="text-sm italic font-normal text-gray-500">NIP/NUPTK: {{ gtk.nip }}</div>
                 </td>
                 <td class="px-6 py-4">
                   <span

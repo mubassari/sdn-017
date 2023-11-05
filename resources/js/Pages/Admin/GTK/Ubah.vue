@@ -12,7 +12,9 @@ const props = defineProps({ gtk: { type: Object, required: true } })
 const gtk = useForm({
   id: props.gtk.id,
   nama: props.gtk.nama,
-  sampul: props.gtk.sampul,
+  nip: props.gtk.nip,
+  jenis_kelamin: props.gtk.jenis_kelamin,
+  foto: props.gtk.foto,
   gtk_jabatan_id: props.gtk.gtk_jabatan_id,
 })
 

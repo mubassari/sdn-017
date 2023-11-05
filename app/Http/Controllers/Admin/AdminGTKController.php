@@ -14,7 +14,7 @@ use Inertia\Inertia;
 class AdminGTKController extends Controller
 {
     public function index(Request $request){
-        $list_gtk = GTK::select('id', 'nama', 'sampul', 'slug', 'gtk_jabatan_id')
+        $list_gtk = GTK::select('id', 'nama', 'foto', 'slug', 'gtk_jabatan_id')
         ->orderBy('id', 'desc')
         ->when($request->input('cari'), function ($query, $role) {
             $query->where('gtk.nama', 'like', "%$role%");
@@ -24,7 +24,8 @@ class AdminGTKController extends Controller
             return [
                 'id'            => $data->id,
                 'nama'         => $data->nama,
-                'sampul'        => $data->path_sampul,
+                'nip'         => $data->nip,
+                'foto'        => $data->path_foto,
                 'jabatan'      => $data->GTKJabatan->nama,
                 'jabatan_slug' => $data->GTKJabatan->slug,
                 'slug'          => $data->slug,
@@ -46,16 +47,16 @@ class AdminGTKController extends Controller
             $validated = $request->validated();
             $gtk = GTK::create($validated);
 
-            if ($request->hasFile('sampul')){
-                $name_file = $request->sampul->hashName();
-                if (!$request->sampul->storeAs('public/gambar/gtk', $name_file)) {
+            if ($request->hasFile('foto')){
+                $name_file = $request->foto->hashName();
+                if (!$request->foto->storeAs('public/gambar/gtk', $name_file)) {
                     return back()->withInput()->with('alert', [
                         'status' => 'danger',
                         'pesan'  => 'Terjadi kesalahan saat mengunggah gambar. Silakan coba lagi!'
                     ]);
                 }
 
-                $gtk->sampul = $name_file;
+                $gtk->foto = $name_file;
             }
             $gtk->save();
 
@@ -82,8 +83,10 @@ class AdminGTKController extends Controller
             return [
                 'id'          => $gtk->id,
                 'nama'       => $gtk->nama,
+                'nip'       => $gtk->nip,
+                'jenis_kelamin'       => $gtk->jenis_kelamin,
                 'isi'         => $gtk->isi,
-                'sampul'      => $gtk->path_sampul,
+                'foto'      => $gtk->path_foto,
                 'gtk_jabatan_id' => $gtk->gtk_jabatan_id,
             ];
         })->first();
@@ -97,26 +100,27 @@ class AdminGTKController extends Controller
             $validated             = $request->validated();
             
             $gtk->nama         = $validated['nama'];
-            $gtk->isi           = $validated['isi'];
+            $gtk->nip         = $validated['nip'];
+            $gtk->jenis_kelamin = $validated['jenis_kelamin'];
             $gtk->gtk_jabatan_id   = $validated['gtk_jabatan_id'];
 
-            if ($request->hasFile('sampul') && $request->file('sampul')->isValid()){
-                $name_file = $request->sampul->hashName();
-                if(!$request->sampul->storeAs('public/gambar/gtk', $name_file)) {
+            if ($request->hasFile('foto') && $request->file('foto')->isValid()){
+                $name_file = $request->foto->hashName();
+                if(!$request->foto->storeAs('public/gambar/gtk', $name_file)) {
                     return back()->withInput()->with('alert', [
                         'status' => 'danger',
                         'pesan'  => 'Terjadi kesalahan saat mengunggah gambar. Silakan coba lagi!'
                     ]);
                 }
 
-                if (Storage::exists("public/gambar/gtk/$gtk->sampul") && $gtk->sampul !== '/gambar/default-person.png' && !Storage::delete("public/gambar/gtk/$gtk->sampul")){
+                if (Storage::exists("public/gambar/gtk/$gtk->foto") && $gtk->foto !== '/gambar/default-person.png' && !Storage::delete("public/gambar/gtk/$gtk->foto")){
                     return back()->withInput()->with('alert', [
                         'status' => 'danger',
                         'pesan'  => 'Terjadi kesalahan saat menghapus gambar lama. Silakan coba lagi!'
                     ]);
                 }
 
-                $gtk->sampul = $name_file;
+                $gtk->foto = $name_file;
             }
 
             $gtk->save();
@@ -142,7 +146,7 @@ class AdminGTKController extends Controller
         try {
             $gtk->delete();
 
-            if (Storage::exists("public/gambar/gtk/$gtk->sampul") && $gtk->sampul !== '/gambar/default-person.png' && !Storage::delete('public/gambar/gtk/' . $gtk->sampul)) {
+            if (Storage::exists("public/gambar/gtk/$gtk->foto") && $gtk->foto !== '/gambar/default-person.png' && !Storage::delete('public/gambar/gtk/' . $gtk->foto)) {
                 return back()->withInput()->with('alert', [
                     'status' => 'danger',
                     'pesan'  => 'Terjadi kesalahan saat menghapus gambar. Silakan coba lagi!'

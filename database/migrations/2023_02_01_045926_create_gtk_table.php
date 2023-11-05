@@ -16,7 +16,9 @@ class CreateGTKTable extends Migration
         Schema::create('gtk', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
-            $table->text('sampul')->nullable()->default('/gambar/default-person.png');
+            $table->integer('nip')->unique()->nullable();
+            $table->enum('jenis_kelamin', ['laki_laki', 'perempuan']);
+            $table->text('foto')->nullable()->default('/gambar/default-person.png');
             $table->string('slug');
             $table->unsignedBigInteger('gtk_jabatan_id')->nullable();
 

@@ -9,7 +9,9 @@ const title = ref('Tambah GTK');
 
 const gtk = useForm({
   nama: '',
-  sampul: null,
+  nip: '',
+  jenis_kelamin: 0,
+  foto: null,
   gtk_jabatan_id: 0,
 })
 

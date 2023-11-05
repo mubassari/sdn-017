@@ -25,7 +25,9 @@ class GTKRequest extends FormRequest
     {
         $rules = [
             'nama'           => 'required|string',
-            'sampul'          => 'sometimes|nullable',
+            'nip'           => 'sometimes|nullable|numeric|max:99999999999999999',
+            'jenis_kelamin' => 'required|in:laki_laki,perempuan',
+            'foto'          => 'sometimes|nullable',
             'gtk_jabatan_id' => 'required|exists:gtk_jabatan,id'
         ];
 
@@ -40,9 +42,9 @@ class GTKRequest extends FormRequest
      */
     public function withValidator($validator)
     {
-        $validator->sometimes('sampul', ['image', 'mimes:jpeg,png,jpg', 'max:1024'], function ($input) {
-            // Check if the 'sampul' input is not empty and is an instance of UploadedFile
-            return !empty($input->sampul) && $input->sampul instanceof \Illuminate\Http\UploadedFile;
+        $validator->sometimes('foto', ['image', 'mimes:jpeg,png,jpg', 'max:1024'], function ($input) {
+            // Check if the 'foto' input is not empty and is an instance of UploadedFile
+            return !empty($input->foto) && $input->foto instanceof \Illuminate\Http\UploadedFile;
         });
     }
 }
