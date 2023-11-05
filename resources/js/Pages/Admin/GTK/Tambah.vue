@@ -17,12 +17,12 @@ const gtk = useForm({
 
 <template>
   <AdminLayout :title="title">
-    <div class="mb-4 col-span-full xl:mb-2">
+    <div class="w-full p-4">
       <h1 class="mb-3 text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">
         {{ title }}
       </h1>
     </div>
-    <Card class="mb-4 col-span-full xl:mb-2">
+    <Card>
       <FormGTK :gtk="gtk" @submit="gtk.post(route('admin.gtk.simpan'))" />
     </Card>
   </AdminLayout>

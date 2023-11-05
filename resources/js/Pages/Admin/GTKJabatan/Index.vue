@@ -56,79 +56,75 @@ const batalAksiJabatan = () => {
 
 <template>
   <AdminLayout :title="title">
-    <div class="mb-4 col-span-full xl:mb-2">
+    <div class="w-full p-4">
       <h1 class="mb-3 text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">
         {{ title }}
       </h1>
     </div>
-    <div class="mb-4 col-span-full xl:mb-2">
-      <div class="relative px-5 space-y-3 overflow-x-auto">
-        <div class="py-1">
-          <form v-if="editJabatan == null" class="flex space-x-3"
-            @submit.prevent="formJabatan.post(route('admin.gtk.jabatan.simpan')); batalAksiJabatan();">
-            <InputGeneral v-model="formJabatan.nama" name="nama" :required="true" />
-            <button type="submit" title="Tambah Jabatan GTK"
-              class="inline-flex items-center justify-center w-1/2 px-3 py-2 mb-5 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 sm:w-auto dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-              :disabled="formJabatan.nama.length < 1 || formJabatan.processing || !formJabatan.isDirty"
-              :class="{ 'cursor-not-allowed': formJabatan.processing || !formJabatan.isDirty }">
-              <font-awesome-icon icon="plus" class="mr-2"></font-awesome-icon>
-              Tambah Jabatan
-            </button>
-          </form>
-          <button v-else type="button" title="Tambah Jabatan GTK" @click="batalAksiJabatan"
-            class="inline-flex items-center justify-center w-1/2 px-3 py-2 mb-5 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 sm:w-auto dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+    <div class="relative px-5 space-y-3 overflow-x-auto">
+      <div class="py-1">
+        <form v-if="editJabatan == null" class="flex space-x-3"
+          @submit.prevent="formJabatan.post(route('admin.gtk.jabatan.simpan')); batalAksiJabatan();">
+          <InputGeneral v-model="formJabatan.nama" name="nama" :required="true" />
+          <button type="submit" title="Tambah Jabatan GTK"
+            class="inline-flex items-center justify-center w-1/2 px-3 py-2 mb-5 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 sm:w-auto dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            :disabled="formJabatan.nama.length < 1 || formJabatan.processing || !formJabatan.isDirty"
+            :class="{ 'cursor-not-allowed': formJabatan.processing || !formJabatan.isDirty }">
             <font-awesome-icon icon="plus" class="mr-2"></font-awesome-icon>
             Tambah Jabatan
           </button>
-        </div>
-        <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
-        <template v-if="list_jabatan.data.length > 0">
-          <div v-for="( jabatan, index ) in list_jabatan.data" :key="jabatan.id"
-            class="bg-white border rounded dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700">
-            <div class="flex items-center justify-between p-3 text-gray-900 dark:text-white">
-              <div class="text-base font-semibold">
-                <span v-if="editJabatan !== jabatan.id">{{ jabatan.nama }}</span>
-                <form class="flex space-x-2" v-else
-                  @submit.prevent="formJabatan.post(route('admin.gtk.jabatan.perbarui', jabatan.id)); batalAksiJabatan()">
-                  <InputGeneral v-model="formJabatan.nama" name="nama" :required="true" />
-                  <button type="submit" title="Ubah"
-                    class="text-white mb-5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 p-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                    :disabled="formJabatan.nama.length < 1 || formJabatan.processing || !formJabatan.isDirty"
-                    :class="{ 'cursor-not-allowed': formJabatan.processing || !formJabatan.isDirty }">
-                    <font-awesome-icon icon="floppy-disk"></font-awesome-icon>
-                    <span class="sr-only">Simpan</span>
-                  </button>
-                  <button @click="batalAksiJabatan" title="Ubah"
-                    class="focus:outline-none mb-5 text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-3 p-2.5 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">
-                    <font-awesome-icon icon="times"></font-awesome-icon>
-                    <span class="sr-only">Batal Ubah</span>
-                  </button>
-                </form>
-              </div>
-              <div v-if="editJabatan !== jabatan.id" class="space-x-2">
-                <button @click="ubahJabatan(index, jabatan.id)" title="Ubah"
-                  class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 p-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                  <font-awesome-icon icon="pen-to-square"></font-awesome-icon>
-                  <span class="sr-only">Ubah</span>
+        </form>
+        <button v-else type="button" title="Tambah Jabatan GTK" @click="batalAksiJabatan"
+          class="inline-flex items-center justify-center w-1/2 px-3 py-2 mb-5 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 sm:w-auto dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+          <font-awesome-icon icon="plus" class="mr-2"></font-awesome-icon>
+          Tambah Jabatan
+        </button>
+      </div>
+      <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
+      <template v-if="list_jabatan.data.length > 0">
+        <div v-for="( jabatan, index ) in list_jabatan.data" :key="jabatan.id"
+          class="bg-white border rounded dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700">
+          <div class="flex items-center justify-between p-3 text-gray-900 dark:text-white">
+            <div class="text-base font-semibold">
+              <span v-if="editJabatan !== jabatan.id">{{ jabatan.nama }}</span>
+              <form class="flex space-x-2" v-else
+                @submit.prevent="formJabatan.post(route('admin.gtk.jabatan.perbarui', jabatan.id)); batalAksiJabatan()">
+                <InputGeneral v-model="formJabatan.nama" name="nama" :required="true" />
+                <button type="submit" title="Ubah"
+                  class="text-white mb-5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 p-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" :disabled="formJabatan.nama.length < 1 || formJabatan.processing || !formJabatan.isDirty"
+            :class="{ 'cursor-not-allowed': formJabatan.processing || !formJabatan.isDirty }">
+                  <font-awesome-icon icon="floppy-disk"></font-awesome-icon>
+                  <span class="sr-only">Simpan</span>
                 </button>
-                <button @click.prevent="deleteJabatan(route('admin.gtk.jabatan.hapus', jabatan.id))" title="Hapus"
-                  class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-3 p-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">
-                  <font-awesome-icon icon="trash"></font-awesome-icon>
-                  <span class="sr-only">Hapus</span>
+                <button @click="batalAksiJabatan" title="Ubah"
+                  class="focus:outline-none mb-5 text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-3 p-2.5 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">
+                  <font-awesome-icon icon="times"></font-awesome-icon>
+                  <span class="sr-only">Batal Ubah</span>
                 </button>
-              </div>
+              </form>
+            </div>
+            <div v-if="editJabatan !== jabatan.id" class="space-x-2">
+              <button @click="ubahJabatan(index, jabatan.id)" title="Ubah"
+                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 p-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                <font-awesome-icon icon="pen-to-square"></font-awesome-icon>
+                <span class="sr-only">Ubah</span>
+              </button>
+              <button @click.prevent="deleteJabatan(route('admin.gtk.jabatan.hapus', jabatan.id))" title="Hapus"
+                class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-3 p-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">
+                <font-awesome-icon icon="trash"></font-awesome-icon>
+                <span class="sr-only">Hapus</span>
+              </button>
             </div>
           </div>
-        </template>
-        <template v-else>
-          <div
-            class="p-3 text-center text-gray-900 bg-white border rounded dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 dark:text-white">
-            <span>Tidak Ada Data</span>
-          </div>
-        </template>
-      </div>
-      <Pagination :links="list_jabatan.links" :dari="list_jabatan.from" :ke="list_jabatan.to"
-        :total="list_jabatan.total" />
+        </div>
+      </template>
+      <template v-else>
+        <div
+          class="p-3 text-center text-gray-900 bg-white border rounded dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 dark:text-white">
+          <span>Tidak Ada Data</span>
+        </div>
+      </template>
     </div>
+    <Pagination :links="list_jabatan.links" :dari="list_jabatan.from" :ke="list_jabatan.to" :total="list_jabatan.total" />
   </AdminLayout>
 </template>
