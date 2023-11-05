@@ -11,8 +11,8 @@ use App\Http\Controllers\Admin\AdminGTKJabatanController;
 use App\Http\Controllers\Admin\AdminSekolahController;
 
 // General Controller
-use App\Http\Controllers\MainController;
-use App\Http\Controllers\ArtikelController;
+use App\Http\Controllers\Main\MainController;
+use App\Http\Controllers\Main\ArtikelController;
 
 /*
 |--------------------------------------------------------------------------
@@ -75,6 +75,6 @@ Route::prefix('admin')->name('admin.')->group(function() {
 });
 
 Route::prefix('{kategori}')->name('artikel.')->group(function() {
-  Route::get('',[ArtikelController::class, 'beranda'])->name('index');
-  Route::get('{artikel}',[ArtikelController::class, 'tampil'])->name('tampil');
+  Route::get('',[MainArtikelController::class, 'beranda'])->name('index');
+  Route::get('{artikel}',[MainArtikelController::class, 'tampil'])->name('tampil');
 });

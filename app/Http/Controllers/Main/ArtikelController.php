@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Main;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Models\Artikel;
 use App\Models\ArtikelKategori;
 use Inertia\Inertia;
 
-class ArtikelController extends Controller
+class MainArtikelController extends Controller
 {
     public function beranda($kategori_slug)
     {
@@ -30,7 +31,7 @@ class ArtikelController extends Controller
                     ];
                 })
                 ->withQueryString();
-            return Inertia::render('Artikel/Index', compact('kategori', 'list_artikel'));
+            return Inertia::render('Main/Artikel/Index', compact('kategori', 'list_artikel'));
         } catch (ModelNotFoundException $exception) {
             return redirect()->intended(route('index'))->with('alert', [
                 'status' => 'danger',
@@ -74,7 +75,7 @@ class ArtikelController extends Controller
                     ];
                 });
 
-            return Inertia::render('Artikel/Tampil', compact('artikel', 'artikel_terkait'));
+            return Inertia::render('Main/Artikel/Tampil', compact('artikel', 'artikel_terkait'));
         } catch (ModelNotFoundException $exception) {
             return redirect()->intended(route('index'))->with('alert', [
                 'status' => 'danger',

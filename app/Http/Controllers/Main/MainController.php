@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Main;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\ArtikelKategori;
 use Inertia\Inertia;
@@ -28,6 +29,6 @@ class MainController extends Controller
             ];
         });
 
-        return Inertia::render('Index', compact('list_kategori'));
+        return Inertia::render('Main/Index', compact('list_kategori'));
     }
 }

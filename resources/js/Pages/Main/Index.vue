@@ -184,30 +184,30 @@ const jumbotronContent = ref([
                     </h1>        
                 </div>
                 <div class="max-w-screen-xl px-4 py-4 mx-auto md:py-16 lg:px-6">
-                    <div class="grid grid-cols-1 gap-8 lg:gap-16 md:grid-cols-3">
+                    <div class="space-y-4 md:grid xl:grid-cols-4 md:grid-cols-2 sm:gap-3 xl:gap-5 md:space-y-0">
                         <a href="#" class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                            <font-awesome-icon icon="times" class="mb-3 text-gray-500 w-7 h-7 dark:text-gray-400"></font-awesome-icon>
                             <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                                Noteworthy technology acquisitions 2021
+                               Tentang sekolah
                             </h5>
-                            <p class="font-normal text-gray-700 dark:text-gray-400">
-                                Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.
-                            </p>
                         </a>
                         <a href="#" class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                            <font-awesome-icon icon="times" class="mb-3 text-gray-500 w-7 h-7 dark:text-gray-400"></font-awesome-icon>
                             <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                                Noteworthy technology acquisitions 2021
+                                Sambutan Kepala Sekolah
                             </h5>
-                            <p class="font-normal text-gray-700 dark:text-gray-400">
-                                Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.
-                            </p>
                         </a>
                         <a href="#" class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                            <font-awesome-icon icon="times" class="mb-3 text-gray-500 w-7 h-7 dark:text-gray-400"></font-awesome-icon>
                             <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                                Noteworthy technology acquisitions 2021
+                                Visi-Misi-Tujuan
                             </h5>
-                            <p class="font-normal text-gray-700 dark:text-gray-400">
-                                Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.
-                            </p>
+                        </a>
+                        <a href="#" class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                            <font-awesome-icon icon="times" class="mb-3 text-gray-500 w-7 h-7 dark:text-gray-400"></font-awesome-icon>
+                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                                Guru & Tenaga Kependidikan
+                            </h5>
                         </a>
                     </div>
                 </div>
