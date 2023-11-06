@@ -17,8 +17,13 @@ class GTK extends Model
 
     protected $fillable = [
         'nama',
-        'sampul',
+        'nip',
+        'foto',
+        'tempat_lahir',
+        'tanggal_lahir',
+        'jenis_kelamin',
         'slug',
+        'status',
         'gtk_jabatan_id'
     ];
 

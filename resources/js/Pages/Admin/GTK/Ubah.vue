@@ -13,8 +13,11 @@ const gtk = useForm({
   id: props.gtk.id,
   nama: props.gtk.nama,
   nip: props.gtk.nip,
+  tempat_lahir: props.gtk.tempat_lahir,
+  tanggal_lahir: props.gtk.tanggal_lahir,
   jenis_kelamin: props.gtk.jenis_kelamin,
   foto: props.gtk.foto,
+  status: props.gtk.status,
   gtk_jabatan_id: props.gtk.gtk_jabatan_id,
 })
 

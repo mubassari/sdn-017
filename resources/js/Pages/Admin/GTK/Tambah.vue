@@ -10,8 +10,11 @@ const title = ref('Tambah GTK');
 const gtk = useForm({
   nama: '',
   nip: '',
+  tempat_lahir: '',
+  tanggal_lahir: '',
   jenis_kelamin: 0,
   foto: null,
+  status: 0,
   gtk_jabatan_id: 0,
 })
 

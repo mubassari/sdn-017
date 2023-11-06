@@ -69,17 +69,20 @@ const deleteData = (route) => {
               <th scope="col" class="px-6 py-3">
                 Foto
               </th>
-            <th scope="col" class="px-6 py-3">
-              Nama
-            </th>
-            <th scope="col" class="px-6 py-3">
+              <th scope="col" class="px-6 py-3">
+                Nama
+              </th>
+              <th scope="col" class="px-6 py-3">
                 Jabatan
               </th>
               <th scope="col" class="px-6 py-3">
-                <span class="sr-only">Opsi</span>
+                Status
               </th>
-            </tr>
-          </thead>
+              <th scope="col" class="px-6 py-3">
+              <span class="sr-only">Opsi</span>
+            </th>
+          </tr>
+        </thead>
           <tbody>
             <template v-if="list_gtk.data.length > 0">
               <tr v-for="(gtk, key) in list_gtk.data" :key="key"
@@ -97,12 +100,18 @@ const deleteData = (route) => {
                     {{ gtk.jabatan }}
                   </span>
                 </td>
+                <td class="px-6 py-4">
+                  <span
+                    class="bg-green-100 text-green-800 text-xs font-semibold mr-3 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-800">
+                    {{ gtk.status }}
+                  </span>
+                </td>
                 <td class="px-6 py-4 text-right whitespace-nowrap">
                   <!-- <Link :href="route('gtk.tampil', [gtk.jabatan_slug, gtk.slug])" title="Lihat"
-                      class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm p-2.5 mr-2 mb-2 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
-                    <font-awesome-icon icon="eye"></font-awesome-icon>
-                    <span class="sr-only">Lihat</span>
-                    </Link> -->
+                        class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm p-2.5 mr-2 mb-2 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                      <font-awesome-icon icon="eye"></font-awesome-icon>
+                      <span class="sr-only">Lihat</span>
+                      </Link> -->
                   <Link :href="route('admin.gtk.ubah', gtk.id)" title="Ubah"
                     class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-2.5 mr-2 mb-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                   <font-awesome-icon icon="pen-to-square"></font-awesome-icon>

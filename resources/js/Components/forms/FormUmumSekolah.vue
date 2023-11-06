@@ -30,9 +30,9 @@ const clearError = (name) => props.sekolah.clearErrors(name)
       </div>
       <div class="grid grid-cols-1 md:gap-5 md:grid-cols-2">
         <InputGeneral v-model="sekolah.npsn" :error="sekolah.errors.npsn" @clear-error="clearError" title="NPSN"
-          name="npsn" />
-        <InputGeneral v-model="sekolah.nss" :error="sekolah.errors.nss" @clear-error="clearError" title="NSS"
-          name="nss" />
+          name="npsn" type="number" />
+        <InputGeneral v-model="sekolah.nss" :error="sekolah.errors.nss" @clear-error="clearError" title="NSS" name="nss"
+          type="number" />
       </div>
       <InputGeneral v-model="sekolah.alamat" :error="sekolah.errors.alamat" @clear-error="clearError" title="Alamat"
         name="alamat" :required="true" />

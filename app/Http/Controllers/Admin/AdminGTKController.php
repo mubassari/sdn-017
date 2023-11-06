@@ -14,7 +14,7 @@ use Inertia\Inertia;
 class AdminGTKController extends Controller
 {
     public function index(Request $request){
-        $list_gtk = GTK::select('id', 'nama', 'foto', 'slug', 'gtk_jabatan_id')
+        $list_gtk = GTK::select('id', 'nama', 'foto', 'status', 'slug', 'gtk_jabatan_id')
         ->orderBy('id', 'desc')
         ->when($request->input('cari'), function ($query, $role) {
             $query->where('gtk.nama', 'like', "%$role%");
@@ -26,6 +26,7 @@ class AdminGTKController extends Controller
                 'nama'         => $data->nama,
                 'nip'         => $data->nip,
                 'foto'        => $data->path_foto,
+                'status'        => $data->status,
                 'jabatan'      => $data->GTKJabatan->nama,
                 'jabatan_slug' => $data->GTKJabatan->slug,
                 'slug'          => $data->slug,
@@ -84,8 +85,10 @@ class AdminGTKController extends Controller
                 'id'          => $gtk->id,
                 'nama'       => $gtk->nama,
                 'nip'       => $gtk->nip,
+                'tempat_lahir'       => $gtk->tempat_lahir,
+                'tanggal_lahir'       => $gtk->tanggal_lahir,
                 'jenis_kelamin'       => $gtk->jenis_kelamin,
-                'isi'         => $gtk->isi,
+                'status'         => $gtk->status,
                 'foto'      => $gtk->path_foto,
                 'gtk_jabatan_id' => $gtk->gtk_jabatan_id,
             ];
@@ -101,7 +104,10 @@ class AdminGTKController extends Controller
             
             $gtk->nama         = $validated['nama'];
             $gtk->nip         = $validated['nip'];
+            $gtk->tempat_lahir = $validated['tempat_lahir'];
+            $gtk->tanggal_lahir = $validated['tanggal_lahir'];
             $gtk->jenis_kelamin = $validated['jenis_kelamin'];
+            $gtk->status   = $validated['status'];
             $gtk->gtk_jabatan_id   = $validated['gtk_jabatan_id'];
 
             if ($request->hasFile('foto') && $request->file('foto')->isValid()){
