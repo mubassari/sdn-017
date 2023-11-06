@@ -17,6 +17,6 @@ class SekolahSettings extends Settings
 
     public static function group(): string
     {
-        return 'sekolah';
+        return 'umum';
     }
 }
