@@ -75,7 +75,7 @@ const clearError = (name) => props.gtk.clearErrors(name)
       </div>
     </div>
     <div class="inline-flex rounded-md shadow-sm" role="group">
-      <button :disabled="gtk.processing || !gtk.isDirty" :class="{ 'cursor-not-allowed': gtk.processing || !gtk.isDirty }"
+      <button type="button" :disabled="gtk.processing || !gtk.isDirty" :class="{ 'cursor-not-allowed': gtk.processing || !gtk.isDirty }"
         @click="resetForm"
         class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-l-lg text-base w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 border border-gray-600">
         <font-awesome-icon icon="arrow-rotate-left" class="mr-1"></font-awesome-icon>
