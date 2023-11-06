@@ -54,6 +54,7 @@ Route::prefix('admin')->name('admin.')->group(function() {
     Route::name('simpan.')->group(function(){
       Route::post('umum',[AdminSekolahController::class, 'simpanUmum'])->name('umum');
       Route::post('sosmed',[AdminSekolahController::class, 'simpanSosmed'])->name('sosmed');
+      Route::post('lokasi',[AdminSekolahController::class, 'simpanLokasi'])->name('lokasi');
     });
   });
 

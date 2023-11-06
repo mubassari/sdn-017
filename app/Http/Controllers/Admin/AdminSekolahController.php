@@ -10,6 +10,9 @@ use App\Settings\SekolahSettings;
 use App\Http\Requests\SosmedSekolahSettingsRequest;
 use App\Settings\SosmedSekolahSettings;
 
+use App\Http\Requests\LokasiSekolahSettingsRequest;
+use App\Settings\LokasiSekolahSettings;
+
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -20,7 +23,8 @@ class AdminSekolahController extends Controller
     public function index(){
         $umum   = new SekolahSettings();
         $sosmed = new SosmedSekolahSettings();
-        return Inertia::render('Admin/Sekolah/Index', compact('umum', 'sosmed'));
+        $lokasi   = new LokasiSekolahSettings();
+        return Inertia::render('Admin/Sekolah/Index', compact('umum', 'sosmed', 'lokasi'));
     }
 
     public function simpanUmum(SekolahSettingsRequest $request, SekolahSettings $sekolah)
@@ -40,6 +44,28 @@ class AdminSekolahController extends Controller
             return redirect()->route('admin.sekolah.index')->with('alert', [
                 'status' => 'success',
                 'pesan'  => 'Anda berhasil menyimpan data Sekolah!'
+            ]);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return back()->withInput()->with('alert', [
+                'status' => 'danger',
+                'pesan'  => 'Terjadi kesalahan saat menyimpan data. Silakan coba lagi!'
+            ]);
+        }
+    }
+
+    public function simpanLokasi(LokasiSekolahSettingsRequest $request, LokasiSekolahSettings $lokasi)
+    {  
+        DB::beginTransaction();
+        try {
+            $lokasi->fill($request->validated());
+            $lokasi->save();
+
+            DB::commit();
+
+            return redirect()->route('admin.sekolah.index')->with('alert', [
+                'status' => 'success',
+                'pesan'  => 'Anda berhasil menyimpan data Lokasi Sekolah!'
             ]);
         } catch (\Exception $e) {
             DB::rollBack();

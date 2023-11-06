@@ -1,7 +1,7 @@
 <script setup>
 import { AdminLayout } from '~Layouts';
 import { Card } from '~Components/core'
-import { FormUmumSekolah, FormSosmedSekolah } from '~Components/forms'
+import { FormUmumSekolah, FormSosmedSekolah, FormLokasiSekolah } from '~Components/forms'
 import { useForm } from "@inertiajs/vue3";
 import { ref } from '@vue/reactivity';
 
@@ -10,6 +10,7 @@ const title = ref('Pengaturan Data Sekolah');
 const props = defineProps({
   umum: { type: Object, required: true },
   sosmed: { type: Object, required: true },
+  lokasi: { type: Object, required: true },
 })
 
 const umum = useForm({
@@ -29,6 +30,11 @@ const sosmed = useForm({
   tiktok: props.sosmed.tiktok,
   twitter: props.sosmed.twitter,
 })
+
+const lokasi = useForm({
+  longitude: props.lokasi.longitude,
+  latitude: props.lokasi.latitude,
+})
 </script>
 
 <template>
@@ -38,17 +44,27 @@ const sosmed = useForm({
         {{ title }}
       </h1>
     </div>
-    <Card id="umum" class="scroll-my-20">
-      <h2 class="mb-5 text-xl font-semibold text-gray-900 dark:text-white">
-        Pengaturan Umum
-      </h2>
-      <FormUmumSekolah :sekolah="umum" @submit="umum.post(route('admin.sekolah.simpan.umum'))" />
-    </Card>
-    <Card id="sosmed" class="scroll-my-20">
-      <h2 class="mb-5 text-xl font-semibold text-gray-900 dark:text-white">
-        Pengaturan Sosial Media
-      </h2>
-      <FormSosmedSekolah :sekolah="sosmed" @submit="sosmed.post(route('admin.sekolah.simpan.sosmed'))" />
-    </Card>
+    <div>
+      <Card id="umum" class="scroll-my-20">
+        <h2 class="mb-5 text-xl font-semibold text-gray-900 dark:text-white">
+          Pengaturan Umum
+        </h2>
+        <FormUmumSekolah :sekolah="umum" @submit="umum.post(route('admin.sekolah.simpan.umum'))" />
+      </Card>
+    </div>
+    <div>
+      <Card id="lokasi" class="scroll-my-20">
+        <h2 class="mb-5 text-xl font-semibold text-gray-900 dark:text-white">
+          Pengaturan Lokasi Sekolah
+        </h2>
+        <FormLokasiSekolah :sekolah="lokasi" @submit="lokasi.post(route('admin.sekolah.simpan.lokasi'))" />
+      </Card>
+      <Card id="sosmed" class="scroll-my-20">
+        <h2 class="mb-5 text-xl font-semibold text-gray-900 dark:text-white">
+          Pengaturan Sosial Media
+        </h2>
+        <FormSosmedSekolah :sekolah="sosmed" @submit="sosmed.post(route('admin.sekolah.simpan.sosmed'))" />
+      </Card>
+    </div>
   </AdminLayout>
 </template>
