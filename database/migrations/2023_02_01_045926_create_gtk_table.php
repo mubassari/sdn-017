@@ -20,7 +20,7 @@ class CreateGTKTable extends Migration
             $table->string('tempat_lahir');
             $table->date('tanggal_lahir');
             $table->enum('jenis_kelamin', ['laki_laki', 'perempuan']);
-            $table->text('foto')->nullable()->default('/gambar/default-person.png');
+            $table->string('foto')->nullable()->default('/gambar/default-person.png');
             $table->string('slug');
             $table->enum('status', ['pns', 'pppk', 'honor']);
             $table->unsignedBigInteger('gtk_jabatan_id')->nullable();
