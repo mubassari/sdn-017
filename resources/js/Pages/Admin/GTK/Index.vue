@@ -127,7 +127,7 @@ const deleteData = (route) => {
             </template>
             <template v-else>
               <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700">
-                <td colspan="4" class="px-6 py-4 text-base text-center whitespace-nowrap">Tidak Ada Data</td>
+                <td colspan="5" class="px-6 py-4 text-base text-center whitespace-nowrap">Tidak Ada Data</td>
               </tr>
             </template>
           </tbody>
