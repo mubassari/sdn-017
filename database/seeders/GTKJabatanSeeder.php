@@ -21,7 +21,6 @@ class GTKJabatanSeeder extends Seeder
             array (
                 'id'   => 1,
                 'nama' => 'Kepala Sekolah',
-                'foto' => '/gambar/default-person.png',
                 'slug' => 'kepala-sekolah',
             ),
         ));
