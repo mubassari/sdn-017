@@ -35,10 +35,13 @@ class GTK extends Model
 
     public $timestamps = true;
 
-    public function getPathSampulAttribute()
+    public function getPathFotoAttribute()
     {
-        if ($this->sampul) {
-            return Storage::url('public/gambar/gtk/' . $this->sampul);
+        if ($this->foto) {
+            if ($this->foto == '/gambar/default-person.png') {
+                return $this->foto;
+            }
+            return Storage::url('public/gambar/gtk/' . $this->foto);
         }
     }
 

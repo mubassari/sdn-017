@@ -91,8 +91,12 @@ const deleteData = (route) => {
                   <img v-if="gtk.foto" :src="gtk.foto" :alt="gtk.nama" class="rounded">
                 </td>
                 <td class="px-6 py-4">
-                  <div class="text-lg font-semibold text-gray-900 dark:text-white">{{ gtk.nama }}</div>
-                  <div class="text-sm italic font-normal text-gray-500">NIP/NUPTK: {{ gtk.nip }}</div>
+                  <div class="text-lg font-semibold text-gray-900 dark:text-white">
+                    {{ gtk.nama }}
+                  </div>
+                  <div class="text-sm italic font-normal text-gray-500">
+                    NIP/NUPTK: {{ gtk.nip }}
+                  </div>
                 </td>
                 <td class="px-6 py-4">
                   <span
@@ -102,7 +106,7 @@ const deleteData = (route) => {
                 </td>
                 <td class="px-6 py-4">
                   <span
-                    class="bg-green-100 text-green-800 text-xs font-semibold mr-3 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-800">
+                    class="bg-green-100 uppercase text-green-800 text-xs font-semibold mr-3 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-800">
                     {{ gtk.status }}
                   </span>
                 </td>

@@ -38,7 +38,7 @@ const sekolahContent = ref([
         icon: "school",
     },
     {
-        uri: "index",
+        uri: "sambutan",
         judul: "Sambutan Kepala Sekolah",
         icon: "scroll",
     },

@@ -26,7 +26,12 @@ const menuContent = ref([
       {
         title: 'Umum',
         uri: 'admin.sekolah.index',
-      }, {
+      },
+      {
+        title: 'Sambutan',
+        uri: 'admin.sambutan.index',
+      },
+      {
         title: 'GTK',
         uri: 'admin.gtk.index',
       }

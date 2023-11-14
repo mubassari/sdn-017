@@ -34,7 +34,7 @@ const menuContent = ref([
         title: "Tentang Sekolah",
       },
       {
-        uri: "index",
+        uri: "sambutan",
         title: "Sambutan Kepala Sekolah",
       },
       {

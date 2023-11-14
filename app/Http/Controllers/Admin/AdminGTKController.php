@@ -14,7 +14,7 @@ use Inertia\Inertia;
 class AdminGTKController extends Controller
 {
     public function index(Request $request){
-        $list_gtk = GTK::select('id', 'nama', 'foto', 'status', 'slug', 'gtk_jabatan_id')
+        $list_gtk = GTK::select('id', 'nip', 'nama', 'foto', 'status', 'slug', 'gtk_jabatan_id')
         ->orderBy('id', 'desc')
         ->when($request->input('cari'), function ($query, $role) {
             $query->where('gtk.nama', 'like', "%$role%");
