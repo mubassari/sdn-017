@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\AdminGTKController;
 use App\Http\Controllers\Admin\AdminGTKJabatanController;
 use App\Http\Controllers\Admin\AdminSekolahController;
 use App\Http\Controllers\Admin\AdminSekolahSambutanController;
+use App\Http\Controllers\Admin\AdminSekolahVisiMisiTujuanController;
 
 // General Controller
 use App\Http\Controllers\Main\MainController;
@@ -62,6 +63,13 @@ Route::prefix('admin')->name('admin.')->group(function() {
   Route::prefix("sambutan")->name('sambutan.')->group(function(){
     Route::get('',[AdminSekolahSambutanController::class, 'index'])->name('index');
     Route::post('simpan',[AdminSekolahSambutanController::class, 'simpan'])->name('simpan');
+  });
+
+  Route::prefix("visi-misi-tujuan")->name('visi_misi_tujuan.')->group(function(){
+    Route::get('',[AdminSekolahVisiMisiTujuanController::class, 'index'])->name('index');
+    Route::post('simpanVisi',[AdminSekolahVisiMisiTujuanController::class, 'simpanVisi'])->name('simpanVisi');
+    Route::post('simpanMisi',[AdminSekolahVisiMisiTujuanController::class, 'simpanMisi'])->name('simpanMisi');
+    Route::post('simpanTujuan',[AdminSekolahVisiMisiTujuanController::class, 'simpanTujuan'])->name('simpanTujuan');
   });
 
   Route::prefix('gtk')->name('gtk.')->group(function(){

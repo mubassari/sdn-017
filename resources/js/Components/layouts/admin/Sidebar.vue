@@ -32,6 +32,10 @@ const menuContent = ref([
         uri: 'admin.sambutan.index',
       },
       {
+        title: 'Visi, Misi & Tujuan',
+        uri: 'admin.visi_misi_tujuan.index',
+      },
+      {
         title: 'GTK',
         uri: 'admin.gtk.index',
       }

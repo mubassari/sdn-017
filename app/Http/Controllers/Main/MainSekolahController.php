@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use App\Models\GTK;
 use App\Settings\SambutanSekolahSettings;
+use App\Settings\VisiMisiTujuanSekolahSettings;
 use Inertia\Inertia;
 
 class MainSekolahController extends Controller
@@ -34,6 +35,8 @@ class MainSekolahController extends Controller
     }
 
     public function visi_misi_tujuan() {
-        return Inertia::render('Main/Sekolah/VisiMisiTujuan');
+        $visi_misi_tujuan       = new VisiMisiTujuanSekolahSettings();
+
+        return Inertia::render('Main/Sekolah/VisiMisiTujuan', compact('visi_misi_tujuan'));
     }
 }
