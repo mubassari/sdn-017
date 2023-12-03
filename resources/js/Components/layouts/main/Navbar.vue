@@ -112,13 +112,13 @@ const hideNavbar = () => {
     </div>
   </div>
   <nav class="sticky top-0 left-0 z-20 w-full bg-white border-b border-gray-200 dark:bg-gray-900 dark:border-gray-600">
-    <div class="flex flex-wrap items-center justify-between max-w-screen-xl max-h-screen p-4 mx-auto overflow-y-scroll md:overflow-hidden">
+    <div class="flex flex-wrap items-center justify-between max-w-screen-xl max-h-screen p-4 mx-auto md:overflow-hidden"
+      :class="{ 'overflow-y-auto': !navbarToggleHide }">
       <a :href="route('index')" class="flex items-center">
         <img :src="sekolah.umum.logo" class="h-8 mr-3" :alt="sekolah.umum.nama" />
       </a>
 
-      <div class="items-center justify-between order-2 w-full md:flex md:w-auto"
-        :class="navbarToggleHide ? 'hidden' : ''">
+      <div class="items-center justify-between order-2 w-full md:flex md:w-auto" :class="{ 'hidden': navbarToggleHide }">
         <ul
           class="flex flex-col max-h-screen gap-3 p-4 mt-4 overflow-auto font-medium border border-gray-100 rounded-lg md:overflow-hidden md:p-0 bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
           <li v-for="(menu, index) in menuContent" :key="index">
