@@ -13,7 +13,7 @@ const clearError = (name) => props.sekolah.clearErrors(name)
   <form @submit.prevent="">
     <div class="mb-6">
       <div v-for="(content, vindex) in sekolah.content" :key="vindex" class="flex">
-        <InputGeneral v-model="sekolah.content[vindex]" :name="'visi[' + vindex + ']'" class="w-full" :required="true" />
+        <InputGeneral v-model="sekolah.content[vindex]" :name="'visi[' + vindex + ']'" class="w-full" required />
         <button type="button" @click="sekolah.content.splice(vindex, 1)" title="Hapus Data"
           class="px-3 py-2 mb-5 ml-3 text-xs font-medium text-center text-white bg-red-700 rounded-lg focus:outline-none hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">
           <font-awesome-icon icon="trash"></font-awesome-icon>

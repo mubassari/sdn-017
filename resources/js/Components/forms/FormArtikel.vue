@@ -18,9 +18,9 @@ const clearError = (name) => props.artikel.clearErrors(name)
   <form @submit.prevent="">
     <div class="mb-6">
       <InputGeneral v-model="artikel.judul" :error="artikel.errors.judul" @clear-error="clearError" title="Judul Artikel"
-        name="judul" :required="true" />
+        name="judul" required />
       <InputSelect v-model="artikel.artikel_kategori_id" :error="artikel.errors.artikel_kategori_id"
-        @clear-error="clearError" title="Kategori Artikel" name="artikel_kategori_id" :required="true" :lists="lists" />
+        @clear-error="clearError" title="Kategori Artikel" name="artikel_kategori_id" required :lists="lists" />
       <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
       <Tiptap v-model="artikel.isi" :error="artikel.errors.isi" @clear-error="clearError" />
     </div>

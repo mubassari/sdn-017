@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use App\Models\UserRole;
 use Illuminate\Database\Seeder;
 
 class UserSeeder extends Seeder
@@ -17,13 +18,17 @@ class UserSeeder extends Seeder
         $faker = \Faker\Factory::create('id_ID');
         $faker->seed(1234);
         for ($i = 0; $i < 15; $i++) {
-            $nama = $i < 1 ? 'Admin' : ($i < 2 ? 'Iva' :  $faker->firstName);
+            $username = $i < 1 ? 'admin' : ($i < 2 ? 'iva' :  $faker->userName);
             User::create([
-                'nama' => $nama,
-                'alamat' => $faker->address,
-                'telpon' => $faker->bothify('08##########'),
+                'username' => $username,
                 'password' => bcrypt('1234'),
             ]);
+            if ($i < 1) {
+                UserRole::create([
+                    'user_id' => 1,
+                    'role_id' => 4
+                ]);
+            }
         }
     }
 }

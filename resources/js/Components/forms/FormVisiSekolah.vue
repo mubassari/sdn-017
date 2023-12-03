@@ -15,7 +15,7 @@ const clearError = (name) => props.sekolah.clearErrors(name)
 <template>
   <form @submit.prevent="">
     <div class="mb-6">
-      <InputGeneral v-model="sekolah.content" name="visi" class="w-full" :required="true"/>
+      <InputGeneral v-model="sekolah.content" name="visi" class="w-full" required/>
     </div>
     <div class="inline-flex rounded-md shadow-sm" role="group">
       <button type="button" :disabled="sekolah.processing || !sekolah.isDirty"

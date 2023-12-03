@@ -72,7 +72,7 @@ class AdminArtikelController extends Controller
                 'pesan'  => 'Anda berhasil menyimpan data Artikel!'
             ]);
         } catch (\Exception $e) {
-            dd($e);
+            
             DB::rollBack();
             return back()->withInput()->with('alert', [
                 'status' => 'danger',
@@ -123,7 +123,7 @@ class AdminArtikelController extends Controller
             ]);
         } catch (\Exception $e) {
             DB::rollBack();
-            dd($e);
+            
             return back()->withInput()->with('alert', [
                 'status' => 'danger',
                 'pesan'  => 'Terjadi kesalahan saat memperbarui data. Silakan coba lagi!'
@@ -291,7 +291,7 @@ class AdminArtikelController extends Controller
         } catch (\Exception $e) {
             // Rollback the transaction if an error occurs during image handling
             DB::rollBack();
-            dd($e);
+            
             return back()->withInput()->with('alert', [
                 'status' => 'danger',
                 'pesan'  => 'Terjadi kesalahan saat memproses gambar. Silakan coba lagi!'
@@ -326,7 +326,7 @@ class AdminArtikelController extends Controller
         } catch (\Exception $e) {
             // Rollback the transaction if an error occurs during image handling
             DB::rollBack();
-            dd($e);
+            
             return back()->withInput()->with('alert', [
                 'status' => 'danger',
                 'pesan'  => 'Terjadi kesalahan saat memproses gambar. Silakan coba lagi!'

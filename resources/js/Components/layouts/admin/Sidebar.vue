@@ -41,6 +41,12 @@ const menuContent = ref([
       }
     ],
   },
+  {
+    title: 'Pengguna',
+    uri: 'admin.user.index',
+    icon: 'users',
+    submenu: null
+  },
 ])
 </script>
 <template>

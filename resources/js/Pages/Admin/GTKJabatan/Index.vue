@@ -66,7 +66,7 @@ const batalAksiJabatan = () => {
         <div class="py-1">
           <form v-if="editJabatan == null" class="flex space-x-3"
             @submit.prevent="formJabatan.post(route('admin.gtk.jabatan.simpan')); batalAksiJabatan();">
-            <InputGeneral v-model="formJabatan.nama" name="nama" :required="true" />
+            <InputGeneral v-model="formJabatan.nama" name="nama" required />
             <button type="submit" title="Tambah Jabatan GTK"
               class="inline-flex items-center justify-center w-1/2 px-3 py-2 mb-5 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 sm:w-auto dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
               :disabled="formJabatan.nama.length < 1 || formJabatan.processing || !formJabatan.isDirty"
@@ -89,8 +89,8 @@ const batalAksiJabatan = () => {
               <div class="text-base font-semibold">
                 <span v-if="editJabatan !== jabatan.id">{{ jabatan.nama }}</span>
                 <form class="flex space-x-2" v-else
-                  @submit.prevent="formJabatan.post(route('admin.gtk.jabatan.perbarui', jabatan.id)); batalAksiJabatan()">
-                  <InputGeneral v-model="formJabatan.nama" name="nama" :required="true" />
+                  @submit.prevent="formJabatan.put(route('admin.gtk.jabatan.perbarui', jabatan.id)); batalAksiJabatan()">
+                  <InputGeneral v-model="formJabatan.nama" name="nama" required />
                   <button type="submit" title="Ubah"
                     class="text-white mb-5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 p-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                     :disabled="formJabatan.nama.length < 1 || formJabatan.processing || !formJabatan.isDirty"

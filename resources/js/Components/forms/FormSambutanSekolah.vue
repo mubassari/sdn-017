@@ -18,7 +18,7 @@ const clearError = (name) => props.sekolah.clearErrors(name)
   <form @submit.prevent="">
     <div class="mb-6">
       <InputSelect v-model="sekolah.kepala_sekolah_id" :error="sekolah.errors.kepala_sekolah_id" @clear-error="clearError"
-        title="Nama Kepala Sekolah" name="kepala_sekolah_id" :required="true" :lists="kepala_sekolah_lists" />
+        title="Nama Kepala Sekolah" name="kepala_sekolah_id" required :lists="kepala_sekolah_lists" />
       <Tiptap v-model="sekolah.isi" :error="sekolah.errors.isi" @clear-error="clearError" title="Isi Sambutan"
         name="isi" />
     </div>

@@ -53,7 +53,7 @@ const clearError = (name) => props.gtk.clearErrors(name)
     <div class="mb-6">
       <div class="grid grid-cols-1 md:gap-5 md:grid-cols-2">
         <InputGeneral v-model="gtk.nama" :error="gtk.errors.nama" @clear-error="clearError" title="Nama Pegawai"
-          name="nama" :required="true" />
+          name="nama" required />
         <InputGeneral v-model="gtk.nip" :error="gtk.errors.nip" @clear-error="clearError" title="NIP/NUPTK" name="nip"
           type="number" />
       </div>
@@ -63,15 +63,15 @@ const clearError = (name) => props.gtk.clearErrors(name)
         <InputGeneral v-model="gtk.tempat_lahir" :error="gtk.errors.tempat_lahir" @clear-error="clearError"
           title="Tempat Lahir" name="tempat_lahir" />
         <InputGeneral v-model="gtk.tanggal_lahir" :error="gtk.errors.tanggal_lahir" @clear-error="clearError"
-          title="Tanggal Lahir" name="tanggal_lahir" type="date" :required="true" />
+          title="Tanggal Lahir" name="tanggal_lahir" type="date" required />
         <InputSelect v-model="gtk.jenis_kelamin" :error="gtk.errors.jenis_kelamin" @clear-error="clearError"
-          title="Jenis Kelamin" name="jenis_kelamin" :required="true" :lists="jenis_kelamin_lists" />
+          title="Jenis Kelamin" name="jenis_kelamin" required :lists="jenis_kelamin_lists" />
       </div>
       <div class="grid grid-cols-1 md:gap-5 md:grid-cols-2">
         <InputSelect v-model="gtk.gtk_jabatan_id" :error="gtk.errors.gtk_jabatan_id" @clear-error="clearError"
-          title="Jabatan GTK" name="gtk_jabatan_id" :required="true" :lists="jabatan_lists" />
+          title="Jabatan GTK" name="gtk_jabatan_id" required :lists="jabatan_lists" />
         <InputSelect v-model="gtk.status" :error="gtk.errors.status" @clear-error="clearError" title="Status Kepegawaian"
-          name="status" :required="true" :lists="status_lists" />
+          name="status" required :lists="status_lists" />
       </div>
     </div>
     <div class="inline-flex rounded-md shadow-sm" role="group">

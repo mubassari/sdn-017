@@ -3,8 +3,10 @@
 namespace App\Models;
 
 use App\Models\GTKJabatan;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\URL;
@@ -81,5 +83,15 @@ class GTK extends Model
     public function GTKJabatan(): BelongsTo
     {
         return $this->belongsTo(GTKJabatan::class, 'gtk_jabatan_id', 'id');
+    }
+
+    /**
+     * Get the user associated with the GTK
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function user(): HasOne
+    {
+        return $this->hasOne(User::class, 'gtk_id', 'id');
     }
 }

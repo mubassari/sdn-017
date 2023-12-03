@@ -68,7 +68,7 @@ class AdminGTKController extends Controller
                 'pesan'  => 'Anda berhasil menyimpan data GTK!'
             ]);
         } catch (\Exception $e) {
-            dd($e);
+            
             DB::rollBack();
             return back()->withInput()->with('alert', [
                 'status' => 'danger',

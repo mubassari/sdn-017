@@ -31,7 +31,7 @@ const gtk = useForm({
       </h1>
     </div>
     <Card class="mb-4 col-span-full xl:mb-2">
-      <FormGTK :gtk="gtk" @submit="gtk.post(route('admin.gtk.perbarui', gtk.id))" />
+      <FormGTK :gtk="gtk" @submit="gtk.put(route('admin.gtk.perbarui', gtk.id))" />
     </Card>
   </AdminLayout>
 </template>

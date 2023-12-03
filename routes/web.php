@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\AdminGTKJabatanController;
 use App\Http\Controllers\Admin\AdminSekolahController;
 use App\Http\Controllers\Admin\AdminSekolahSambutanController;
 use App\Http\Controllers\Admin\AdminSekolahVisiMisiTujuanController;
+use App\Http\Controllers\Admin\AdminUserController;
 
 // General Controller
 use App\Http\Controllers\Main\MainController;
@@ -39,14 +40,14 @@ Route::prefix('admin')->name('admin.')->group(function() {
     Route::prefix('kategori')->name('kategori.')->group(function(){
       Route::get('',[AdminArtikelKategoriController::class, 'index'])->name('index');
       Route::post('',[AdminArtikelKategoriController::class, 'simpan'])->name('simpan');
-      Route::post('{kategori}',[AdminArtikelKategoriController::class, 'perbarui'])->name('perbarui');
+      Route::put('{kategori}',[AdminArtikelKategoriController::class, 'perbarui'])->name('perbarui');
       Route::delete('{kategori}',[AdminArtikelKategoriController::class, 'hapus'])->name('hapus');
     });
     
     Route::get('tambah',[AdminArtikelController::class, 'tambah'])->name('tambah');
     Route::post('',[AdminArtikelController::class, 'simpan'])->name('simpan');
     Route::get('ubah/{artikel}',[AdminArtikelController::class, 'ubah'])->name('ubah');
-    Route::post('{artikel}',[AdminArtikelController::class, 'perbarui'])->name('perbarui');
+    Route::put('{artikel}',[AdminArtikelController::class, 'perbarui'])->name('perbarui');
     Route::delete('{artikel}',[AdminArtikelController::class, 'hapus'])->name('hapus');
   });
 
@@ -78,15 +79,24 @@ Route::prefix('admin')->name('admin.')->group(function() {
     Route::prefix('jabatan')->name('jabatan.')->group(function(){
       Route::get('',[AdminGTKJabatanController::class, 'index'])->name('index');
       Route::post('',[AdminGTKJabatanController::class, 'simpan'])->name('simpan');
-      Route::post('{jabatan}',[AdminGTKJabatanController::class, 'perbarui'])->name('perbarui');
+      Route::put('{jabatan}',[AdminGTKJabatanController::class, 'perbarui'])->name('perbarui');
       Route::delete('{jabatan}',[AdminGTKJabatanController::class, 'hapus'])->name('hapus');
     });
 
     Route::get('tambah',[AdminGTKController::class, 'tambah'])->name('tambah');
     Route::post('',[AdminGTKController::class, 'simpan'])->name('simpan');
     Route::get('ubah/{gtk}',[AdminGTKController::class, 'ubah'])->name('ubah');
-    Route::post('{gtk}',[AdminGTKController::class, 'perbarui'])->name('perbarui');
+    Route::put('{gtk}',[AdminGTKController::class, 'perbarui'])->name('perbarui');
     Route::delete('{gtk}',[AdminGTKController::class, 'hapus'])->name('hapus');
+  });
+
+  Route::prefix('user')->name('user.')->group(function(){
+    Route::get('',[AdminUserController::class, 'index'])->name('index');
+    Route::get('tambah',[AdminUserController::class, 'tambah'])->name('tambah');
+    Route::post('',[AdminUserController::class, 'simpan'])->name('simpan');
+    Route::get('ubah/{user}',[AdminUserController::class, 'ubah'])->name('ubah');
+    Route::put('{user}',[AdminUserController::class, 'perbarui'])->name('perbarui');
+    Route::delete('{user}',[AdminUserController::class, 'hapus'])->name('hapus');
   });
 });
 

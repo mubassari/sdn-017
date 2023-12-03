@@ -21,7 +21,7 @@ const clearError = (name) => props.sekolah.clearErrors(name)
   <form @submit.prevent="">
     <div class="mb-6">
       <InputGeneral v-model="sekolah.nama" :error="sekolah.errors.nama" @clear-error="clearError" title="Nama Sekolah"
-        name="nama" :required="true" />
+        name="nama" required />
       <div class="grid grid-cols-1 md:gap-5 md:grid-cols-2">
         <InputImage v-model="sekolah.logo" :error="sekolah.errors.logo" @clear-error="clearError" title="Logo Sekolah"
           name="logo" ref="inputLogoSekolah" accept="image/jpeg,image/png,image/jpg" />
@@ -35,7 +35,7 @@ const clearError = (name) => props.sekolah.clearErrors(name)
           type="number" />
       </div>
       <InputGeneral v-model="sekolah.alamat" :error="sekolah.errors.alamat" @clear-error="clearError" title="Alamat"
-        name="alamat" :required="true" />
+        name="alamat" required />
       <div class="grid grid-cols-1 md:gap-5 md:grid-cols-2">
         <InputGeneral v-model="sekolah.telepon" :error="sekolah.errors.telepon" @clear-error="clearError"
           title="Nomor Telepon" name="telepon" />
