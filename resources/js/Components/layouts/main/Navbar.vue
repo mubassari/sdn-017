@@ -6,6 +6,7 @@ import { usePage } from '@inertiajs/vue3'
 const page = usePage()
 
 const sekolah = page.props.sekolah
+const is_auth = page.props.is_auth
 
 // Menu
 const menuContent = ref([
@@ -105,8 +106,8 @@ const hideNavbar = () => {
       </li>
     </ul>
     <div>
-      <Link :href="route('admin.index')" class="mb-3 text-xs font-bold text-blue-600 dark:text-blue-500 hover:underline">
-      Admin Panel
+      <Link :href="route(is_auth ? 'admin.index' : 'masuk')" class="mb-3 text-xs font-bold text-blue-600 dark:text-blue-500 hover:underline">
+        {{ is_auth ? 'Admin Panel' : 'Masuk' }}
       <font-awesome-icon icon="arrow-right-long" class="ml-1"></font-awesome-icon>
       </Link>
     </div>
@@ -114,9 +115,9 @@ const hideNavbar = () => {
   <nav class="sticky top-0 left-0 z-20 w-full bg-white border-b border-gray-200 dark:bg-gray-900 dark:border-gray-600">
     <div class="flex flex-wrap items-center justify-between max-w-screen-xl max-h-screen p-4 mx-auto md:overflow-hidden"
       :class="{ 'overflow-y-auto': !navbarToggleHide }">
-      <a :href="route('index')" class="flex items-center">
+      <Link :href="route('index')" class="flex items-center">
         <img :src="sekolah.umum.logo" class="h-8 mr-3" :alt="sekolah.umum.nama" />
-      </a>
+      </Link>
 
       <div class="items-center justify-between order-2 w-full md:flex md:w-auto" :class="{ 'hidden': navbarToggleHide }">
         <ul

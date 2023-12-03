@@ -30,8 +30,11 @@ use App\Http\Controllers\Main\MainSekolahController;
 */
 
 Route::get('',[MainController::class, 'beranda'])->name('index');
+Route::get('masuk',[MainController::class, 'masuk'])->name('masuk');
+Route::post('masuk',[MainController::class, 'auth'])->name('auth');
+Route::post('keluar',[MainController::class, 'keluar'])->name('keluar');
 
-Route::prefix('admin')->name('admin.')->group(function() {
+Route::middleware('auth')->prefix('admin')->name('admin.')->group(function() {
   Route::get('',[AdminController::class, 'beranda'])->name('index');
   
   Route::prefix('artikel')->name('artikel.')->group(function(){

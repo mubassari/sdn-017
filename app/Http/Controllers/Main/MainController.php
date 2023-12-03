@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Main;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\LoginRequest;
 use App\Models\ArtikelKategori;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 
 class MainController extends Controller
@@ -30,5 +32,58 @@ class MainController extends Controller
         });
 
         return Inertia::render('Main/Index', compact('list_kategori'));
+    }
+
+    public function masuk()
+    {
+        return Inertia::render('Auth/Masuk');
+    }
+
+    public function auth(LoginRequest $request)
+    {
+        DB::beginTransaction();
+        try {
+            $credentials = $request->validated();
+            if (Auth::attempt($credentials, $request->remember)) {
+                $request->session()->regenerateToken();
+                DB::commit();
+                return redirect()->intended(route('admin.index'))->with('alert', [
+                    'status' => 'success',
+                    'pesan'  => 'Anda berhasil masuk!'
+                ]);
+            } else {
+                return redirect()->back()->onlyInput('username')->with('alert', [
+                    'status' => 'danger',
+                    'pesan'  => 'Username Anda salah!'
+                ]);
+            }
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return back()->withInput()->with('alert', [
+                'status' => 'danger',
+                'pesan'  => 'Terjadi kesalahan saat masuk. Silakan coba lagi!'
+            ]);
+        }
+    }
+
+    public function keluar()
+    {
+        DB::beginTransaction();
+        try {
+            Auth::logout();
+            return redirect()->route('index')->with('alert', [
+                'status' => 'success',
+                'pesan'  => 'Anda Berhasil Keluar!'
+            ]);
+            
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return back()->withInput()->with('alert', [
+                'status' => 'danger',
+                'pesan'  => 'Terjadi kesalahan saat keluar. Silakan coba lagi!'
+            ]);
+        }
     }
 }

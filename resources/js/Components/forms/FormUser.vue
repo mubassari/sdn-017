@@ -39,7 +39,7 @@ const clearError = (name) => props.user.clearErrors(name)
         </InputGeneral>
       </div>
 
-      <div class="mb-5">
+      <div class="mb-6">
         <label class="block mb-2 text-sm font-medium"
           :class="{ 'text-red-700 dark:text-red-500': user.errors.role, 'text-gray-900 dark:text-white': !user.errors.role }">
           Pilih Role

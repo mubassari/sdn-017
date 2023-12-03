@@ -6,6 +6,7 @@ use App\Models\ArtikelKategori;
 use App\Settings\SekolahSettings;
 use App\Settings\SosmedSekolahSettings;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Inertia\Middleware;
 
@@ -43,7 +44,7 @@ class HandleInertiaRequests extends Middleware
         $isAdminPage = Str::startsWith($request->route()->getName(), 'admin.');
 
         return array_merge(parent::share($request), [
-            'page_content' => $isAdminPage ?  [] : [
+            'page_content' => $isAdminPage ? NULL : [
                 'list_kategori' => ArtikelKategori::select('id','nama', 'slug')->get()
             ],
             'alert'    => session('alert'),
@@ -51,6 +52,7 @@ class HandleInertiaRequests extends Middleware
                 'umum'   => new SekolahSettings,
                 'sosmed' => new SosmedSekolahSettings,
             ],
+            'is_auth' => Auth::user(),
             'scroll_position' => session('scroll_position'),
         ]);
     }

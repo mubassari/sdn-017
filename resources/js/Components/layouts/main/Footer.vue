@@ -4,6 +4,7 @@ import { usePage } from '@inertiajs/vue3'
 const page = usePage()
 
 const sekolah = page.props.sekolah
+const is_auth = page.props.is_auth
 </script>
 <template>
   <!-- Footer -->
@@ -25,9 +26,9 @@ const sekolah = page.props.sekolah
         </li>
       </ul>
       <div>
-        <Link :href="route('admin.index')"
+        <Link :href="route(is_auth ? 'admin.index' : 'masuk')"
           class="px-3 py-2 text-xs text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-        Admin Panel
+        {{ is_auth ? 'Admin Panel' : 'Masuk' }}
         </Link>
       </div>
     </div>
@@ -55,5 +56,6 @@ const sekolah = page.props.sekolah
         </a>
       </div>
     </div>
-</footer>
-<!-- End Footer --></template>
+  </footer>
+  <!-- End Footer -->
+</template>

@@ -18,15 +18,18 @@ defineEmits(["toggleSidebar"])
                         <span class="sr-only">Open sidebar</span>
                         <font-awesome-icon icon="bars" size="2x"></font-awesome-icon>
                     </button>
-                    <a :href="route('admin.index')" class="flex ml-2 md:mr-24">
+                    <Link :href="route('admin.index')" class="flex ml-2 md:mr-24">
                         <img :src="sekolah.umum.logo" class="h-8 mr-3" :alt="sekolah.umum.nama" />
-                        <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">
+                        <span class="self-center text-xl font-semibold sm:text-2xl dark:text-white">
                             {{ sekolah.umum.nama }}
                         </span>
-                    </a>
+                    </Link>
                 </div>
                 <div class="flex items-center">
                     <ThemeToggle />
+                    <Link class="text-gray-500 inline-flex items-center justify-center dark:text-gray-400 hover:bg-gray-100 w-10 h-10 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5" href="/keluar" method="post" as="button">
+                    <font-awesome-icon icon="right-from-bracket" size="lg"></font-awesome-icon>
+                    </Link>
                 </div>
             </div>
         </div>
