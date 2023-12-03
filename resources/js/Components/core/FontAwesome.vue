@@ -26,6 +26,7 @@ import {
   faAlignRight,
   faArrowRightLong,
   faArrowRotateLeft,
+  faAt,
   faBars,
   faBroom,
   faBold,
@@ -66,6 +67,7 @@ import {
   faTrash,
   faUnderline,
   faUndoAlt,
+  faUsers,
   faQuoteLeft,
 } from "@fortawesome/free-solid-svg-icons";
 
@@ -87,6 +89,7 @@ library.add(
   faAlignRight,
   faArrowRightLong,
   faArrowRotateLeft,
+  faAt,
   faBars,
   faBroom,
   faBold,
@@ -127,6 +130,7 @@ library.add(
   faTrash,
   faUnderline,
   faUndoAlt,
+  faUsers,
   faQuoteLeft
 );
 </script>
