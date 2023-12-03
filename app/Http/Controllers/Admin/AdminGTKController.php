@@ -46,6 +46,7 @@ class AdminGTKController extends Controller
         DB::beginTransaction();
         try {
             $validated = $request->validated();
+            $validated['foto'] = '/gambar/default-person.png';
             $gtk = GTK::create($validated);
 
             if ($request->hasFile('foto')){
@@ -56,7 +57,6 @@ class AdminGTKController extends Controller
                         'pesan'  => 'Terjadi kesalahan saat mengunggah gambar. Silakan coba lagi!'
                     ]);
                 }
-
                 $gtk->foto = $name_file;
             }
             $gtk->save();
