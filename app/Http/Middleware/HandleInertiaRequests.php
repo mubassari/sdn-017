@@ -43,16 +43,31 @@ class HandleInertiaRequests extends Middleware
     {
         $isAdminPage = Str::startsWith($request->route()->getName(), 'admin.');
 
+        $auth_user = Auth::user();
+        $auth_user = [
+            'id' => $auth_user->id,
+            'nama' => $auth_user->GTK->nama ?? NULL,
+            'nip' => $auth_user->GTK->nip ?? NULL,
+            'username' => $auth_user->username,
+            'role' => [
+                'nama' => $auth_user->roles[0]->nama,
+                'slug' => $auth_user->roles[0]->slug,
+            ]
+        ];
+
         return array_merge(parent::share($request), [
             'page_content' => $isAdminPage ? NULL : [
                 'list_kategori' => ArtikelKategori::select('id','nama', 'slug')->get()
             ],
             'alert'    => session('alert'),
-            'sekolah'  => [
-                'umum'   => new SekolahSettings,
-                'sosmed' => new SosmedSekolahSettings,
-            ],
-            'is_auth' => Auth::user(),
+            'sekolah'  => $isAdminPage ? 
+                [
+                    'umum'   => new SekolahSettings,
+                ] : [
+                    'umum'   => new SekolahSettings,
+                    'sosmed' => new SosmedSekolahSettings,
+                ],
+            'auth_user' => $auth_user,
             'scroll_position' => session('scroll_position'),
         ]);
     }

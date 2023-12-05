@@ -4,7 +4,7 @@ import { usePage } from '@inertiajs/vue3'
 const page = usePage()
 
 const sekolah = page.props.sekolah
-const is_auth = page.props.is_auth
+const auth_user = page.props.auth_user
 </script>
 <template>
   <!-- Footer -->
@@ -26,9 +26,9 @@ const is_auth = page.props.is_auth
         </li>
       </ul>
       <div>
-        <Link :href="route(is_auth ? 'admin.index' : 'masuk')"
+        <Link :href="route(auth_user ? 'admin.index' : 'masuk')"
           class="px-3 py-2 text-xs text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-        {{ is_auth ? 'Admin Panel' : 'Masuk' }}
+        {{ auth_user ? 'Admin Panel' : 'Masuk' }}
         </Link>
       </div>
     </div>

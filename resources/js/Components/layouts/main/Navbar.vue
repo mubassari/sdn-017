@@ -6,7 +6,7 @@ import { usePage } from '@inertiajs/vue3'
 const page = usePage()
 
 const sekolah = page.props.sekolah
-const is_auth = page.props.is_auth
+const auth_user = page.props.auth_user
 
 // Menu
 const menuContent = ref([
@@ -106,8 +106,8 @@ const hideNavbar = () => {
       </li>
     </ul>
     <div>
-      <Link :href="route(is_auth ? 'admin.index' : 'masuk')" class="mb-3 text-xs font-bold text-blue-600 dark:text-blue-500 hover:underline">
-        {{ is_auth ? 'Admin Panel' : 'Masuk' }}
+      <Link :href="route(auth_user ? 'admin.index' : 'masuk')" class="mb-3 text-xs font-bold text-blue-600 dark:text-blue-500 hover:underline">
+        {{ auth_user ? 'Admin Panel' : 'Masuk' }}
       <font-awesome-icon icon="arrow-right-long" class="ml-1"></font-awesome-icon>
       </Link>
     </div>

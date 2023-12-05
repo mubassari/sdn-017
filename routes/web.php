@@ -37,7 +37,7 @@ Route::post('keluar',[MainController::class, 'keluar'])->name('keluar');
 Route::middleware('auth')->prefix('admin')->name('admin.')->group(function() {
   Route::get('',[AdminController::class, 'beranda'])->name('index');
   
-  Route::prefix('artikel')->name('artikel.')->group(function(){
+  Route::middleware('role:penulis')->prefix('artikel')->name('artikel.')->group(function(){
     Route::get('',[AdminArtikelController::class, 'index'])->name('index');
     
     Route::prefix('kategori')->name('kategori.')->group(function(){
@@ -54,29 +54,31 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function() {
     Route::delete('{artikel}',[AdminArtikelController::class, 'hapus'])->name('hapus');
   });
 
-  Route::prefix('sekolah')->name('sekolah.')->group(function(){
-    Route::get('',[AdminSekolahController::class, 'index'])->name('index');
+  Route::middleware('role:admin')->group(function () {
+    Route::prefix('sekolah')->name('sekolah.')->group(function(){
+      Route::get('',[AdminSekolahController::class, 'index'])->name('index');
 
-    Route::name('simpan.')->group(function(){
-      Route::post('umum',[AdminSekolahController::class, 'simpanUmum'])->name('umum');
-      Route::post('sosmed',[AdminSekolahController::class, 'simpanSosmed'])->name('sosmed');
-      Route::post('lokasi',[AdminSekolahController::class, 'simpanLokasi'])->name('lokasi');
+      Route::name('simpan.')->group(function(){
+        Route::post('umum',[AdminSekolahController::class, 'simpanUmum'])->name('umum');
+        Route::post('sosmed',[AdminSekolahController::class, 'simpanSosmed'])->name('sosmed');
+        Route::post('lokasi',[AdminSekolahController::class, 'simpanLokasi'])->name('lokasi');
+      });
+    });
+
+    Route::prefix("sambutan")->name('sambutan.')->group(function(){
+      Route::get('',[AdminSekolahSambutanController::class, 'index'])->name('index');
+      Route::post('simpan',[AdminSekolahSambutanController::class, 'simpan'])->name('simpan');
+    });
+
+    Route::prefix("visi-misi-tujuan")->name('visi_misi_tujuan.')->group(function(){
+      Route::get('',[AdminSekolahVisiMisiTujuanController::class, 'index'])->name('index');
+      Route::post('simpanVisi',[AdminSekolahVisiMisiTujuanController::class, 'simpanVisi'])->name('simpanVisi');
+      Route::post('simpanMisi',[AdminSekolahVisiMisiTujuanController::class, 'simpanMisi'])->name('simpanMisi');
+      Route::post('simpanTujuan',[AdminSekolahVisiMisiTujuanController::class, 'simpanTujuan'])->name('simpanTujuan');
     });
   });
 
-  Route::prefix("sambutan")->name('sambutan.')->group(function(){
-    Route::get('',[AdminSekolahSambutanController::class, 'index'])->name('index');
-    Route::post('simpan',[AdminSekolahSambutanController::class, 'simpan'])->name('simpan');
-  });
-
-  Route::prefix("visi-misi-tujuan")->name('visi_misi_tujuan.')->group(function(){
-    Route::get('',[AdminSekolahVisiMisiTujuanController::class, 'index'])->name('index');
-    Route::post('simpanVisi',[AdminSekolahVisiMisiTujuanController::class, 'simpanVisi'])->name('simpanVisi');
-    Route::post('simpanMisi',[AdminSekolahVisiMisiTujuanController::class, 'simpanMisi'])->name('simpanMisi');
-    Route::post('simpanTujuan',[AdminSekolahVisiMisiTujuanController::class, 'simpanTujuan'])->name('simpanTujuan');
-  });
-
-  Route::prefix('gtk')->name('gtk.')->group(function(){
+  Route::middleware(['role:admin-gtk|admin'])->prefix('gtk')->name('gtk.')->group(function(){
     Route::get('',[AdminGTKController::class, 'index'])->name('index');
     
     Route::prefix('jabatan')->name('jabatan.')->group(function(){
@@ -93,7 +95,7 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function() {
     Route::delete('{gtk}',[AdminGTKController::class, 'hapus'])->name('hapus');
   });
 
-  Route::prefix('user')->name('user.')->group(function(){
+  Route::middleware('role:super-admin')->prefix('user')->name('user.')->group(function(){
     Route::get('',[AdminUserController::class, 'index'])->name('index');
     Route::get('tambah',[AdminUserController::class, 'tambah'])->name('tambah');
     Route::post('',[AdminUserController::class, 'simpan'])->name('simpan');
