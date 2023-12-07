@@ -62,8 +62,8 @@ class GTKJabatan extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function GTK(): HasMany
+    public function gtk(): HasMany
     {
-        return $this->hasMany(GTK::class);
+        return $this->hasMany(GTK::class, 'gtk_jabatan_id', 'id');
     }
 }

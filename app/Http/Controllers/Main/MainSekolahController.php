@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use App\Models\GTK;
+use App\Models\GTKJabatan;
 use App\Settings\SambutanSekolahSettings;
 use App\Settings\VisiMisiTujuanSekolahSettings;
 use Inertia\Inertia;
@@ -38,5 +39,32 @@ class MainSekolahController extends Controller
         $visi_misi_tujuan       = new VisiMisiTujuanSekolahSettings();
 
         return Inertia::render('Main/Sekolah/VisiMisiTujuan', compact('visi_misi_tujuan'));
+    }
+
+    public function gtk() {
+        $gtk_list = GTKJabatan::select('id', 'nama')
+            ->get()
+            ->map(function ($jabatan_gtk) {
+                return [
+                    'id'            => $jabatan_gtk->id,
+                    'nama'         => $jabatan_gtk->nama,
+                    'gtk'           => $jabatan_gtk->gtk
+                        ->filter(function ($gtk_map) use ($jabatan_gtk) {
+                            // Filter 'Kepala Sekolah' data to include only the latest
+                            return $jabatan_gtk->nama === 'Kepala Sekolah'
+                                ? $gtk_map->created_at == $jabatan_gtk->gtk->max('created_at')
+                                : true;
+                        })
+                        ->map(function ($gtk_map) {
+                            return [
+                                'nama' => $gtk_map->nama,
+                                'nip' => $gtk_map->nip,
+                                'foto' => $gtk_map->path_foto,
+                            ];
+                    }),
+                ];
+            });
+
+        return Inertia::render('Main/Sekolah/GTK', compact('gtk_list'));
     }
 }

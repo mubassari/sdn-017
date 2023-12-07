@@ -107,6 +107,7 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function() {
 
 Route::get('visi-misi-tujuan',[MainSekolahController::class, 'visi_misi_tujuan'])->name('visi_misi_tujuan');
 Route::get('sambutan',[MainSekolahController::class, 'sambutan'])->name('sambutan');
+Route::get('gtk',[MainSekolahController::class, 'gtk'])->name('gtk');
 
 Route::prefix('{kategori}')->name('artikel.')->group(function() {
   Route::get('',[MainArtikelController::class, 'beranda'])->name('index');

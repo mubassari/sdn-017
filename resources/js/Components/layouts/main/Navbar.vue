@@ -43,7 +43,7 @@ const menuContent = ref([
         title: "Visi, Misi & Tujuan",
       },
       {
-        uri: "index",
+        uri: "gtk",
         title: "Guru & Tenaga Kependidikan",
       },
     ]

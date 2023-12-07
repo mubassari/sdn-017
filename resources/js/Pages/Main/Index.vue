@@ -48,7 +48,7 @@ const sekolahContent = ref([
         icon: "circle-up",
     },
     {
-        uri: "index",
+        uri: "gtk",
         judul: "Guru & Tenaga Kependidikan",
         icon: "address-card",
     },
