@@ -25,7 +25,7 @@ class GTKRequest extends FormRequest
     {
         $rules = [
             'nama'           => 'required|string',
-            'nip'           => 'sometimes|nullable|numeric|max:99999999999999999',
+            'nip'           => 'sometimes|numeric|max:99999999999999999',
             'tempat_lahir' => 'required|string',
             'tanggal_lahir' => 'required|date',
             'jenis_kelamin' => 'required|in:laki_laki,perempuan',

@@ -16,7 +16,7 @@ class CreateGTKTable extends Migration
         Schema::create('gtk', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
-            $table->integer('nip')->unique()->nullable();
+            $table->bigInteger('nip')->unique()->nullable();
             $table->string('tempat_lahir');
             $table->date('tanggal_lahir');
             $table->enum('jenis_kelamin', ['laki_laki', 'perempuan']);
