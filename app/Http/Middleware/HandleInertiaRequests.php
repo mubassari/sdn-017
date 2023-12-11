@@ -44,7 +44,7 @@ class HandleInertiaRequests extends Middleware
         $isAdminPage = Str::startsWith($request->route()->getName(), 'admin.');
 
         $auth_user = Auth::user();
-        $auth_user = [
+        $auth_user = Auth::user() ? [
             'id' => $auth_user->id,
             'nama' => $auth_user->GTK->nama ?? NULL,
             'nip' => $auth_user->GTK->nip ?? NULL,
@@ -53,7 +53,7 @@ class HandleInertiaRequests extends Middleware
                 'nama' => $auth_user->roles[0]->nama,
                 'slug' => $auth_user->roles[0]->slug,
             ]
-        ];
+        ] : [];
 
         return array_merge(parent::share($request), [
             'page_content' => $isAdminPage ? NULL : [
