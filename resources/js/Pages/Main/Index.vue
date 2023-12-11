@@ -178,9 +178,6 @@ const sekolahContent = ref([
             </section>
             <!-- End Artikel -->
         </main>
-        <div
-            class="w-10 h-10 m-0 text-gray-900 bg-white hover:text-blue-700 dark:hover:text-blue-500 md:w-16 md:h-16 dark:bg-gray-900 dark:text-white">
-        </div>
     </MainLayout>
 </template>
 
