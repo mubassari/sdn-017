@@ -97,12 +97,13 @@ const deleteData = (route) => {
                   </span>
                 </td>
                 <td class="px-6 py-4 text-right whitespace-nowrap">
-                  <Link :href="route('admin.user.ubah', user.id)" title="Ubah"
+                  <Link :href="route('admin.user.ubah', user.id)" title="Ubah" v-if="user.can.ubah"
                     class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-2.5 mr-2 mb-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                   <font-awesome-icon icon="pen-to-square"></font-awesome-icon>
                   <span class="sr-only">Ubah</span>
                   </Link>
                   <button @click.prevent="deleteData(route('admin.user.hapus', user.id))" title="Hapus"
+                    v-if="user.can.hapus"
                     class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm p-2.5 mr-2 mb-2 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">
                     <font-awesome-icon icon="trash"></font-awesome-icon>
                     <span class="sr-only">Hapus</span>

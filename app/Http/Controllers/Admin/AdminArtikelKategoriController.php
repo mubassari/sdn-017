@@ -53,8 +53,7 @@ class AdminArtikelKategoriController extends Controller
 
   public function perbarui(ArtikelKategoriRequest $request, ArtikelKategori $kategori)
   {
-      $idKategori = $kategori->id;
-      if($idKategori > 2) {
+    if($kategori->id > 2) {
         DB::beginTransaction();
         try {
             $validated       = $request->validated();
@@ -75,18 +74,17 @@ class AdminArtikelKategoriController extends Controller
                 'pesan'  => 'Terjadi kesalahan saat memperbarui data. Silakan coba lagi!'
             ]);
         }
-      } else {
+    } else {
         return back()->withInput()->with('alert', [
-          'status' => 'danger',
-          'pesan'  => 'Data ini tidak dapat diubah!'
-      ]);
-      }
+            'status' => 'danger',
+            'pesan'  => 'Data ini tidak dapat diubah!'
+        ]);
+    }
   }
 
   public function hapus(ArtikelKategori $kategori)
   {
-      $idKategori = $kategori->id;
-      if($idKategori > 2) {
+    if($kategori->id > 2) {
         DB::beginTransaction();
         try {
             $kategori->delete();
@@ -104,11 +102,11 @@ class AdminArtikelKategoriController extends Controller
                 'pesan'  => 'Terjadi kesalahan saat menghapus data. Silakan coba lagi!'
             ]);
         }
-      } else {
+    } else {
         return back()->withInput()->with('alert', [
-          'status' => 'danger',
-          'pesan'  => 'Data ini tidak dapat dihapus!'
-      ]);
+            'status' => 'danger',
+            'pesan'  => 'Data ini tidak dapat dihapus!'
+        ]);
     }
   }
 }

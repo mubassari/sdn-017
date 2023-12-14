@@ -34,6 +34,10 @@ class AdminUserController extends Controller
                 'role'     => $data->roles->map(function($role) {
                     return $role->nama;
                 }),
+                'can'      => [
+                    'ubah'  => $data->id != 1,
+                    'hapus' => !($data->id == 1 || $data->id == Auth::user()->id)
+                ]
             ];
         })
         ->withQueryString();
@@ -77,65 +81,86 @@ class AdminUserController extends Controller
     }
     public function ubah(User $user)
     {
-        $user = collect([$user])->map(function($data) {
-            return [
-                'id' => $data->id,
-                'username' => $data->username,
-                'gtk_id' => $data->GTK->nama,
-                'role' => $data->roles->pluck('id'),
-            ];
-        })[0];
-        $role = Role::select('id', 'nama')->get();
-        return Inertia::render('Admin/User/Ubah', compact('user', 'role'));
+        if ($user->id != 1){
+            $user = collect([$user])->map(function($data) {
+                return [
+                    'id' => $data->id,
+                    'username' => $data->username,
+                    'gtk_id' => $data->GTK->nama,
+                    'role' => $data->roles->pluck('id'),
+                ];
+            })[0];
+            $role = Role::select('id', 'nama')->get();
+            return Inertia::render('Admin/User/Ubah', compact('user', 'role'));
+        } else {
+            return back()->withInput()->with('alert', [
+            'status' => 'danger',
+            'pesan'  => 'Data ini tidak dapat diubah!'
+            ]);
+        }
     }
 
     public function perbarui(UserRequest $request, User $user)
     {
-        DB::beginTransaction();
-        try {
-            $validated = $request->validated();
-            $validated['password'] = bcrypt($request->password);
+        if($user->id != 1){
+            DB::beginTransaction();
+            try {
+                $validated = $request->validated();
+                $validated['password'] = bcrypt($request->password);
 
-            $user->username = $validated['username'];
-            $user->password = $validated['password'];
+                $user->username = $validated['username'];
+                $user->password = $validated['password'];
 
-            $user->roles()->sync($validated['role']);
+                $user->roles()->sync($validated['role']);
 
-            $user->save();
+                $user->save();
 
-            DB::commit();
+                DB::commit();
 
-            return redirect()->route('admin.user.index')->with('alert', [
-                'status' => 'success',
-                'pesan'  => 'Anda berhasil memperbarui data User!'
-            ]);
-        } catch (\Exception $e) {
-            DB::rollBack();
-            
+                return redirect()->route('admin.user.index')->with('alert', [
+                    'status' => 'success',
+                    'pesan'  => 'Anda berhasil memperbarui data User!'
+                ]);
+            } catch (\Exception $e) {
+                DB::rollBack();
+                
+                return back()->withInput()->with('alert', [
+                    'status' => 'danger',
+                    'pesan'  => 'Terjadi kesalahan saat memperbarui data. Silakan coba lagi!'
+                ]);
+            }
+        } else {
             return back()->withInput()->with('alert', [
-                'status' => 'danger',
-                'pesan'  => 'Terjadi kesalahan saat memperbarui data. Silakan coba lagi!'
+            'status' => 'danger',
+            'pesan'  => 'Data ini tidak dapat diubah!'
             ]);
         }
     }
 
     public function hapus(User $user)
     {
-        DB::beginTransaction();
-        try {
-            $user->delete();
+        if(!($data->id == 1 || $data->id == Auth::user()->id)){
+            DB::beginTransaction();
+            try {
+                $user->delete();
 
-            DB::commit();
+                DB::commit();
 
-            return redirect()->route('admin.user.index')->with('alert', [
-                'status' => 'success',
-                'pesan'  => 'Data pengguna berhasil dihapus!'
-            ]);
-        } catch (\Exception $e) {
-            DB::rollBack();
-            return redirect()->route('admin.user.index')->with('alert', [
-                'status' => 'danger',
-                'pesan'  => 'Terjadi kesalahan saat menghapus data pengguna. Silakan coba lagi!'
+                return redirect()->route('admin.user.index')->with('alert', [
+                    'status' => 'success',
+                    'pesan'  => 'Data pengguna berhasil dihapus!'
+                ]);
+            } catch (\Exception $e) {
+                DB::rollBack();
+                return redirect()->route('admin.user.index')->with('alert', [
+                    'status' => 'danger',
+                    'pesan'  => 'Terjadi kesalahan saat menghapus data pengguna. Silakan coba lagi!'
+                ]);
+            }
+        } else {
+            return back()->withInput()->with('alert', [
+            'status' => 'danger',
+            'pesan'  => 'Data ini tidak dapat diubah!'
             ]);
         }
     }

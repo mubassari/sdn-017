@@ -20,6 +20,7 @@ class AdminGTKJabatanController extends Controller
                 'id'     => $jabatan->id,
                 'nama'   => $jabatan->nama,
                 'slug'   => $jabatan->slug,
+                'is_kepsek' => $jabatan->id == 1
             ];
         })
         ->withQueryString();
@@ -28,19 +29,19 @@ class AdminGTKJabatanController extends Controller
 
   public function simpan(GTKJabatanRequest $request)
   {
-      DB::beginTransaction();
       try {
-          $validated = $request->validated();
-          $jabatan = GTKJabatan::create($validated);
+        DB::beginTransaction();
+        $validated = $request->validated();
+        $jabatan = GTKJabatan::create($validated);
 
-          $jabatan->save();
+        $jabatan->save();
 
-          DB::commit();
+        DB::commit();
 
-          return redirect()->route('admin.gtk.jabatan.index')->with('alert', [
-              'status' => 'success',
-              'pesan'  => 'Anda berhasil menyimpan data Jabatan!'
-          ]);
+        return redirect()->route('admin.gtk.jabatan.index')->with('alert', [
+            'status' => 'success',
+            'pesan'  => 'Anda berhasil menyimpan data Jabatan!'
+        ]);
       } catch (\Exception $e) {
           DB::rollBack();
           return back()->withInput()->with('alert', [
@@ -52,24 +53,31 @@ class AdminGTKJabatanController extends Controller
 
   public function perbarui(GTKJabatanRequest $request, GTKJabatan $jabatan)
   {
-    DB::beginTransaction();
-    try {
-        $validated       = $request->validated();
-        $jabatan->nama   = $validated['nama'];
+    if($jabatan->id != 1) {
+        DB::beginTransaction();
+        try {
+            $validated       = $request->validated();
+            $jabatan->nama   = $validated['nama'];
 
-        $jabatan->save();
+            $jabatan->save();
 
-        DB::commit();
+            DB::commit();
 
-        return redirect()->route('admin.gtk.jabatan.index')->with('alert', [
-            'status' => 'success',
-            'pesan'  => 'Anda berhasil memperbarui data Jabatan!'
-        ]);
-    } catch (\Exception $e) {
-        DB::rollBack();
+            return redirect()->route('admin.gtk.jabatan.index')->with('alert', [
+                'status' => 'success',
+                'pesan'  => 'Anda berhasil memperbarui data Jabatan!'
+            ]);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return back()->withInput()->with('alert', [
+                'status' => 'danger',
+                'pesan'  => 'Terjadi kesalahan saat memperbarui data. Silakan coba lagi!'
+            ]);
+        }
+    } else {
         return back()->withInput()->with('alert', [
-            'status' => 'danger',
-            'pesan'  => 'Terjadi kesalahan saat memperbarui data. Silakan coba lagi!'
+        'status' => 'danger',
+        'pesan'  => 'Data ini tidak dapat diubah!'
         ]);
     }
   }
@@ -77,20 +85,27 @@ class AdminGTKJabatanController extends Controller
   public function hapus(GTKJabatan $jabatan)
   {
     DB::beginTransaction();
-    try {
-        $jabatan->delete();
+    if ($jabatan->id != 1) {
+        try {
+            $jabatan->delete();
 
-        DB::commit();
+            DB::commit();
 
-        return redirect()->route('admin.gtk.jabatan.index')->with('alert', [
-            'status' => 'success',
-            'pesan'  => 'Anda berhasil menghapus data Jabatan!'
-        ]);
-    } catch (\Exception $e) {
-        DB::rollBack();
+            return redirect()->route('admin.gtk.jabatan.index')->with('alert', [
+                'status' => 'success',
+                'pesan'  => 'Anda berhasil menghapus data Jabatan!'
+            ]);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return back()->withInput()->with('alert', [
+                'status' => 'danger',
+                'pesan'  => 'Terjadi kesalahan saat menghapus data. Silakan coba lagi!'
+            ]);
+        }
+    } else {
         return back()->withInput()->with('alert', [
-            'status' => 'danger',
-            'pesan'  => 'Terjadi kesalahan saat menghapus data. Silakan coba lagi!'
+        'status' => 'danger',
+        'pesan'  => 'Data ini tidak dapat dihapus!'
         ]);
     }
   }

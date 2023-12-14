@@ -105,7 +105,7 @@ const batalAksiJabatan = () => {
                   </button>
                 </form>
               </div>
-              <div v-if="editJabatan !== jabatan.id" class="space-x-2">
+              <div v-if="editJabatan !== jabatan.id || jabatan.is_kepsek" class="space-x-2">
                 <button @click="ubahJabatan(index, jabatan.id)" title="Ubah"
                   class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 p-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                   <font-awesome-icon icon="pen-to-square"></font-awesome-icon>
