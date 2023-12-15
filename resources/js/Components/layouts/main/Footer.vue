@@ -4,7 +4,7 @@ import { usePage } from '@inertiajs/vue3'
 const page = usePage()
 
 const sekolah = page.props.sekolah
-const auth_user = page.props.auth_user
+const auth_user = page.props.auth_user.length > 0
 </script>
 <template>
   <!-- Footer -->
