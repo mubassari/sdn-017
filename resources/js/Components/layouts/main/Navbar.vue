@@ -1,7 +1,7 @@
 <script setup>
 import { ThemeToggle } from '~Components/core'
 import { ref } from '@vue/reactivity'
-import { usePage } from '@inertiajs/vue3'
+import { usePage, router } from '@inertiajs/vue3'
 
 const page = usePage()
 
@@ -14,17 +14,6 @@ const menuContent = ref([
     title: 'Beranda',
     uri: 'index',
     submenu: null
-  },
-  {
-    title: 'Artikel',
-    uri: null,
-    submenu: page.props.page_content.list_kategori.map(el => {
-      return {
-        title: el.nama,
-        uri: ['artikel.index', el.slug]
-      }
-    }
-    ),
   },
   {
     title: 'Sekolah',
@@ -49,9 +38,15 @@ const menuContent = ref([
     ]
   },
   {
-    title: 'Kontak',
-    uri: '/artikel',
-    submenu: null
+    title: 'Artikel',
+    uri: null,
+    submenu: page.props.page_content.list_kategori.map(el => {
+      return {
+        title: el.nama,
+        uri: ['artikel.index', el.slug]
+      }
+    }
+    ),
   },
 ])
 
@@ -86,7 +81,9 @@ const hideNavbar = () => {
   navbarToggleHide.value = !navbarToggleHide.value;
   submenuOpened.value = null
 }
-// End Menu
+
+const cari = ref('');
+
 </script>
 <template>
   <div
@@ -106,8 +103,9 @@ const hideNavbar = () => {
       </li>
     </ul>
     <div>
-      <Link :href="route(auth_user ? 'admin.index' : 'masuk')" class="mb-3 text-xs font-bold text-blue-600 dark:text-blue-500 hover:underline">
-        {{ auth_user ? 'Admin Panel' : 'Masuk' }}
+      <Link :href="route(auth_user ? 'admin.index' : 'masuk')"
+        class="mb-3 text-xs font-bold text-blue-600 dark:text-blue-500 hover:underline">
+      {{ auth_user ? 'Admin Panel' : 'Masuk' }}
       <font-awesome-icon icon="arrow-right-long" class="ml-1"></font-awesome-icon>
       </Link>
     </div>
@@ -116,7 +114,7 @@ const hideNavbar = () => {
     <div class="flex flex-wrap items-center justify-between max-w-screen-xl max-h-screen p-4 mx-auto md:overflow-hidden"
       :class="{ 'overflow-y-auto': !navbarToggleHide }">
       <Link :href="route('index')" class="flex items-center">
-        <img :src="sekolah.umum.logo" class="h-8 mr-3" :alt="sekolah.umum.nama" />
+      <img :src="sekolah.umum.logo" class="h-8 mr-3" :alt="sekolah.umum.nama" />
       </Link>
 
       <div class="items-center justify-between order-2 w-full md:flex md:w-auto" :class="{ 'hidden': navbarToggleHide }">
@@ -158,6 +156,15 @@ const hideNavbar = () => {
           </li>
         </ul>
         <div class="flex justify-end mt-4 md:ml-8 md:mt-0">
+          <form class="flex w-full me-3" @submit.prevent="router.get(route('cari', cari.replace(' ', '-')))">
+            <input type="text" v-model="cari"
+              class="flex-1 order text-sm block w-full p-2.5 bg-gray-50 border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 rounded-l-lg"
+              name="cari" id="cari" placeholder="Cari Artikel">
+            <button type="submit" :disabled="cari.length < 3" :class="{ 'cursor-not-allowed': cari.length < 3 }"
+              class="inline-flex items-center px-3 text-sm font-medium text-center text-white bg-gray-800 rounded-r-lg hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">
+              <font-awesome-icon icon="magnifying-glass" size="lg"></font-awesome-icon>
+            </button>
+          </form>
           <ThemeToggle />
         </div>
       </div>

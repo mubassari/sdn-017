@@ -83,4 +83,44 @@ class MainArtikelController extends Controller
             ]);
         }
     }
+
+    public function cari(Request $request, $cari)
+    {
+        if(mb_strlen($cari) >= 3){
+            try {
+                $cari = str_replace('-', ' ', $cari);
+
+                $list_artikel = Artikel::select('id', 'isi', 'judul', 'slug', 'artikel_kategori_id')
+                    ->where('judul', 'like', '%'.$cari.'%')
+                    ->latest()
+                    ->paginate(12)
+                    ->through(function($data) {
+                        return [
+                            'id'       => $data->id,
+                            'judul'    => $data->judul,
+                            'sampul'   => $data->path_sampul,
+                            'kategori' => [
+                                'nama' => $data->ArtikelKategori->nama,
+                                'slug' => $data->ArtikelKategori->slug,
+                            ],
+                            'slug'     => $data->slug,
+                            'waktu'    => $data->waktu,
+                        ];
+                    })
+                    ->withQueryString();
+
+                return Inertia::render('Main/Artikel/Cari', compact('list_artikel', 'cari'));
+            } catch (\Exception $exception) {
+                return redirect()->intended(route('index'))->with('alert', [
+                    'status' => 'danger',
+                    'pesan'  => 'Gagal melakukan pencarian!'
+                ]);
+            }
+        } else {
+            return redirect()->intended(route('index'))->with('alert', [
+                'status' => 'danger',
+                'pesan'  => 'Pencarian memerlukan minimal 3 karakter!'
+            ]);
+        }
+    }
 }
