@@ -42,19 +42,23 @@ class MainSekolahController extends Controller
     }
 
     public function gtk() {
+        $sambutan       = new SambutanSekolahSettings();
+        $kepala_sekolah = GTK::select('id', 'nama', 'nip', 'foto')
+            ->where('id', '=', $sambutan->kepala_sekolah_id)
+            ->first();
+
+        if ($kepala_sekolah !== null) {
+            $kepala_sekolah->foto = $kepala_sekolah->path_foto;
+        }
+
         $gtk_list = GTKJabatan::select('id', 'nama')
+            ->where('id', '>', 1)
             ->get()
             ->map(function ($jabatan_gtk) {
                 return [
                     'id'            => $jabatan_gtk->id,
                     'nama'         => $jabatan_gtk->nama,
                     'gtk'           => $jabatan_gtk->gtk
-                        ->filter(function ($gtk_map) use ($jabatan_gtk) {
-                            // Filter 'Kepala Sekolah' data to include only the latest
-                            return $jabatan_gtk->nama === 'Kepala Sekolah'
-                                ? $gtk_map->created_at == $jabatan_gtk->gtk->max('created_at')
-                                : true;
-                        })
                         ->map(function ($gtk_map) {
                             return [
                                 'nama' => $gtk_map->nama,
@@ -65,6 +69,6 @@ class MainSekolahController extends Controller
                 ];
             });
 
-        return Inertia::render('Main/Sekolah/GTK', compact('gtk_list'));
+        return Inertia::render('Main/Sekolah/GTK', compact('gtk_list', 'kepala_sekolah'));
     }
 }
