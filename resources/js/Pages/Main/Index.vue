@@ -1,35 +1,19 @@
 <script setup>
 import { MainLayout } from "~Layouts";
 import { ref } from "@vue/reactivity";
-import { Carousel, Slide, Navigation } from "vue3-carousel";
+import { Carousel, Slide, Navigation, Pagination } from "vue3-carousel";
 import { usePage } from "@inertiajs/vue3";
 import "vue3-carousel/dist/carousel.css";
 
 const page = usePage();
 const sekolah = page.props.sekolah;
 
-const props = defineProps({ list_kategori: { type: Object, required: true } });
+const props = defineProps({
+    artikel_baru: { type: Object, required: true },
+    list_kategori: { type: Object, required: true },
+});
 
 const currentArticleShownId = ref(1);
-
-// Jumbotron
-const jumbotronContent = ref([
-    {
-        judul: "Hello",
-        sampul: "https://placehold.co/600x400",
-        slug: "hello",
-    },
-    {
-        judul: "Hai",
-        sampul: "https://placehold.co/500x400",
-        slug: null,
-    },
-    {
-        judul: "Apa Kabar",
-        sampul: "https://placehold.co/300x100",
-        slug: "apa-kabar",
-    },
-]);
 
 const sekolahContent = ref([
     {
@@ -59,24 +43,35 @@ const sekolahContent = ref([
         <main>
             <!-- Slide -->
             <Carousel :autoplay="5000" :wrap-around="true" :pauseAutoplayOnHover="true">
-                <Slide v-for="jumbotron in jumbotronContent" :key="jumbotron.slug">
+                <Slide v-for="artikel in artikel_baru" :key="artikel.slug">
                     <section class="bg-fixed bg-gray-700 bg-center bg-no-repeat bg-cover bg-blend-multiply"
-                        :style="`background-image: url('${jumbotron.sampul}')`">
+                        :style="`background-image: url('${artikel.sampul}')`">
                         <div
                             class="px-4 text-center min-h-[100svh] w-screen flex flex-col items-center justify-center hover:backdrop-blur-sm transition ease-out duration-200">
                             <h1
-                                class="mb-10 text-4xl font-extrabold leading-none tracking-tight text-white md:text-5xl lg:text-6xl">
-                                {{ jumbotron.judul }}
+                                class="mb-10 text-4xl mx-4 font-extrabold leading-none tracking-tight text-white md:text-5xl lg:text-6xl">
+                                {{ artikel.judul }}
                             </h1>
-                            <div class="flex flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
-                                <a v-if="jumbotron.slug" :href="jumbotron.slug" :key="jumbotron.slug"
-                                    class="px-5 py-3 text-base font-medium text-center text-white bg-blue-700 rounded-lg max-w-fit hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
-                                    Baca Selengkapnya
-                                    <font-awesome-icon icon="arrow-right-long" class="ml-1"></font-awesome-icon>
-                                </a>
-                                <span v-else class="px-5 py-3 text-base font-medium text-center max-w-fit">
-                                    &nbsp;
-                                </span>
+                            <div class="">
+                                <div
+                                    class="flex justify-center my-5 divide-x-2 divide-gray-500 dark:divide-gray-700 mt-2.5 mb-5">
+                                    <span
+                                        class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 mr-3 rounded dark:bg-blue-200 dark:text-blue-800">
+                                        {{ artikel.kategori.nama }}
+                                    </span>
+                                    <p class="pl-3 text-sm text-gray-400">
+                                        {{ artikel.waktu }}
+                                    </p>
+                                </div>
+                                <Link :href="route('artikel.tampil', [
+                                    artikel.kategori.slug,
+                                    artikel.slug,
+                                ])
+                                    "
+                                    class="px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                Baca Selengkapnya
+                                <font-awesome-icon icon="arrow-right-long" class="ml-1"></font-awesome-icon>
+                                </Link>
                             </div>
                         </div>
                     </section>
@@ -84,6 +79,7 @@ const sekolahContent = ref([
 
                 <template #addons>
                     <Navigation />
+                    <Pagination />
                 </template>
             </Carousel>
             <!-- End Slide -->
@@ -119,18 +115,17 @@ const sekolahContent = ref([
                     <button v-for="kategori in list_kategori" :key="kategori.id" type="button"
                         @click="currentArticleShownId = kategori.id"
                         class="rounded-full text-base font-medium px-5 py-2.5 text-center mr-3 mb-3 border focus:ring-4 focus:outline-none transition ease-out"
-                        :class="
-                            currentArticleShownId == kategori.id
-                                ? 'text-blue-700 hover:text-white border-blue-600 bg-white hover:bg-blue-700 focus:ring-blue-300 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:bg-gray-900 dark:focus:ring-blue-800'
-                                : 'text-gray-900 border-white hover:border-gray-200 dark:border-gray-900 dark:bg-gray-900 dark:hover:border-gray-700 bg-white focus:ring-gray-300  dark:text-white dark:focus:ring-gray-800'
-                        ">
+                        :class="currentArticleShownId == kategori.id
+                            ? 'text-blue-700 hover:text-white border-blue-600 bg-white hover:bg-blue-700 focus:ring-blue-300 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:bg-gray-900 dark:focus:ring-blue-800'
+                            : 'text-gray-900 border-white hover:border-gray-200 dark:border-gray-900 dark:bg-gray-900 dark:hover:border-gray-700 bg-white focus:ring-gray-300  dark:text-white dark:focus:ring-gray-800'
+                            ">
                         {{ kategori.nama }}
                     </button>
                 </div>
                 <div class="max-w-screen-xl px-4 py-4 mx-auto md:py-16 lg:px-6">
                     <TransitionGroup tag="div" enter-from-class="opacity-0" enter-active-class="duration-500"
                         leave-active-class="duration-500" leave-to-class="opacity-0"
-                        class="space-y-4 md:grid xl:grid-cols-4 md:grid-cols-2 sm:gap-3 xl:gap-5 md:space-y-0">
+                        class="space-y-4 grid xl:grid-cols-4 md:grid-cols-2 sm:gap-3 xl:gap-5 md:space-y-0">
                         <div v-for="artikel in list_kategori[
                             currentArticleShownId - 1
                         ].artikel" :key="artikel.id"
@@ -149,14 +144,13 @@ const sekolahContent = ref([
                                         {{ artikel.waktu }}
                                     </p>
                                 </div>
-                                <Link :href="
-                                    route('artikel.tampil', [
-                                        list_kategori[
-                                            currentArticleShownId - 1
-                                        ].slug,
-                                        artikel.slug,
-                                    ])
-                                "
+                                <Link :href="route('artikel.tampil', [
+                                    list_kategori[
+                                        currentArticleShownId - 1
+                                    ].slug,
+                                    artikel.slug,
+                                ])
+                                    "
                                     class="px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                 Baca Selengkapnya
                                 <font-awesome-icon icon="arrow-right-long" class="ml-1"></font-awesome-icon>
@@ -165,10 +159,9 @@ const sekolahContent = ref([
                         </div>
                     </TransitionGroup>
                 </div>
-                <Link :href="list_kategori[currentArticleShownId - 1].slug" v-if="
-                    list_kategori[currentArticleShownId - 1].artikel
-                        .length !== 0
-                "
+                <Link :href="list_kategori[currentArticleShownId - 1].slug" v-if="list_kategori[currentArticleShownId - 1].artikel
+                    .length !== 0
+                    "
                     class="py-2.5 px-5 m-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 uppercase text-center">
                 Lihat Lebih Banyak
                 </Link>
@@ -193,5 +186,17 @@ const sekolahContent = ref([
 .carousel__prev,
 .carousel__next {
     @apply w-10 h-10 m-0 text-gray-900 bg-white hover:text-blue-700 dark:hover:text-blue-500 md:w-16 md:h-16 dark:bg-gray-900 dark:text-white;
+}
+
+.carousel__pagination-button::after {
+    @apply rounded-full h-3 w-3 bg-white hover:bg-blue-700 dark:hover:bg-blue-500;
+}
+
+.carousel__pagination-button--active::after {
+  @apply bg-gray-500;
+}
+
+.carousel__pagination {
+    @apply -mt-10 z-100 relative;
 }
 </style>
