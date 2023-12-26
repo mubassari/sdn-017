@@ -33,7 +33,7 @@ const jumbotronContent = ref([
 
 const sekolahContent = ref([
     {
-        uri: "index",
+        uri: "tentang",
         judul: "Tentang Sekolah",
         icon: "school",
     },

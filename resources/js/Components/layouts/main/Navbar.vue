@@ -20,7 +20,7 @@ const menuContent = ref([
     uri: null,
     submenu: [
       {
-        uri: "index",
+        uri: "tentang",
         title: "Tentang Sekolah",
       },
       {

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use App\Models\GTK;
 use App\Models\GTKJabatan;
+use App\Settings\LokasiSekolahSettings;
 use App\Settings\SambutanSekolahSettings;
 use App\Settings\VisiMisiTujuanSekolahSettings;
 use Inertia\Inertia;
@@ -14,7 +15,9 @@ use Inertia\Inertia;
 class MainSekolahController extends Controller
 {
     public function tentang() {
-
+        $lokasi   = new LokasiSekolahSettings;
+        // dd($lokasi);
+        return Inertia::render('Main/Sekolah/Tentang', compact('lokasi'));
     }
 
     public function sambutan() {
