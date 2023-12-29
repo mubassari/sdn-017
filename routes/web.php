@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\AdminSekolahController;
 use App\Http\Controllers\Admin\AdminSekolahSambutanController;
 use App\Http\Controllers\Admin\AdminSekolahVisiMisiTujuanController;
 use App\Http\Controllers\Admin\AdminUserController;
+use App\Http\Controllers\Admin\AdminPengaturanController;
 
 // General Controller
 use App\Http\Controllers\Main\SitemapController;
@@ -96,13 +97,20 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function() {
     Route::delete('{gtk}',[AdminGTKController::class, 'hapus'])->name('hapus');
   });
 
-  Route::middleware('role:super-admin')->prefix('user')->name('user.')->group(function(){
-    Route::get('',[AdminUserController::class, 'index'])->name('index');
-    Route::get('tambah',[AdminUserController::class, 'tambah'])->name('tambah');
-    Route::post('',[AdminUserController::class, 'simpan'])->name('simpan');
-    Route::get('ubah/{user}',[AdminUserController::class, 'ubah'])->name('ubah');
-    Route::put('{user}',[AdminUserController::class, 'perbarui'])->name('perbarui');
-    Route::delete('{user}',[AdminUserController::class, 'hapus'])->name('hapus');
+  Route::middleware('role:super-admin')->group(function () {
+    Route::prefix('pengaturan')->name('pengaturan.')->group(function () {
+      Route::get('',[AdminPengaturanController::class, 'index'])->name('index');
+      Route::post('artikel',[AdminPengaturanController::class, 'simpan_artikel'])->name('simpan_artikel');
+    });
+
+    Route::prefix('user')->name('user.')->group(function(){
+      Route::get('',[AdminUserController::class, 'index'])->name('index');
+      Route::get('tambah',[AdminUserController::class, 'tambah'])->name('tambah');
+      Route::post('',[AdminUserController::class, 'simpan'])->name('simpan');
+      Route::get('ubah/{user}',[AdminUserController::class, 'ubah'])->name('ubah');
+      Route::put('{user}',[AdminUserController::class, 'perbarui'])->name('perbarui');
+      Route::delete('{user}',[AdminUserController::class, 'hapus'])->name('hapus');
+    });
   });
 });
 

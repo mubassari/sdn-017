@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Main;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use App\Settings\PengaturanArtikelSettings; 
 use App\Models\Artikel;
 use App\Models\ArtikelKategori;
 use Inertia\Inertia;
@@ -14,12 +15,13 @@ class MainArtikelController extends Controller
     public function beranda($kategori_slug)
     {
         try {
+            $pengaturan_artikel = new PengaturanArtikelSettings();
             $kategori = ArtikelKategori::where('slug', $kategori_slug)->firstOrFail();
 
             $list_artikel = Artikel::select('id', 'isi', 'judul', 'slug', 'artikel_kategori_id')
                 ->where('artikel_kategori_id', $kategori->id)
                 ->orderBy('id', 'desc')
-                ->paginate(12)
+                ->paginate($pengaturan_artikel->max_artikel_kategori)
                 ->through(function($data) use ($kategori) {
                     return [
                         'id'       => $data->id,
@@ -88,12 +90,13 @@ class MainArtikelController extends Controller
     {
         if(mb_strlen($cari) >= 3){
             try {
+                $pengaturan_artikel = new PengaturanArtikelSettings();
                 $cari = str_replace('-', ' ', $cari);
 
                 $list_artikel = Artikel::select('id', 'isi', 'judul', 'slug', 'artikel_kategori_id')
                     ->where('judul', 'like', '%'.$cari.'%')
                     ->latest()
-                    ->paginate(12)
+                    ->paginate($pengaturan_artikel->max_artikel_pencarian)
                     ->through(function($data) {
                         return [
                             'id'       => $data->id,

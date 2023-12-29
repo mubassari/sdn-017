@@ -60,6 +60,13 @@ const menuContent = ref([
     role: ['super-admin'],
     submenu: null
   },
+  {
+    title: 'Pengaturan',
+    uri: 'admin.pengaturan.index',
+    icon: 'gear',
+    role: ['super-admin'],
+    submenu: null
+  },
 ])
 </script>
 <template>

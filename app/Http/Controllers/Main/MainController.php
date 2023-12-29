@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
 use App\Models\Artikel;
 use App\Models\ArtikelKategori;
+use App\Settings\PengaturanArtikelSettings; 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
@@ -14,8 +15,9 @@ class MainController extends Controller
 {
     public function beranda()
     {
+        $pengaturan_artikel = new PengaturanArtikelSettings;
         $artikel_baru = Artikel::select('id', 'isi', 'judul', 'slug', 'artikel_kategori_id')
-            ->take(5)
+            ->take($pengaturan_artikel->max_artikel_terbaru)
             ->get()
             ->map(function ($data) {
                 return [
@@ -34,12 +36,12 @@ class MainController extends Controller
 
         $list_kategori = ArtikelKategori::select('id', 'nama', 'slug')
             ->get()
-            ->map(function($kategori) {
+            ->map(function($kategori) use ($pengaturan_artikel) {
                 return [
                     'id'      => $kategori->id,
                     'nama'    => $kategori->nama,
                     'slug'    => $kategori->slug,
-                    'artikel' => $kategori->LatestArtikel(4)->map(function($data) use ($kategori) {
+                    'artikel' => $kategori->LatestArtikel($pengaturan_artikel->max_artikel_terkait)->map(function($data) use ($kategori) {
                         return [
                             'id'       => $data->id,
                             'judul'    => $data->judul,
