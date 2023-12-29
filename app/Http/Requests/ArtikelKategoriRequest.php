@@ -43,12 +43,14 @@ class ArtikelKategoriRequest extends FormRequest
                 'Kategori',
                 'Masuk',
                 'Sambutan',
+                'Sitemap',
+                'Sitemap.xml',
                 'Tentang',
                 'Visi Misi Tujuan',
             ];
 
             if (in_array(Str::slug($this->input('nama')), array_map('Str::slug', $disallowedWords))) {
-                $validator->errors()->add('nama', "Pilihan nilai tidak sesuai.");
+                $validator->errors()->add('nama', "Pilihan nilai tidak sesuai atau mengandung kata terlarang.");
             }
         });
     }
