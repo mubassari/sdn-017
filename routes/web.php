@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\AdminSekolahVisiMisiTujuanController;
 use App\Http\Controllers\Admin\AdminUserController;
 
 // General Controller
+use App\Http\Controllers\Main\SitemapController;
 use App\Http\Controllers\Main\MainController;
 use App\Http\Controllers\Main\MainArtikelController;
 use App\Http\Controllers\Main\MainSekolahController;
@@ -110,6 +111,8 @@ Route::get('sambutan',[MainSekolahController::class, 'sambutan'])->name('sambuta
 Route::get('gtk',[MainSekolahController::class, 'gtk'])->name('gtk');
 Route::get('tentang',[MainSekolahController::class, 'tentang'])->name('tentang');
 Route::get('cari/{cari}',[MainArtikelController::class, 'cari'])->name('cari');
+
+Route::get('sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');
 
 Route::prefix('{kategori}')->name('artikel.')->group(function() {
   Route::get('',[MainArtikelController::class, 'beranda'])->name('index');
