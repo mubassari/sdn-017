@@ -1,5 +1,6 @@
 <script setup>
-import { Pagination } from '~Components/core'
+import { ref } from '@vue/reactivity'
+import { Pagination, Artikel } from '~Components/core'
 import { MainLayout } from '~Layouts';
 
 const props = defineProps({
@@ -7,40 +8,21 @@ const props = defineProps({
   'list_artikel': { type: Object, required: true }
 })
 
+const title = ref('Pencarian: ' + props.cari)
 </script>
 
 <template>
-  <MainLayout :title="'Pencarian: ' + cari">
+  <MainLayout :title="title">
     <div class="flex flex-col items-center justify-center pt-24 bg-white dark:bg-gray-900 ">
       <h1
         class="my-3 text-3xl font-extrabold leading-none tracking-tight text-center text-gray-900 uppercase dark:text-white md:text-4xl lg:text-5xl">
-        Pencarian: {{ cari }}
+        {{ title }}
       </h1>
       <div class="max-w-screen-xl px-4 py-4 mx-auto md:py-16 lg:px-6">
-        <div class="space-y-4 md:grid xl:grid-cols-4 md:grid-cols-2 sm:gap-3 xl:gap-5 md:space-y-0">
-          <div v-for="artikel in list_artikel.data" :key="artikel.id"
-            class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-            <img class="object-cover w-full rounded-t-lg aspect-square" :src="artikel.sampul" />
-            <div class="p-5">
-              <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                {{ artikel.judul }}
-              </h5>
-              <div class="mt-2.5 mb-5 space-y-1">
-                <span
-                  class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800">
-                  {{ artikel.kategori.nama }}
-                </span>
-                <p class="text-sm text-gray-500 dark:text-gray-400">
-                  {{ artikel.waktu }}
-                </p>
-              </div>
-              <Link :href="route('artikel.tampil', [artikel.kategori.slug, artikel.slug])"
-                class="px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-              Baca Selengkapnya
-              <font-awesome-icon icon="arrow-right-long" class="ml-1"></font-awesome-icon>
-              </Link>
-            </div>
-          </div>
+        <div class="grid grid-cols-2 gap-3 xl:grid-cols-4 xl:gap-5">
+          <Artikel v-for="artikel in list_artikel.data" :key="artikel.id" :artikel="artikel"
+            :kategori="[artikel.kategori.nama, artikel.kategori.slug]">
+          </Artikel>
         </div>
         <Pagination :links="list_artikel.links" :dari="list_artikel.from" :ke="list_artikel.to"
           :total="list_artikel.total" class="px-5 pt-10 m-2" />

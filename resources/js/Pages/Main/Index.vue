@@ -1,5 +1,6 @@
 <script setup>
 import { MainLayout } from "~Layouts";
+import { Artikel } from '~Components/core'
 import { ref } from "@vue/reactivity";
 import { Carousel, Slide, Navigation, Pagination } from "vue3-carousel";
 import { usePage } from "@inertiajs/vue3";
@@ -49,7 +50,7 @@ const sekolahContent = ref([
                         <div
                             class="px-4 text-center min-h-[100svh] w-screen flex flex-col items-center justify-center hover:backdrop-blur-sm transition ease-out duration-200">
                             <h1
-                                class="mb-10 text-4xl mx-4 font-extrabold leading-none tracking-tight text-white md:text-5xl lg:text-6xl">
+                                class="mx-4 mb-10 text-4xl font-extrabold leading-none tracking-tight text-white md:text-5xl lg:text-6xl">
                                 {{ artikel.judul }}
                             </h1>
                             <div class="">
@@ -125,41 +126,15 @@ const sekolahContent = ref([
                 <div class="max-w-screen-xl px-4 py-4 mx-auto md:py-16 lg:px-6">
                     <TransitionGroup tag="div" enter-from-class="opacity-0" enter-active-class="duration-500"
                         leave-active-class="duration-500" leave-to-class="opacity-0"
-                        class="space-y-4 grid xl:grid-cols-4 md:grid-cols-2 sm:gap-3 xl:gap-5 md:space-y-0">
-                        <div v-for="artikel in list_kategori[
+                        class="grid grid-cols-2 gap-3 md:grid-cols-4 xl:gap-5">
+                        <Artikel v-for="artikel in list_kategori[
                             currentArticleShownId - 1
-                        ].artikel" :key="artikel.id"
-                            class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                            <img class="object-cover w-full rounded-t-lg aspect-square" :src="artikel.sampul" />
-                            <div class="p-5">
-                                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                                    {{ artikel.judul }}
-                                </h5>
-                                <div class="mt-2.5 mb-5 space-y-1">
-                                    <span
-                                        class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800">
-                                        {{ artikel.kategori }}
-                                    </span>
-                                    <p class="text-sm text-gray-500 dark:text-gray-400">
-                                        {{ artikel.waktu }}
-                                    </p>
-                                </div>
-                                <Link :href="route('artikel.tampil', [
-                                    list_kategori[
-                                        currentArticleShownId - 1
-                                    ].slug,
-                                    artikel.slug,
-                                ])
-                                    "
-                                    class="px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                                Baca Selengkapnya
-                                <font-awesome-icon icon="arrow-right-long" class="ml-1"></font-awesome-icon>
-                                </Link>
-                            </div>
-                        </div>
+                        ].artikel" :key="artikel.id" :artikel="artikel"
+                            :kategori="[list_kategori[currentArticleShownId - 1].slug, artikel.slug]">
+                        </Artikel>
                     </TransitionGroup>
                 </div>
-                <Link :href="list_kategori[currentArticleShownId - 1].slug" v-if="list_kategori[currentArticleShownId - 1].artikel
+                <Link :href="route('artikel.index', list_kategori[currentArticleShownId - 1].slug)" v-if="list_kategori[currentArticleShownId - 1].artikel
                     .length !== 0
                     "
                     class="py-2.5 px-5 m-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 uppercase text-center">
@@ -193,7 +168,7 @@ const sekolahContent = ref([
 }
 
 .carousel__pagination-button--active::after {
-  @apply bg-gray-500;
+    @apply bg-gray-500;
 }
 
 .carousel__pagination {
