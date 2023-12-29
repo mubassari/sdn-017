@@ -6,8 +6,8 @@ use Spatie\LaravelSettings\Settings;
 
 class PengaturanTagSettings extends Settings
 {
-    public int $header;
-    public int $footer;
+    public ?string $header;
+    public ?string $footer;
 
     public static function group(): string
     {

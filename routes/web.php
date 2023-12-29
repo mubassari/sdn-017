@@ -101,6 +101,7 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function() {
     Route::prefix('pengaturan')->name('pengaturan.')->group(function () {
       Route::get('',[AdminPengaturanController::class, 'index'])->name('index');
       Route::post('artikel',[AdminPengaturanController::class, 'simpan_artikel'])->name('simpan_artikel');
+      Route::post('tag',[AdminPengaturanController::class, 'simpan_tag'])->name('simpan_tag');
     });
 
     Route::prefix('user')->name('user.')->group(function(){

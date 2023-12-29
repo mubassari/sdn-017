@@ -26,5 +26,6 @@ class AppServiceProvider extends ServiceProvider
         \Carbon\Carbon::setLocale('id');
         date_default_timezone_set('Asia/Makassar');
         setlocale(LC_TIME, 'id_ID');
+        \Illuminate\Support\Facades\View::share('settings', new \App\Settings\PengaturanTagSettings());
     }
 }

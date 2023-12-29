@@ -8,3 +8,4 @@ export { default as FormSambutanSekolah } from './FormSambutanSekolah';
 export { default as FormMisiTujuanSekolah } from './FormMisiTujuanSekolah';
 export { default as FormVisiSekolah } from './FormVisiSekolah';
 export { default as FormPengaturanArtikel } from './FormPengaturanArtikel';
+export { default as FormPengaturanTag } from './FormPengaturanTag';

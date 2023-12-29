@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Validator;
 
-class PengaturanArtikelSettingsRequest extends FormRequest
+class PengaturanTagSettingsRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,15 +25,13 @@ class PengaturanArtikelSettingsRequest extends FormRequest
     public function rules()
     {
         return [
-            'max_artikel_terbaru'   => 'required|numeric|in:2,3,4,5,6,7,8,9',
-            'max_artikel_terkait'   => 'required|numeric|in:2,4,6',
-            'max_artikel_kategori'  => 'required|numeric|in:8,12,16',
-            'max_artikel_pencarian' => 'required|numeric|in:8,12,16',
+            'header'   => 'nullable|string',
+            'footer'   => 'nullable|string',
         ];
     }
 
     public function withValidator(Validator $validator): void
     {
-        session(['scroll_position' => 'artikel']);
+        session(['scroll_position' => 'tag']);
     }
 }

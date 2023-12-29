@@ -1,7 +1,7 @@
 <script setup>
 import { AdminLayout } from '~Layouts';
 import { Card } from '~Components/core';
-import { FormPengaturanArtikel } from '~Components/forms'
+import { FormPengaturanArtikel, FormPengaturanTag } from '~Components/forms'
 import { useForm } from "@inertiajs/vue3";
 import { ref } from '@vue/reactivity';
 
@@ -9,6 +9,7 @@ const title = ref('Pengaturan Situs');
 
 const props = defineProps({
   artikel: { type: Object, required: true },
+  tag: { type: Object, required: true },
 })
 
 const artikel = useForm({
@@ -16,6 +17,11 @@ const artikel = useForm({
   max_artikel_terkait: props.artikel.max_artikel_terkait,
   max_artikel_kategori: props.artikel.max_artikel_kategori,
   max_artikel_pencarian: props.artikel.max_artikel_pencarian,
+})
+
+const tag = useForm({
+  header: props.tag.header,
+  footer: props.tag.footer,
 })
 </script>
 <template>
@@ -31,6 +37,12 @@ const artikel = useForm({
           Pengaturan Artikel
         </h2>
         <FormPengaturanArtikel :pengaturan="artikel" @submit="artikel.post(route('admin.pengaturan.simpan_artikel'))" />
+      </Card>
+      <Card id="tag" class="scroll-my-20">
+        <h2 class="mb-5 text-xl font-semibold text-gray-900 dark:text-white">
+          Pengaturan Tag
+        </h2>
+        <FormPengaturanTag :pengaturan="tag" @submit="tag.post(route('admin.pengaturan.simpan_tag'))" />
       </Card>
     </div>
   </AdminLayout>
