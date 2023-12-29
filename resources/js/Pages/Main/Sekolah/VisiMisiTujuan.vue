@@ -10,7 +10,7 @@ const props = defineProps({
 </script>
 
 <template>
-  <MainLayout :title="title">
+  <MainLayout :title="title" :description="title" keyword="visi,misi,tujuan">
     <div class="flex flex-col items-center justify-center pt-24 bg-white dark:bg-gray-900">
       <h1
         class="my-3 text-3xl font-extrabold leading-none tracking-tight text-center text-gray-900 uppercase dark:text-white md:text-4xl lg:text-5xl">

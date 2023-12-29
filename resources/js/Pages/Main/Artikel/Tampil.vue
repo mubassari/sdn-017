@@ -6,10 +6,21 @@ const props = defineProps({
   'artikel_terkait': { type: Object, required: true }
 })
 
+var tempElement = document.createElement('div');
+tempElement.innerHTML = props.artikel.isi;
+
+// Get all <p> elements inside the temporary element
+var paragraphs = tempElement.getElementsByTagName('p');
+var description = '';
+// Check if there is at least one <p> element
+if (paragraphs.length > 0) {
+  // Get the content of the first <p> tag
+  description = paragraphs[0].textContent;
+}
 </script>
 
 <template>
-  <MainLayout :title="artikel.judul">
+  <MainLayout :title="artikel.judul" type="article" :description="description" :image="artikel.sampul">
 
     <main class="py-24 antialiased bg-white dark:bg-gray-900">
       <div class="flex justify-between max-w-screen-xl px-4 mx-auto ">

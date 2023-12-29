@@ -103,7 +103,7 @@ const cari = ref('');
       </li>
     </ul>
     <div>
-      <Link :href="route(auth_user ? 'admin.index' : 'masuk')"
+      <Link :href="route(auth_user ? 'admin.index' : 'masuk')" rel="nofollow"
         class="mb-3 text-xs font-bold text-blue-600 dark:text-blue-500 hover:underline">
       {{ auth_user ? 'Admin Panel' : 'Masuk' }}
       <font-awesome-icon icon="arrow-right-long" class="ml-1"></font-awesome-icon>

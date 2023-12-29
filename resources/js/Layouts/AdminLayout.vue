@@ -11,7 +11,7 @@ const removeFinishEventListener = router.on('finish', () => {
     const scroll_position = page.props.scroll_position;
     if (scroll_position) {
         const scroll_id = document.getElementById(scroll_position);
-        if(scroll_id){
+        if (scroll_id) {
             scroll_id.scrollIntoView({ behavior: 'smooth' })
         }
     }
@@ -34,6 +34,9 @@ defineProps({ title: { type: String, default: '' } })
 
 <template>
     <CoreLayout :title="title">
+        <template #head>
+            <meta name="robots" content="noindex, nofollow">
+        </template>
         <Toast />
         <AdminNavbar @toggleSidebar="sidebarIsOpen = !sidebarIsOpen" />
         <AdminSidebar :sidebarIsOpen="sidebarIsOpen" />

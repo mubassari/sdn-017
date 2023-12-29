@@ -26,7 +26,7 @@ const auth_user = page.props.auth_user.length > 0
         </li>
       </ul>
       <div>
-        <Link :href="route(auth_user ? 'admin.index' : 'masuk')"
+        <Link :href="route(auth_user ? 'admin.index' : 'masuk')" rel="nofollow"
           class="px-3 py-2 text-xs text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
         {{ auth_user ? 'Admin Panel' : 'Masuk' }}
         </Link>
