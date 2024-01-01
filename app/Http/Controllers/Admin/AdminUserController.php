@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Controller; 
 use App\Http\Requests\UserRequest;
+use App\Http\Requests\UserUbahRequest;
+use App\Http\Requests\UserPasswordRequest;
 use App\Models\GTK;
 use App\Models\User;
 use App\Models\Role;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 
@@ -35,7 +38,7 @@ class AdminUserController extends Controller
                     return $role->nama;
                 }),
                 'can'      => [
-                    'ubah'  => $data->id != 1,
+                    'ubah'  => $data->id != 1 || Auth::user()->id == 1,
                     'hapus' => !($data->id == 1 || $data->id == Auth::user()->id)
                 ]
             ];
@@ -81,58 +84,70 @@ class AdminUserController extends Controller
     }
     public function ubah(User $user)
     {
-        if ($user->id != 1){
-            $user = collect([$user])->map(function($data) {
-                return [
-                    'id' => $data->id,
-                    'username' => $data->username,
-                    'gtk_id' => $data->GTK->nama,
-                    'role' => $data->roles->pluck('id'),
-                ];
-            })[0];
-            $role = Role::select('id', 'nama')->get();
-            return Inertia::render('Admin/User/Ubah', compact('user', 'role'));
-        } else {
+        $user = collect([$user])->map(function($data) {
+            return [
+                'id' => $data->id,
+                'username' => $data->username,
+                'gtk_id' => $data->GTK->nama ?? '',
+                'role' => $data->roles->pluck('id'),
+            ];
+        })[0];
+        $role = Role::select('id', 'nama')->get();
+        return Inertia::render('Admin/User/Ubah', compact('user', 'role'));
+    }
+
+    public function perbarui(UserUbahRequest $request, User $user)
+    {
+        DB::beginTransaction();
+        try {
+            $validated = $request->validated();
+
+            $user->username = $validated['username'];
+
+            if (Auth::user()->id !== $user->id || Auth::user()->id !== 1) {
+                $user->roles()->sync($validated['role']);
+            }
+
+            $user->save();
+
+            DB::commit();
+
+            return redirect()->route('admin.user.index')->with('alert', [
+                'status' => 'success',
+                'pesan'  => 'Anda berhasil memperbarui data User!'
+            ]);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            
             return back()->withInput()->with('alert', [
-            'status' => 'danger',
-            'pesan'  => 'Data ini tidak dapat diubah!'
+                'status' => 'danger',
+                'pesan'  => 'Terjadi kesalahan saat memperbarui data. Silakan coba lagi!'
             ]);
         }
     }
 
-    public function perbarui(UserRequest $request, User $user)
+    public function perbarui_password(UserPasswordRequest $request, User $user)
     {
-        if($user->id != 1){
-            DB::beginTransaction();
-            try {
-                $validated = $request->validated();
-                $validated['password'] = bcrypt($request->password);
+        DB::beginTransaction();
+        try {
+            $validated = $request->validated();
 
-                $user->username = $validated['username'];
-                $user->password = $validated['password'];
+            $user->username = \Illuminate\Support\Facades\Hash::make($validated['password']);
 
-                $user->roles()->sync($validated['role']);
+            $user->save();
 
-                $user->save();
+            DB::commit();
 
-                DB::commit();
-
-                return redirect()->route('admin.user.index')->with('alert', [
-                    'status' => 'success',
-                    'pesan'  => 'Anda berhasil memperbarui data User!'
-                ]);
-            } catch (\Exception $e) {
-                DB::rollBack();
-                
-                return back()->withInput()->with('alert', [
-                    'status' => 'danger',
-                    'pesan'  => 'Terjadi kesalahan saat memperbarui data. Silakan coba lagi!'
-                ]);
-            }
-        } else {
+            return redirect()->route('admin.user.index')->with('alert', [
+                'status' => 'success',
+                'pesan'  => 'Anda berhasil memperbarui data User!'
+            ]);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            
             return back()->withInput()->with('alert', [
-            'status' => 'danger',
-            'pesan'  => 'Data ini tidak dapat diubah!'
+                'status' => 'danger',
+                'pesan'  => 'Terjadi kesalahan saat memperbarui data. Silakan coba lagi!'
             ]);
         }
     }

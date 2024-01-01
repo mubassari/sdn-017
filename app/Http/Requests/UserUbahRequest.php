@@ -7,7 +7,7 @@ use Illuminate\Validation\Validator;
 use Illuminate\Support\Str;
 use App\Models\Role;
 
-class UserRequest extends FormRequest
+class UserUbahRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -38,9 +38,6 @@ class UserRequest extends FormRequest
                     }
                 },
             ],
-            'password' => 'required|string|min:8|confirmed',
-            'password_confirmed' => 'required|string|min:8|same:password',
-            // 'gtk_id' => 'required|unique:user,gtk_id,'.$this->user->gtk_id,
         ];
 
         return $rules;

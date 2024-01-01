@@ -110,6 +110,7 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function() {
       Route::post('',[AdminUserController::class, 'simpan'])->name('simpan');
       Route::get('ubah/{user}',[AdminUserController::class, 'ubah'])->name('ubah');
       Route::put('{user}',[AdminUserController::class, 'perbarui'])->name('perbarui');
+      Route::put('password/{user}',[AdminUserController::class, 'perbarui_password'])->name('perbarui_password');
       Route::delete('{user}',[AdminUserController::class, 'hapus'])->name('hapus');
     });
   });
