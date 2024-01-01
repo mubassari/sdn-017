@@ -32,16 +32,10 @@ const tag = useForm({
       </h1>
     </div>
     <div class="col-span-full">
-      <Card id="artikel" class="scroll-my-20">
-        <h2 class="mb-5 text-xl font-semibold text-gray-900 dark:text-white">
-          Pengaturan Artikel
-        </h2>
+      <Card id="artikel" title="Pengaturan Artikel" class="scroll-my-20">
         <FormPengaturanArtikel :pengaturan="artikel" @submit="artikel.post(route('admin.pengaturan.simpan_artikel'))" />
       </Card>
-      <Card id="tag" class="scroll-my-20">
-        <h2 class="mb-5 text-xl font-semibold text-gray-900 dark:text-white">
-          Pengaturan Tag
-        </h2>
+      <Card id="tag" title="Pengaturan Tag" class="scroll-my-20">
         <FormPengaturanTag :pengaturan="tag" @submit="tag.post(route('admin.pengaturan.simpan_tag'))" />
       </Card>
     </div>

@@ -45,24 +45,15 @@ const lokasi = useForm({
       </h1>
     </div>
     <div>
-      <Card id="umum" class="scroll-my-20">
-        <h2 class="mb-5 text-xl font-semibold text-gray-900 dark:text-white">
-          Pengaturan Umum
-        </h2>
+      <Card id="umum" title="Pengaturan Umum" class="scroll-my-20">
         <FormUmumSekolah :sekolah="umum" @submit="umum.post(route('admin.sekolah.simpan.umum'))" />
       </Card>
     </div>
     <div>
-      <Card id="lokasi" class="scroll-my-20">
-        <h2 class="mb-5 text-xl font-semibold text-gray-900 dark:text-white">
-          Pengaturan Lokasi Sekolah
-        </h2>
+      <Card id="lokasi" title="Pengaturan Lokasi Sekolah" class="scroll-my-20">
         <FormLokasiSekolah :sekolah="lokasi" @submit="lokasi.post(route('admin.sekolah.simpan.lokasi'))" />
       </Card>
-      <Card id="sosmed" class="scroll-my-20">
-        <h2 class="mb-5 text-xl font-semibold text-gray-900 dark:text-white">
-          Pengaturan Sosial Media
-        </h2>
+      <Card id="sosmed" title="Pengaturan Sosial Media" class="scroll-my-20">
         <FormSosmedSekolah :sekolah="sosmed" @submit="sosmed.post(route('admin.sekolah.simpan.sosmed'))" />
       </Card>
     </div>
