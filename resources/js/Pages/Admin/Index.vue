@@ -39,7 +39,8 @@ const menuContent = ref([
   <AdminLayout title="Admin">
     <div class="mb-4 col-span-full xl:mb-2">
       <h1 class="mb-3 text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">
-        Halo {{ user.nama }}, Selamat Datang di {{ sekolah.umum.nama }}
+        Halo <span class="font-bold">{{ user.nama ?? '@' + user.username }}</span>,
+        Selamat Datang di <span class="font-bold">{{ sekolah.umum.nama }}</span>!
       </h1>
     </div>
     <div class="col-span-full">
