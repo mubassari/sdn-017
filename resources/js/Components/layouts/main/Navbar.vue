@@ -135,7 +135,7 @@ const cari = ref('');
               </button>
               <div :class="submenuOpened !== index ? 'hidden' : 'block'"
                 class="w-full mt-3 divide-gray-100 rounded-lg shadow bg-gray-50 md:z-20 md:absolute md:mt-3 md:w-44 md:-translate-x-5 divide dark:bg-gray-700">
-                <ul class="py-2 text-sm text-gray-700 dark:text-gray-200">
+                <ul class="py-2 text-sm text-gray-900 dark:text-gray-200">
                   <li v-for="(submenu, indexSubmenu) in menu.submenu" :key="indexSubmenu">
                     <Link v-if="Array.isArray(submenu.uri)" :href="route(submenu.uri[0], submenu.uri[1])"
                       class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
