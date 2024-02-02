@@ -23,7 +23,7 @@ const props = defineProps({
         </p>
       </div>
       <Link :href="route('artikel.tampil', [kategori[1], artikel.slug])"
-        class="px-3 py-2 text-xs font-medium text-center text-white bg-blue-700 rounded-lg xl:text-sm hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+        class="block px-3 py-2 text-xs font-medium text-center text-white bg-blue-700 rounded-lg xl:text-sm hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
       Baca Selengkapnya
       <font-awesome-icon icon="arrow-right-long" class="ml-1"></font-awesome-icon>
       </Link>
