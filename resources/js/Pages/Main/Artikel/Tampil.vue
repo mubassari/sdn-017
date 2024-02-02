@@ -1,4 +1,5 @@
 <script setup>
+import { Artikel } from '~Components/core'
 import { MainLayout } from '~Layouts';
 
 const props = defineProps({
@@ -54,30 +55,10 @@ if (paragraphs.length > 0) {
           class="mb-16 text-2xl font-extrabold leading-none tracking-tight text-center text-gray-900 uppercase dark:text-white md:text-4xl lg:text-5xl">
           Artikel Terkait
         </h2>
-        <div class="grid justify-center gap-12 sm:grid-cols-2 lg:grid-cols-4">
-          <div v-for="artikel in artikel_terkait" :key="artikel.id"
-            class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-            <img class="object-cover w-full rounded-t-lg aspect-square" :src="artikel.sampul" />
-            <div class="p-5">
-              <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                {{ artikel.judul }}
-              </h5>
-              <div class="mt-2.5 mb-5 space-y-1">
-                <span
-                  class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800">
-                  {{ artikel.kategori }}
-                </span>
-                <p class="text-sm text-gray-500 dark:text-gray-400">
-                  {{ artikel.waktu }}
-                </p>
-              </div>
-              <Link :href="route('artikel.tampil', [artikel.kategori_slug, artikel.slug])"
-                class="px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-              Baca Selengkapnya
-              <font-awesome-icon icon="arrow-right-long" class="ml-1"></font-awesome-icon>
-              </Link>
-            </div>
-          </div>
+        <div class="grid grid-cols-2 gap-3 md:grid-cols-4 xl:gap-5">
+          <Artikel v-for="artikel in artikel_terkait" :key="artikel.id" :artikel="artikel"
+            :kategori="[artikel.kategori, artikel.kategori_slug]">
+          </Artikel>
         </div>
       </div>
     </section>
@@ -87,7 +68,7 @@ if (paragraphs.length > 0) {
 
 <style lang="scss">
 .format *>img {
-  @apply rounded;
+  @apply rounded block m-auto;
 }
 
 .format *>table {

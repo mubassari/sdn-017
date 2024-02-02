@@ -60,10 +60,12 @@ class MainArtikelController extends Controller
                 'waktu'         => $artikel_find->waktu,
             ];
 
-             $artikel_terkait = Artikel::inRandomOrder()
+            $pengaturan_artikel = new PengaturanArtikelSettings();
+            $artikel_terkait = Artikel::inRandomOrder()
                 ->select('id', 'judul', 'isi', 'slug', 'artikel_kategori_id')
                 ->where('id', '!=', $artikel_find->id) // Exclude the current article
-                ->limit(4) // Limit the number of related articles
+                ->where('artikel_kategori_id', '=', $artikel_find->artikel_kategori_id)
+                ->limit($pengaturan_artikel->max_artikel_terkait) // Limit the number of related articles
                 ->get()->map(function ($artikel_find) {
                     return [
                         'id'            => $artikel_find->id,
@@ -75,7 +77,7 @@ class MainArtikelController extends Controller
                         'slug'          => $artikel_find->slug,
                         'waktu'         => $artikel_find->waktu,
                     ];
-                });
+            });
 
             return Inertia::render('Main/Artikel/Tampil', compact('artikel', 'artikel_terkait'));
         } catch (ModelNotFoundException $exception) {

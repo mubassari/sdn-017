@@ -8,28 +8,24 @@ const props = defineProps({
 
 const terbaru_lists = ref([
   { id: 0, nama: 'Pilih Angka' },
-  { nama: 2 }, { nama: 3 },
-  { nama: 4 }, { nama: 5 },
-  { nama: 6 }, { nama: 7 },
-  { nama: 8 }, { nama: 9 },
+  { nama: 4 }, { nama: 8 }, { nama: 12 },
 ]);
 
 const terkait_lists = ref([
   { id: 0, nama: 'Pilih Angka' },
-  { nama: 2 }, { nama: 4 },
-  { nama: 6 },
+  { nama: 4 }, { nama: 8 },
 ]);
 
 const kategori_lists = ref([
   { id: 0, nama: 'Pilih Angka' },
   { nama: 8 }, { nama: 12 },
-  { nama: 16 },
+  { nama: 16 }, { nama: 20 },
 ]);
 
 const pencarian_lists = ref([
   { id: 0, nama: 'Pilih Angka' },
   { nama: 8 }, { nama: 12 },
-  { nama: 16 },
+  { nama: 16 }, { nama: 20 },
 ]);
 
 const emits = defineEmits(['submit'])

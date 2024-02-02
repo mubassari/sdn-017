@@ -17,7 +17,7 @@ const props = defineProps({
         {{ kategori.nama }}
       </h1>
       <div class="max-w-screen-xl px-4 py-4 mx-auto md:py-16 lg:px-6">
-        <div class="grid grid-cols-2 gap-3 xl:grid-cols-4 xl:gap-5">
+        <div class="grid grid-cols-2 gap-3 md:grid-cols-4 xl:gap-5">
           <Artikel v-for="artikel in list_artikel.data" :key="artikel.id" :artikel="artikel"
             :kategori="[kategori.nama, kategori.slug]">
           </Artikel>
